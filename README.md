@@ -4,13 +4,13 @@ The eventual design is expected to work as follows:
 
 -   A Python daemon (`autotester.py`) watches
     
-    -   a `tasks/` directory for YAML files defining tasks
+    -   A `tasks/` directory for YAML files defining tasks.
     
-        new entries are loaded using `testmaker.py`.
+        New entries are loaded using `testmaker.py`.
         
-    -   an `upload/submission/` directory for Python files solving tasks
+    -   An `upload/submission/` directory for Python files solving tasks.
 
-        new entries are tested, using the tests from `testmaker.py` which use `modwrap.py` to sandbox the code.
+        New entries are tested, using the tests from `testmaker.py` which use `modwrap.py` to sandbox the code.
     
     Test results are written to a file and then moved to the `upload/result/` directory.
 
