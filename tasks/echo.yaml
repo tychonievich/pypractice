@@ -1,0 +1,18 @@
+random:
+  num:
+    range: [2,5]
+description: >
+  Write a program that asks the user their name and then prints that name $num$ times on a single line.
+topics: [program, input, strings]
+solution: |
+  name = input('What is your name? ')
+  print((name+' ') * $num$)
+cases:
+  - inputs: ['Jack']
+    outputs: "[None, 'Jack '*$num$]"
+  - inputs: ['Mr Miagi']
+    outputs: "[None, 'Mr Miagi '*$num$]"
+  - inputs: ['']
+    outputs: "['/.*[Nn]ame.*[:?] $/', None]"
+    message: "prompt must end '? ' or ': '"
+    name: "(formatting)"

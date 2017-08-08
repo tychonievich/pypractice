@@ -1,0 +1,19 @@
+description: >
+  Write a function named *nums* that,
+  given a positive integer *n*,
+  prompts the user for *n* integers
+  and returns a list of the integers the user inputs.
+topics: [function, input, list]
+solution: |
+  def nums(n):
+    return [int(input('Type integer '+str(_)+' of '+str(n)+': ')) for _ in range(1, n+1)]
+func: nums
+cases:
+  - args: [0]
+    inputs: []
+  - args: [1]
+    inputs: [3]
+  - args: [1]
+    inputs: [-10]
+  - args: [4]
+    inputs: [8,2,-1,134]
