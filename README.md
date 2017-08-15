@@ -1,10 +1,10 @@
-This project is currently in a pre-alpha stage of development.
+This project is currently in a alpha stage of development.
 
 The eventual design is expected to work as follows:
 
 -   A Python daemon (`autotester.py`) watches
     
-    -   A `tasks/` directory for YAML files defining tasks.
+    -   A `upload/tasks/` directory for YAML files defining tasks.
     
         New entries are loaded using `testmaker.py`.
         

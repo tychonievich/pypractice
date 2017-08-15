@@ -139,10 +139,17 @@ if __name__ == "__main__":
                 newtask(path) # PIDWrap(1, newtask, (path,))
             else:
                 pass # print('unexpected path name:', path)
+        def newdir(self, path, watch=True):
+            if watch:
+                wm.add_watch(path, mask, rec=True)
+            # the following may result in double-processed files but prevents a different race condition
+            for d,sds,fns in os.walk(event.pathname):
+                for fn in fns:
+                    self.newfile(os.path.join(d,fn))
         def process_default(self, event):
             if event.dir:
                 # print('watching', event.pathname)
-                wm.add_watch(event.pathname, mask, rec=True)
+                self.newdir(event.pathname);
             elif not event.mask&(pin.IN_CREATE | pin.IN_IGNORED):
                 # print('handling', event.pathname)
                 self.newfile(event.pathname)
