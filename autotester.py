@@ -16,7 +16,7 @@ def newtask(path):
 # result/mst3k/name/20170720T110423/name.csv
 def newcode(path):
     global testers
-    import ast, csv, os
+    import ast, csv, os, json
     dest = path.replace('submission/', 'result/', 1).rsplit('/', 1)[0]
     name = path.rsplit('/', 1)[-1].rsplit('.', 1)[0]
 
@@ -42,20 +42,46 @@ def newcode(path):
             result = SystemError('Testing harness error: '+params[1:].strip())
         if type(params) is dict:
             result = testers[name].test(path, params)
-
-    # because vibe's DirectoryWatcher does not have a close_write listener,
-    # we need to make the entire file elsewhere and the move it to the final destination
-    tmploc = '.tmp_' + dest.replace('/', '_') + name + '.csv'
-    endloc = os.path.join(dest, name + '.csv')
-    os.makedirs(dest, mode=0o777, exist_ok=True)
-    with open(tmploc, 'w') as f:
-        w = csv.writer(f)
-        w.writerow(['passed', 'test', 'message', 'diagnostics'])
+    
+    if 0:
+        # because vibe's DirectoryWatcher does not have a close_write listener,
+        # we need to make the entire file elsewhere and the move it to the final destination
+        tmploc = '.tmp_' + dest.replace('/', '_') + name + '.csv'
+        endloc = os.path.join(dest, name + '.csv')
+        os.makedirs(dest, mode=0o777, exist_ok=True)
+        with open(tmploc, 'w') as f:
+            w = csv.writer(f)
+            w.writerow(['passed', 'test', 'message', 'diagnostics'])
+            if isinstance(result, BaseException):
+                w.writerow(['False', 'Code check', result.__class__.__name__+': '+str(result), repr(result)])
+            else:
+                for case in result:
+                    w.writerow(case[0:3] + (repr(case[3:]),))
+    else:
+        # because vibe's DirectoryWatcher does not have a close_write listener,
+        # we need to make the entire file elsewhere and the move it to the final destination
+        tmploc = '.tmp_' + dest.replace('/', '_') + name + '.json'
+        endloc = os.path.join(dest, name + '.json')
+        os.makedirs(dest, mode=0o777, exist_ok=True)
+        data = {'score':0, 'tests':[]}
         if isinstance(result, BaseException):
-            w.writerow(['False', 'Code check', result.__class__.__name__+': '+str(result), repr(result)])
+            data['tests'].append({
+                'passed':False, 
+                'case':'Code check', 
+                'message':result.__class__.__name__+': '+str(result),
+                'details':repr(result),
+            })
         else:
             for case in result:
-                w.writerow(case[0:3] + (repr(case[3:]),))
+                data['tests'].append({
+                    'passed':case[0], 
+                    'case':case[1], 
+                    'message':case[2],
+                    'details':repr(case[3:]),
+                })
+        
+        with open(tmploc, 'w') as f:
+            json.dump(data, f)
     os.rename(tmploc, endloc)
 
 class PIDWrap:
@@ -120,7 +146,7 @@ if __name__ == "__main__":
         def newfile(self, path):
             if 'submission/' in path:
                 PIDWrap(1, newcode, (path,))
-            elif 'task/' in path:
+            elif 'tasks/' in path:
                 newtask(path) # PIDWrap(1, newtask, (path,))
             else:
                 pass # print('unexpected path name:', path)
@@ -136,7 +162,7 @@ if __name__ == "__main__":
     handler = EventHandler()
     notifier = pin.Notifier(wm, handler)
     
-    for d, sds, fns in os.walk('upload/task'):
+    for d, sds, fns in os.walk('upload/tasks'):
         for fn in fns:
             if fn.endswith('.yaml'):
                 handler.newfile(os.path.join(d,fn))
