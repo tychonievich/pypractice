@@ -11,17 +11,18 @@ def newtask(path):
     testers[name] = t
     print('loaded new task', name, 'from', path)
 
-# submission/mst3k/name/20170720T110423/name.py
+# submission/.../name.py
 # end with name.py so that error messages make more sense
-# result/mst3k/name/20170720T110423/name.csv
-def newcode(path):
+# result/.../name.json
+# mirrored structure
+def newcode(path, skip=False):
     global testers
-    import ast, csv, os, json
+    import ast, os, json
     dest = path.replace('submission/', 'result/', 1).rsplit('/', 1)[0]
     name = path.rsplit('/', 1)[-1].rsplit('.', 1)[0]
 
     # the following case prevents re-running the same test
-    if os.path.exists(os.path.join(dest, name+'.csv')):
+    if skip and os.path.exists(os.path.join(dest, name+'.json')):
         return
     
     result = None
@@ -43,45 +44,31 @@ def newcode(path):
         if type(params) is dict:
             result = testers[name].test(path, params)
     
-    if 0:
-        # because vibe's DirectoryWatcher does not have a close_write listener,
-        # we need to make the entire file elsewhere and the move it to the final destination
-        tmploc = '.tmp_' + dest.replace('/', '_') + name + '.csv'
-        endloc = os.path.join(dest, name + '.csv')
-        os.makedirs(dest, mode=0o777, exist_ok=True)
-        with open(tmploc, 'w') as f:
-            w = csv.writer(f)
-            w.writerow(['passed', 'test', 'message', 'diagnostics'])
-            if isinstance(result, BaseException):
-                w.writerow(['False', 'Code check', result.__class__.__name__+': '+str(result), repr(result)])
-            else:
-                for case in result:
-                    w.writerow(case[0:3] + (repr(case[3:]),))
+    # because vibe's DirectoryWatcher does not have a close_write listener,
+    # we need to make the entire file elsewhere and the move it to the final destination
+    tmploc = '.tmp_' + dest.replace('/', '_') + name + '.json'
+    endloc = os.path.join(dest, name + '.json')
+    os.makedirs(dest, mode=0o777, exist_ok=True)
+    data = {'score':0, 'tests':[]}
+    if isinstance(result, BaseException):
+        data['tests'].append({
+            'passed':False, 
+            'case':'Code check', 
+            'message':result.__class__.__name__+': '+str(result),
+            'details':repr(result),
+        })
     else:
-        # because vibe's DirectoryWatcher does not have a close_write listener,
-        # we need to make the entire file elsewhere and the move it to the final destination
-        tmploc = '.tmp_' + dest.replace('/', '_') + name + '.json'
-        endloc = os.path.join(dest, name + '.json')
-        os.makedirs(dest, mode=0o777, exist_ok=True)
-        data = {'score':0, 'tests':[]}
-        if isinstance(result, BaseException):
+        for case in result:
             data['tests'].append({
-                'passed':False, 
-                'case':'Code check', 
-                'message':result.__class__.__name__+': '+str(result),
-                'details':repr(result),
+                'passed':case[0], 
+                'case':case[1], 
+                'message':case[2],
+                'details':repr(case[3:]),
             })
-        else:
-            for case in result:
-                data['tests'].append({
-                    'passed':case[0], 
-                    'case':case[1], 
-                    'message':case[2],
-                    'details':repr(case[3:]),
-                })
-        
-        with open(tmploc, 'w') as f:
-            json.dump(data, f)
+            if case[0]: data['score'] += 1
+    
+    with open(tmploc, 'w') as f:
+        json.dump(data, f)
     os.rename(tmploc, endloc)
 
 class PIDWrap:
@@ -143,9 +130,9 @@ if __name__ == "__main__":
         '''Given a multiprocessing pool and a list,
         for each file event, requests the pool handle file
         and puts the request handler in the list'''
-        def newfile(self, path):
+        def newfile(self, path, skip=False):
             if 'submission/' in path:
-                PIDWrap(1, newcode, (path,))
+                PIDWrap(1, newcode, (path,skip))
             elif 'tasks/' in path:
                 newtask(path) # PIDWrap(1, newtask, (path,))
             else:
@@ -169,7 +156,7 @@ if __name__ == "__main__":
     for d, sds, fns in os.walk('upload/submission'):
         for fn in fns:
             if fn.endswith('.py'):
-                handler.newfile(os.path.join(d,fn))
+                handler.newfile(os.path.join(d,fn), skip=True)
     
     
     while True:
