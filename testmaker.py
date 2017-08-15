@@ -51,8 +51,56 @@ could also wrap modules in functions
 
 '''
 
-''' To keep the code small, most things in testmaker are not here. '''
-from testmaker import ex_msg, req_recursion, no_loops, ban
+def req_recursion(node):
+    '''An ast predicate that requires a recursive function somewhere in the tree'''
+    # recursion occurs when a node invokes itself
+    # that requires a depth-first traveral, not just a random walk
+    import ast, _ast
+    fstack = []
+    recursive = set()
+    def visit(node, dep=0):
+        if isinstance(node, _ast.FunctionDef): fstack.append(node.name)
+        if isinstance(node, _ast.Call) and isinstance(node.func, _ast.Name) and node.func.id in fstack:
+            recursive.add(node.func.id)
+        for n in ast.iter_child_nodes(node):
+            visit(n, dep+2)
+        if isinstance(node, _ast.FunctionDef): fstack.pop()
+    visit(node)
+    if len(recursive) == 0:
+        raise ValueError('required a recursive function')
+def no_loops(node):
+    '''An ast predicate that requires no loops (for, while, or async for)'''
+    import ast, _ast
+    for f in ast.walk(node):
+        if isinstance(f, (_ast.AsyncFor, _ast.For, _ast.While)):
+            raise ValueError('use of loops prohibited')
+def ban(*names):
+    '''An ast predicate maker to prohibit particular variable, module, and function names (slightly more forgiving that banning lexemes)'''
+    def ans(node):
+        '''An ast predicate to prohibit particular variable, module, and function names (slightly more forgiving that banning lexemes)'''
+        import ast, _ast
+        for f in ast.walk(node):
+            if isinstance(node, _ast.Name) and node.id in names:
+                raise ValueError('use of name "'+node.id+'" prohibited')
+            elif isinstance(node, _ast.Attribute) and node.attr in names:
+                raise ValueError('use of name "'+node.id+'" prohibited')
+                
+    return ans
+    
+
+def ex_msg(ex):
+    '''turns an exception into a one-line and multi-line message.
+    Skips the top-level invocation, which is always from the testing harness.'''
+    msg = ''
+    tr = ex.__traceback__.tb_next
+    line = None
+    while tr is not None:
+        msg += '  File "'+tr.tb_frame.f_code.co_filename+'", line '+str(tr.tb_lineno)+'\n'
+        line = tr.tb_lineno
+        tr = tr.tb_next
+    msg += ex.__class__.__name__+': ' + str(ex)
+    smsg = 'raised '+ex.__class__.__name__+(' on line '+str(line) if line is not None else '')+': '+str(ex)
+    return smsg, msg
 
 def case_str(case):
     ans = ''
