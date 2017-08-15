@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
     wm = pin.WatchManager()
     mask = pin.IN_CLOSE_WRITE | pin.IN_MOVED_TO | pin.IN_CREATE
-    watched = wm.add_watch(os.path.dirname(sys.argv[0])+'/upload', mask, rec=True)
+    watched = wm.add_watch(os.path.abspath('upload'), mask, rec=True)
 
     class EventHandler(pin.ProcessEvent):
         '''Given a multiprocessing pool and a list,
