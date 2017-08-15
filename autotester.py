@@ -1,4 +1,6 @@
 
+root = '/opt/pypractice/upload/'
+
 testers = {}
 
 # task/name.yaml
@@ -124,7 +126,7 @@ if __name__ == "__main__":
 
     wm = pin.WatchManager()
     mask = pin.IN_CLOSE_WRITE | pin.IN_MOVED_TO | pin.IN_CREATE
-    watched = wm.add_watch(os.path.abspath('upload'), mask, rec=True)
+    watched = wm.add_watch(root, mask, rec=True)
 
     class EventHandler(pin.ProcessEvent):
         '''Given a multiprocessing pool and a list,
@@ -139,9 +141,10 @@ if __name__ == "__main__":
                 pass # print('unexpected path name:', path)
         def process_default(self, event):
             if event.dir:
+                # print('watching', event.pathname)
                 wm.add_watch(event.pathname, mask, rec=True)
             elif not event.mask&(pin.IN_CREATE | pin.IN_IGNORED):
-                # to-do: handle problem definition files and submissions differently
+                # print('handling', event.pathname)
                 self.newfile(event.pathname)
             # else ignore
             
@@ -149,11 +152,11 @@ if __name__ == "__main__":
     handler = EventHandler()
     notifier = pin.Notifier(wm, handler)
     
-    for d, sds, fns in os.walk('upload/tasks'):
+    for d, sds, fns in os.walk(root+'tasks'):
         for fn in fns:
             if fn.endswith('.yaml'):
                 handler.newfile(os.path.join(d,fn))
-    for d, sds, fns in os.walk('upload/submission'):
+    for d, sds, fns in os.walk(root+'submission'):
         for fn in fns:
             if fn.endswith('.py'):
                 handler.newfile(os.path.join(d,fn), skip=True)

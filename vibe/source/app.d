@@ -5,6 +5,11 @@ import std.functional : toDelegate;
 import std.conv : to;
 static import dyaml;
 
+enum datadir = "/opt/pypractice/upload/"; // should contain at least sessions/ and tasks/ 
+enum userlog = datadir ~ "users.log";
+enum sublog = datadir ~ "submissions.log";
+
+
 
 enum Role { student, ta, prof }
 
@@ -140,10 +145,6 @@ shared User[string] users;
 shared Task[string] tasks;
 shared bool[string][string] topics; // topics['loops'] = ['task':true, 'task2':true, ...]
 shared long lastread;
-
-enum datadir = "/opt/pypractice/uploads/";
-enum userlog = datadir ~ "users.log";
-enum sublog = datadir ~ "submissions.log";
 
 /**
  * The log is an append-only replay log of all actions taken.
@@ -363,7 +364,7 @@ void handleWebSocketConnection(scope WebSocket socket) {
                             socket.send(serializeToJsonString(
                             [".":"task"
                             ,"task":task
-                            ,"desc":tasks[task].description
+                            ,"desc":tasks[task].description.filterMarkdown
                             ]));
                         } else {
                             socket.send(serializeToJsonString(

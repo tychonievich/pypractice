@@ -2,7 +2,7 @@
 	"authors": [
 		"Luther A. Tychonievich"
 	],
-	"name": "wss_test",
+	"name": "pypractice_wss",
 	"license": "Apache 2.0",
 	"copyright": "Copyright © 2017, Luther A. Tychonievich",
 	"description": "Web socket backend for python practicing tool",

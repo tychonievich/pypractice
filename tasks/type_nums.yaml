@@ -11,9 +11,13 @@ func: nums
 cases:
   - args: [0]
     inputs: []
+    outputs: "[None]"
   - args: [1]
     inputs: [3]
+    outputs: "[None]*2"
   - args: [1]
     inputs: [-10]
+    outputs: "[None]*2"
   - args: [4]
     inputs: [8,2,-1,134]
+    outputs: "[None]*5"

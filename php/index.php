@@ -7,8 +7,8 @@
 <?php
 $user = $_SERVER['PHP_AUTH_USER'];
 $token = bin2hex(openssl_random_pseudo_bytes(4)) . " " . date(DATE_ISO8601);
-mkdir("/tmp/sessions");
-file_put_contents("/tmp/sessions/$user", "$token");
+mkdir("/opt/pypractice/upload/sessions");
+file_put_contents("/opt/pypractice/upload/sessions/$user", "$token");
 ?>
 
 var socket;
@@ -65,7 +65,7 @@ function connect()
             editor.setOptions({maxLines: Infinity});
         } else if (kind == "result") {
             var res = document.getElementById("result");
-            while(res.hasChildNodes()) res.removeChild(res.lastChild());
+            while(res.hasChildNodes()) res.removeChild(res.lastChild);
             var tr = res.insertRow();
             tr.insertCell();
             tr.insertCell().appendChild(document.createTextNode("correct"));
@@ -74,9 +74,10 @@ function connect()
                 var test = data['tests'][i];
                 tr = res.insertRow();
                 tr.className = test.passed ? 'passed' : 'failed';
-                tr.insertCell().appendChild(document.createTextNode(test.passed ? "&#x2713;": "&#2717;"));
+                tr.insertCell().appendChild(document.createTextNode(test.passed ? "✓": "✗"));
                 tr.insertCell().appendChild(document.createTextNode(test.case));
-                tr.insertCell().appendChild(document.createTextNode(test.message ? test.message : 'Failed'));
+                tr.lastChild.style.whiteSpace = 'pre-wrap';
+                tr.insertCell().appendChild(document.createTextNode(test.message ? test.message : ''));
             }
         } else {
             setText(kind + ": " + message.data);
@@ -125,6 +126,9 @@ function getBaseURL()
             width:100%;
             font-size:100%;
         }
+        #result td { padding:0.5ex; }
+        tr.failed { background-color:#fdd; }
+        tr.passed { background-color:#dfd; }
     </style>
 </head>
 <body onLoad="connect()">
