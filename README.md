@@ -16,11 +16,17 @@ The eventual design is expected to work as follows:
 
 -   A set of PHP scripts
     -   handle user authentication
-    -   interact with an sqlite database to track user success
-    -   let user write code for a task, uploading submissions to `upload/submission/`
-    -   use javascript to check `upload/result/` for results
+    -   use javascript for text editing and websockets
 
-The Python part of this is reasonably complete.
-A few updates to support more corner-case task tests and wrap more unsafe imports are expected, but it is workable as it stands.
+-   A vibe.d server
+    -   backend for web sockets
+    -   interfaces between python and web front-end using inotify
+    -   implements in-memory database with append-only file persistence
 
-The other parts are still under design.
+A first draft of each is completed.  Many ideas are not yet achieved:
+
+-   parameterized tasks are implemented in Python, but not D (shared opAssign is the problem)
+-   the user interface is ugly and lacks the ability to return to the main page after submission
+-   tracking completion is implemented in D, but untested
+-   implicitly-exact function-style python tests should only check retval, not output (see type_nums.yaml)
+-   ...
