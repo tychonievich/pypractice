@@ -1,0 +1,16 @@
+{
+	"authors": [
+		"Luther A. Tychonievich"
+	],
+	"name": "wss_test",
+	"license": "Apache 2.0",
+	"copyright": "Copyright © 2017, Luther A. Tychonievich",
+	"description": "Web socket backend for python practicing tool",
+	"dependencies": {
+		"vibe-d": "~>0.7.31",
+		"dyaml": "~>0.6.3"
+	},
+	"versions": [
+		"VibeDefaultMain"
+	]
+}
