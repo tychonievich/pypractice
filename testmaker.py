@@ -94,12 +94,18 @@ def ex_msg(ex):
     msg = ''
     tr = ex.__traceback__.tb_next
     line = None
+    fname = None
     while tr is not None:
         msg += '  File "'+tr.tb_frame.f_code.co_filename+'", line '+str(tr.tb_lineno)+'\n'
         line = tr.tb_lineno
+        fname = tr.tb_frame.f_code.co_filename
         tr = tr.tb_next
     msg += ex.__class__.__name__+': ' + str(ex)
-    smsg = 'raised '+ex.__class__.__name__+(' on line '+str(line) if line is not None else '')+': '+str(ex)
+    # -1 to line to move past hidden parameterization comment
+    if fname is not None and fname.endswith('testmaker.py'):
+        smsg = 'test harness raised '+ex.__class__.__name__+':\n  '+str(ex)
+    else:
+        smsg = 'raised '+ex.__class__.__name__+(' on line '+str(line-1) if line is not None else '')+': '+str(ex)
     return smsg, msg
 
 def case_str(case):
@@ -255,8 +261,18 @@ class Tester:
             results = []
             for case in self.cases:
                 try:
-                    ur, uo = run(user, self.func, case.get('inputs'), case.get('args',()), case.get('kwargs',{}))
-                    gr, go = run(self.solution, self.func, case.get('inputs'), case.get('args',()), case.get('kwargs',{}), params)
+                    uo, go = [], []
+                    try:
+                        ur, uo = run(user, self.func, case.get('inputs'), case.get('args',()), case.get('kwargs',{}))
+                    except BaseException as ex:
+                        ur = ex
+                    try:
+                        gr, go = run(self.solution, self.func, case.get('inputs'), case.get('args',()), case.get('kwargs',{}), params)
+                    except BaseException as ex:
+                        gr = ex
+                    
+                    if isinstance(ur, BaseException) and not isinstance(gr, BaseException):
+                        raise ur
                     
                     if len(user[3].inputs) > 0:
                         results.append((False, case['name'], 'inputs '+ str(user[3].inputs)+' unread', case, ur, uo))
@@ -292,7 +308,10 @@ class Tester:
                                 continue
                     elif self.exact:
                         if not compare_result(gr, ur):
-                            results.append((False, case['name'], 'returned wrong value', case, ur, uo))
+                            if isinstance(gr,BaseException) and not isinstance(ur,BaseException):
+                                results.append((False, case['name'], 'expected to raise an Exception', case, ur, uo))
+                            else:
+                                results.append((False, case['name'], 'returned wrong value', case, ur, uo))
                             continue
                         if not compare_result(go, uo):
                             results.append((False, case['name'], 'printed wrong text', case, ur, uo))
@@ -306,7 +325,7 @@ class Tester:
                     if isinstance(case.get('retval'), BaseException):
                         results.append((True, u, None, case, ex, ['']))
                     else:
-                        results.append((False,)+ex_msg(ex)+(case, ex, ['']))
+                        results.append((False,case['name'], ex_msg(ex)[0], case, ex, ['']))
             return results
         except BaseException as ex:
             return ex

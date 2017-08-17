@@ -16,6 +16,7 @@ var user = "<?=$user;?>";
 var token = "<?=$token;?>";
 var editor;
 var task;
+var done;
 function connect()
 {
     setText("connecting "+user+"...");
@@ -57,8 +58,9 @@ function connect()
             content.innerHTML = '';
             content.appendChild(table);
         } else if (kind == "task") {
+            done = false;
             task = data.task;
-            document.getElementById("content").innerHTML = "<h1>"+data.task+".py</h1><p>"+data.desc+"</p><div id='editor'></div><input type=\"button\" onclick=\"sendcode()\" value=\"Submit Code\"></input><table id=\"result\"></table>";
+            document.getElementById("content").innerHTML = "<h1>"+data.task+".py</h1><p>"+data.desc+"</p><div id='editor'></div><input id=\"send\" type=\"button\" onclick=\"sendcode()\" value=\"Submit Code\"></input><table id=\"result\"></table>";
             editor = ace.edit("editor");
             editor.setTheme("ace/theme/pycharm");
             editor.getSession().setMode("ace/mode/python");
@@ -79,6 +81,10 @@ function connect()
                 tr.lastChild.style.whiteSpace = 'pre-wrap';
                 tr.insertCell().appendChild(document.createTextNode(test.message ? test.message : ''));
             }
+            if (data.score >= 1) {
+                done = true;
+                document.getElementById('send').value = "Return to menu";
+            }
         } else {
             setText(kind + ": " + message.data);
         }
@@ -98,11 +104,16 @@ function closeConnection()
 }
 
 function sendcode() {
-    socket.send(JSON.stringify({user:user, session:token, 
-        action:"submit",
-        task:task,
-        code:editor.getValue(),
-    }));
+    if (done)
+        socket.send(JSON.stringify({user:user, session:token, 
+            action:"status",
+        }));
+    else
+        socket.send(JSON.stringify({user:user, session:token, 
+            action:"submit",
+            task:task,
+            code:editor.getValue(),
+        }));
 }
 
 function setText(text)

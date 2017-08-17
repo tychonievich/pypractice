@@ -247,8 +247,8 @@ struct Parameterization {
     string removeDollars(string s) shared const {
         import std.array : replace;
         foreach(const ref n; pairs)
-            s = s.replace("$"~n.name~"$", n.value.toString);
-        return s;
+            s = s.replace("$"~n.name~"$", n.value.toString.replace(`-`,`−`));
+        return s.replace("+ −", "− ");
     }
 }
 

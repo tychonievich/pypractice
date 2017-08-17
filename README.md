@@ -36,7 +36,7 @@ Checklist:
 | done | php blocks double submissions |
 | done | grader handles parameterization |
 | done | socket handles parameterization |
-| pending | user can finish with assignment |
+| done | user can finish with assignment |
 | pending | implicit testing of functions ignores output |
 | pending | admin views |
 | pending | dynamic addition of users |
