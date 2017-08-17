@@ -23,7 +23,7 @@ function connect()
     var content = document.getElementById("content");
     socket = new WebSocket(getBaseURL() + "/ws");
     socket.onopen = function() {
-        setText("connected. waiting for timer...");
+        setText("connected. waiting for update from server");
         socket.send(JSON.stringify({user:user, session:token, 
             action:"status"}));
     }
@@ -51,12 +51,13 @@ function connect()
                         tr.insertCell().innerText = key;
                         tr.insertCell().innerText = data[key];
                         // tr.addEventListener('click', function(){socket.send(JSON.stringify({user:user, session:token, action:"practice", topic:key}));});
-                        tr.setAttribute("onclick", 'socket.send(JSON.stringify({user:"'+user+'", session:"'+token+'", action:"practice", topic:"'+key+'"}))');
+                        tr.setAttribute("onclick", 'setText("requesting task definition from server..."); socket.send(JSON.stringify({user:"'+user+'", session:"'+token+'", action:"practice", topic:"'+key+'"}))');
                     }
                 }
             }
             content.innerHTML = '';
             content.appendChild(table);
+            setText('ready');
         } else if (kind == "task") {
             done = false;
             task = data.task;
@@ -65,6 +66,7 @@ function connect()
             editor.setTheme("ace/theme/pycharm");
             editor.getSession().setMode("ace/mode/python");
             editor.setOptions({maxLines: Infinity});
+            setText('ready');
         } else if (kind == "result") {
             var res = document.getElementById("result");
             while(res.hasChildNodes()) res.removeChild(res.lastChild);
@@ -85,25 +87,27 @@ function connect()
                 done = true;
                 document.getElementById('send').value = "Return to menu";
             }
+            setText('ready');
         } else {
             setText(kind + ": " + message.data);
         }
     }
     socket.onclose = function() {
-        setText("connection closed.");
+        setText("connection closed; reload page to make a new connection.");
     }
     socket.onerror = function() {
-        setText("Error!");
+        setText("error connecting to server");
     }
 }
 
 function closeConnection()
 {
     socket.close();
-    setText("closed.");
+    setText("connection closed; reload page to make a new connection.");
 }
 
 function sendcode() {
+    setText('code sent; awaiting reply from server...');
     if (done)
         socket.send(JSON.stringify({user:user, session:token, 
             action:"status",
@@ -118,7 +122,7 @@ function sendcode() {
 
 function setText(text)
 {
-    document.getElementById("timer").innerHTML += "\n"+text;
+    document.getElementById("timer").innerHTML = text;
 }
 
 function getBaseURL()
@@ -128,6 +132,10 @@ function getBaseURL()
 }
     //--></script>
     <style>
+        #wrapper { 
+            padding:1em; border-radius:1em; background:white;
+        }
+        body { background: #dddad0; }
         pre#timer {
             border: 1px solid black;
         }
@@ -137,16 +145,16 @@ function getBaseURL()
             width:100%;
             font-size:100%;
         }
-        #result td { padding:0.5ex; }
+        td { padding:0.5ex; }
         tr.failed { background-color:#fdd; }
         tr.passed { background-color:#dfd; }
     </style>
 </head>
 <body onLoad="connect()">
-    <p>The following box should show a running counter, updated by the server:</p>
-    <pre id="timer"></pre>
-    <button type="button" onclick="closeConnection()">Close connection</button>
-    <div id="content"></div>
+    <div id="wrapper">
+        <div id="content"></div>
+        <pre id="timer"></pre>
+    </div>
 </body>
 </html>
 <?php
