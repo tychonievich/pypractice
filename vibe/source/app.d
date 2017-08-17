@@ -125,20 +125,134 @@ struct User {
 struct Task {
     string[] topics;
     string description;
-    // Json randomization; // FIXME: implement this
+    immutable(Param)[] parameters; 
     
     bool ready(const ref shared User me) shared {
         int missing = 0;
         foreach(topic; topics) if (topic !in me.mastered) missing += 1;
         return missing <= 1;
     }
+    shared(Parameterization) parameterize() shared {
+        shared Parameterization ans;
+        foreach(shared const ref p; parameters)
+            ans.pairs ~= p.pick;
+        return ans;
+    }
 }
-shared struct Action {
+struct Action {
     string task;
     long[2] times;
     float result;
-    // Json parameterization = Json.emptyObject; // FIXME: initialize this per action
+    shared Parameterization params;
+    this(string task, long[2] times, float result, shared _nif[] p) shared {
+        this.task = task;
+        this.times[] = times[];
+        this.result = result;
+        this.params.pairs ~= p;
+    }
 }
+struct Picker(T) {
+    T[2] range;
+    T[] include;
+    T[] exclude;
+    T pick() const {
+        import std.random;
+        if (range[1] <= range[0]
+        || (include.length > 0 && uniform(cast(T)0, cast(T)(range[1]-range[0]-exclude.length+include.length)) < include.length))
+            return include[uniform(0, include.length)];
+        bool again = true;
+        T ans;
+        while(again) {
+            again = false;
+            ans = uniform(range[0], range[1]);
+            foreach(i; exclude) if (i == ans) { again = true; break; }
+        }
+        return ans;
+    }
+}
+struct Param {
+    string name;
+    bool integer;
+    union {
+        Picker!long i;
+        Picker!double f;
+    }
+    void pick(ref Json ans) const {
+        ans[name] = integer ? Json(i.pick) : Json(f.pick);
+    }
+    shared(_nif) pick() const {
+        if (integer) return shared(_nif)(name, i.pick);
+        else return shared(_nif)(name, f.pick);
+    }
+    this(in string n, in long[2] r, in long[] i, in long[] e) immutable {
+        this.name = n;
+        this.integer = true;
+        this.i = immutable Picker!(long)(r, i.idup, e.idup);
+    }
+    this(in string n, in double[2] r, in double[] i, in double[] e) immutable {
+        this.name = n;
+        this.integer = false;
+        this.f = immutable Picker!(double)(r, i.idup, e.idup);
+    }
+}
+/**
+ * named integer/float : just needed to permit shared map assignment
+ */
+struct _nif {
+	string name;
+	bool integer;
+	union { long i; double f; }
+	this(string n, in long i) { name = n; integer = true; this.i = i; }
+	this(string n, in double f) { name = n; integer = false; this.f = f; }
+	this(string n, in long i) shared { name = n; integer = true; this.i = i; }
+	this(string n, in double f) shared { name = n; integer = false; this.f = f; }
+	this(string n, in Json v) { name = n; value(v); }
+	Json value() const shared { return integer ? Json(i) : Json(f); }
+	void value(in Json v) { 
+		integer = v.type == Json.Type.int_; 
+		if (integer) i = v.get!long;
+		else f = v.get!double;
+	}
+}
+struct Parameterization {
+	_nif[] pairs;
+	
+	Json toJson() const shared {
+		Json ans = Json.emptyObject;
+		foreach(const ref n; pairs)
+			ans[n.name] = n.value;
+		return ans;
+	}
+	static Parameterization fromJson(in Json src) {
+		Parameterization ans;
+		foreach(string k, const Json v; src) {
+			ans.pairs ~= _nif(k, v);
+		}
+		return ans;
+	}
+    string toString() shared const {
+        import std.array;
+        Appender!string ans;
+        char pre = '{';
+        foreach(const ref n; pairs) {
+            ans ~= pre; pre = ',';
+            ans ~= '"'; ans ~= n.name; ans ~= `":`;
+            if (n.integer) ans ~= to!string(n.i);
+            else ans ~= to!string(n.f);
+        }
+        if (pre == '{') return "{}";
+        ans ~= '}';
+        return ans.data;
+    }
+    string removeDollars(string s) shared const {
+        import std.array : replace;
+        foreach(const ref n; pairs)
+            s = s.replace("$"~n.name~"$", n.value.toString);
+        return s;
+    }
+}
+
+
 
 shared string[string] session_key;
 shared User[string] users;
@@ -165,6 +279,7 @@ shared long lastread;
  *  start?
  *  stop?
  *  result?
+ *  params
  * 
  * Tasks (and topics) are stored separately in individual YAML files; see readTask.
  */
@@ -202,12 +317,13 @@ bool readLogLine(R)(ref R range) {
                 act.task = a.task;
                 act.times[] = a.times[];
                 act.result = a.result;
-                // act.parameterization = a.parameterization; // violates sharedness
+                act.params = a.params;
             } else
                 act.task = data["task"].get!string;
             if ("start" in data) act.times[0] = data["start"].get!long;
             if ("stop" in data) act.times[1] = data["stop"].get!long;
             if ("result" in data)  act.result = data["result"].to!float;
+            if ("param" in data) {act.params.pairs.length = 0; act.params.pairs ~= Parameterization.fromJson(data["param"]).pairs;}
             
             user.done[data["task"].get!string] = act;
             return true;
@@ -230,8 +346,29 @@ void readTask(string path, string name) {
             tp ~= topic;
             topics[topic][name] = true;
         }
-        // FIXME: add parameters
-        tasks[name] = shared Task(tp, node["description"].get!string);
+        immutable(Param)[] p;
+        if ("random" in node) {
+            foreach(string k,ref dyaml.Node v; node["random"]) {
+                if (("range" in v) ? v["range"][0].isInt : v["include"][0].isInt) {
+                    long[2] range;
+                    long[] include, exclude;
+                    range[0] = ("range" in v) ? v["range"][0].get!long : 0;
+                    range[1] = ("range" in v) ? v["range"][1].get!long : 0;
+                    if ("include" in v) foreach(long i; v["include"]) include ~= i;
+                    if ("exclude" in v) foreach(long i; v["exclude"]) exclude ~= i;
+                    p ~= immutable Param(k, range, include, exclude);
+                } else {
+                    double[2] range;
+                    double[] include, exclude;
+                    range[0] = ("range" in v) ? v["range"][0].get!double : 0;
+                    range[1] = ("range" in v) ? v["range"][1].get!double : 0;
+                    if ("include" in v) foreach(double i; v["include"]) include ~= i;
+                    if ("exclude" in v) foreach(double i; v["exclude"]) exclude ~= i;
+                    p ~= immutable Param(k, range, include, exclude);
+                }
+            }
+        }
+        tasks[name] = shared Task(tp, node["description"].get!string, p);
     } catch(dyaml.YAMLException ex) {}
 }
 
@@ -358,13 +495,14 @@ void handleWebSocketConnection(scope WebSocket socket) {
                         if (options.length > 0) {
                             auto now = timestamp;
                             auto task = options[uniform(0,options.length)];
-                             // FIXME: add paramterization
-                            recordAction(["user":Json(user), "task":Json(task), "start":Json(now)]);
-                            users[user].done[task] = shared Action(task, [now,0], 0.0f);
+                            shared param = tasks[task].parameterize;
+                            recordAction(["user":Json(user), "task":Json(task), "start":Json(now), "param":param.toJson]);
+                            auto a = shared Action(task, [now,0], 0.0f, param.pairs);
+                            users[user].done[task] = a;
                             socket.send(serializeToJsonString(
                             [".":"task"
                             ,"task":task
-                            ,"desc":tasks[task].description.filterMarkdown
+                            ,"desc":param.removeDollars(tasks[task].description).filterMarkdown
                             ]));
                         } else {
                             socket.send(serializeToJsonString(
@@ -400,7 +538,7 @@ void handleWebSocketConnection(scope WebSocket socket) {
                         // post code to tester directory
                         auto codedir = datadir~"submission/"~user~"/";
                         { static import std.file; std.file.mkdirRecurse(codedir); }
-                        writeFile(codedir~task~".py", cast(immutable(ubyte)[])("# {}\n"~data["code"].get!string)); // FIXME: add parameterization
+                        writeFile(codedir~task~".py", cast(immutable(ubyte)[])("# "~act.params.toString~"\n"~data["code"].get!string));
                         // wait for result to appear
                         DirectoryChange[2] _c; auto c = _c[0..0];
                         if (watcher.readChanges(c, dur!"seconds"(30))) {
