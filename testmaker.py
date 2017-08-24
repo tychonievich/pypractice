@@ -9,13 +9,12 @@ parse task/whatever.yaml into a Test object
     solution:       string that can be exec'd
     func:           function name or None for module test
     imports:        list of permitted module names
-    src:            dict with keys
-        recursive:  True|False|None
-        loops:      True|False|None
-        ban:        list of strings to ban at tokenization
-        ast:        list of [predicate(ast) -> None or raise Exception]
-        re:         list of regular expressions that need to search() positively
-        ban_re:     list of regular expressions that need to not search() positively
+    recursive:      True
+    loops:          False
+    ban:            list of strings to ban at tokenization
+    ast:            list of [predicate(ast) -> None or raise Exception]
+    re:             list of regular expressions that need to search() positively
+    ban_re:         list of regular expressions that need to not search() positively
     constraints:    list of predicates, each either
         - string s -- used as eval(s, {'retval':, 'output':, 'args':, 'kwargs':, 'input':}) -> True/False
         - dict {rule:..., message:...} -- rule is eval'd as above, custom error message on failure
@@ -52,7 +51,7 @@ could also wrap modules in functions
 '''
 
 def req_recursion(node):
-    '''An ast predicate that requires a recursive function somewhere in the tree'''
+    '''An ast predicate tshat requires a recursive function somewhere in the tree'''
     # recursion occurs when a node invokes itself
     # that requires a depth-first traveral, not just a random walk
     import ast, _ast
@@ -193,7 +192,7 @@ class Tester:
         else:
             self.params = ()
         self.allow = obj.get('imports', ())
-        self.banned = obj.get('src', {}).get('ban', ())
+        self.banned = obj.get('ban', ())
         self.astchecks = (
             ((req_recursion,) if obj.get('recursive') is True else ()) +
             ((no_loops,) if obj.get('loops') is False else ()) +
