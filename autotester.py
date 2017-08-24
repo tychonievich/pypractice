@@ -73,8 +73,8 @@ def newcode(path, skip=False):
         json.dump(data, f)
     os.rename(tmploc, endloc)
 
+import os
 class PIDWrap:
-    import os
     count = 0
     limit = max(1,len(os.sched_getaffinity(0))) * 10
     objs = set()
