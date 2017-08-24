@@ -17,6 +17,7 @@ var token = "<?=$token;?>";
 var editor;
 var task;
 var done;
+
 function connect()
 {
     setText("connecting "+user+"...");
@@ -34,6 +35,30 @@ function connect()
         if (kind == 'error') {
             console.log(data.private);
             setText('ERROR: ' + data.public);
+        } else if (kind == "view") {
+            var table = document.createElement("table");
+            var head = document.createElement("thead");
+            table.appendChild(head);
+            head = head.insertRow();
+            var th = document.createElement("th"); head.appendChild(th); th.innerText = "Topic";
+            th = document.createElement("th"); head.appendChild(th); th.innerText = "Recommendation";
+            th = document.createElement("th"); head.appendChild(th); th.innerText = "Check Off";
+            var body = document.createElement("tbody");
+            table.appendChild(body);
+            for(var i=0; i<5; i+=1) {
+                var begin = ["done", "check", "practice", "wait", "missing"][i];
+                for(var key in data) {
+                    if (data[key].startsWith(begin)) {
+                        var tr = body.insertRow();
+                        tr.insertCell().innerText = key;
+                        tr.insertCell().innerText = data[key];
+                        tr.insertCell().innerHTML = '<input type="button" value="'+(begin == 'done' ? 'Unc' : 'C')+'heck off mastery of '+key+'" onclick="setText(\'sending check-off to server...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', action:\''+(begin == 'done' ? 'un' : '')+'checkoff\', student:\''+data['.student']+'\', topic:\''+key+'\'}))">';
+                    }
+                }
+            }
+            content.innerHTML = '<p>You are viewing '+data['.name']+' ('+data['.student']+').  In addition to the options below, you may <input type="button" value="return to the students list" onclick="setText(\'requesting student list from server...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', action:\'status\'}))"> or <input type="button" value="log in as this student" onclick="setText(\'asking server to treat you as a student...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', asuser:\''+data['.student']+'\', action:\'status\'}))"> </p>';
+            content.appendChild(table);
+            setText('ready');
         } else if (kind == "status") {
             var table = document.createElement("table");
             var head = document.createElement("thead");
@@ -88,6 +113,24 @@ function connect()
                 document.getElementById('send').value = "Return to menu";
             }
             setText('ready');
+        } else if (kind == "students") {
+            var table = document.createElement("table");
+            var head = document.createElement("thead");
+            table.appendChild(head);
+            head = head.insertRow();
+            var th = document.createElement("th"); head.appendChild(th); th.appendChild(document.createTextNode("ID"));
+            th = document.createElement("th"); head.appendChild(th); th.appendChild(document.createTextNode("Name"));
+            var body = document.createElement("tbody");
+            table.appendChild(body);
+            for(var i=0; i<data.students.length; i+=1) {
+                var tr = body.insertRow();
+                tr.insertCell().innerText = data.students[i][0];
+                tr.insertCell().innerText = data.students[i][1];
+                tr.setAttribute("onclick", 'setText("requesting student summary from server..."); socket.send(JSON.stringify({user:"'+user+'", session:"'+token+'", action:"view", student:"'+data.students[i][0]+'"}))');
+            }
+            content.innerHTML = '';
+            content.appendChild(table);
+            setText('ready');
         } else {
             setText(kind + ": " + message.data);
         }
@@ -122,7 +165,8 @@ function sendcode() {
 
 function setText(text)
 {
-    document.getElementById("timer").innerHTML = text;
+    if (socket && socket.readyState >= socket.CLOSING) document.getElementById("timer").innerHTML = "connection closed; reload page to make a new connection.";
+    else document.getElementById("timer").innerHTML = text;
 }
 
 function getBaseURL()

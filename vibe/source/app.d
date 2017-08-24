@@ -302,7 +302,7 @@ bool readLogLine(R)(ref R range) {
             }
             if ("picture" in data) ans.picture = data["picture"].get!string;
             if ("mastered" in data) ans.mastered[data["mastered"].get!string] = true;
-            if ("unmaster" in data) ans.mastered.remove(data["mastered"].get!string);
+            if ("unmaster" in data) ans.mastered.remove(data["unmastered"].get!string);
             
             users[data["id"].get!string] = ans;
             return true;
@@ -475,17 +475,37 @@ void handleWebSocketConnection(scope WebSocket socket) {
                 ,"private":"user "~user~" not registered with system"
                 ]));
             } else {
+                string staff = null;
+                if (users[user].role != Role.student) {
+                    staff = user;
+                    if ("asuser" in data) {
+                        user = data["asuser"].get!string;
+                        if (user !in users || users[user].role != Role.student) {
+                            socket.send(serializeToJsonString(
+                            [".":"error"
+                            ,"public":"user "~user~" not registered with system"
+                            ,"private":"attempted to send asuser="~user~", who is not registered with system"
+                            ]));
+                            continue;
+                        }
+                    }
+                }
                 switch(action) {
                     case "status": {
-                        if (true || users[user].role == Role.student) {
+                        if (users[user].role == Role.student) {
                             auto ans = users[user].status;
                             ans["."] = "status";
                             socket.send(serializeToJsonString(ans));
                         } else {
-                            socket.send(serializeToJsonString(
-                            [".":"unfinished"
-                            ,"msg":"will eventually provide menu of Instructor/TA options"
-                            ]));
+                            Json tmp = Json.emptyObject;
+                            tmp["."] = "students";
+                            tmp["students"] = Json.emptyArray;
+                            foreach(uid, const ref u; users) {
+                                if (u.role == Role.student) {
+                                    tmp["students"] ~= serializeToJson([[u.id, u.name]]);
+                                }
+                            }
+                            socket.send(tmp.toString);
                         }
                     } break;
                     case "practice": { 
@@ -564,8 +584,53 @@ void handleWebSocketConnection(scope WebSocket socket) {
                                 ]));
                         }
                     } break;
-                    //case "overview": { } break;
-                    //case "checkoff": { } break;
+                    case "view": {
+                        if (!staff) {
+                            socket.send(serializeToJsonString(
+                                [".":"error"
+                                ,"public":"only staff may view other students"
+                                ,"private":"attempted prohibited behavior: " ~ data.toString
+                                ]));
+                            break;
+                        }
+                        user = data["student"].get!string;
+                        if (user !in users || users[user].role != Role.student) {
+                            socket.send(serializeToJsonString(
+                            [".":"error"
+                            ,"public":"user "~user~" not registered with system"
+                            ,"private":"attempted to view student="~user~", who is not registered with system"
+                            ]));
+                            break;
+                        }
+                        auto ans = users[user].status;
+                        ans["."] = "view";
+                        ans[".student"] = user;
+                        ans[".name"] = users[user].name;
+                        socket.send(serializeToJsonString(ans));
+                    } break;
+                    case "uncheckoff": goto case;
+                    case "checkoff": {
+                        if (!staff) {
+                            socket.send(serializeToJsonString(
+                                [".":"error"
+                                ,"public":"only staff may check off students"
+                                ,"private":"attempted prohibited behavior: " ~ data.toString
+                                ]));
+                            break;
+                        }
+                        user = data["student"].get!string;
+                        if (user !in users || users[user].role != Role.student) {
+                            socket.send(serializeToJsonString(
+                            [".":"error"
+                            ,"public":"user "~user~" not registered with system"
+                            ,"private":"attempted to view student="~user~", who is not registered with system"
+                            ]));
+                            break;
+                        }
+                        appendToFile(userlog, serializeToJsonString([".":"user", "id":user, (action == "uncheckoff" ? "unmastered" : "mastered"):data["topic"].get!string, "ta":staff, "when":timestr])~"\n");
+                        if (action == "checkoff") users[user].mastered[data["topic"].get!string] = true;
+                        else users[user].mastered.remove(data["topic"].get!string);
+                    } goto case "view";
                     default:
                         socket.send(serializeToJsonString(
                             [".":"error"

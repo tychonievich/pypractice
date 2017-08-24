@@ -1,3 +1,5 @@
+# Task specification
+
 Tests are written in [YAML](http://yaml.org), a human-readable data specification language.
 JSON is a valid subset of YAML, so feel free to use JSON if you are confused by YAML syntax.
 And yes, I know we don't teach JSON or YAML in our core curriculum. I was never taught them either.
@@ -230,3 +232,20 @@ cases:
   - inputs: ['so wise!']
 ````
 </td></tr></tbody></table>
+
+## Comparisons
+
+When providing `outputs` or `retval`s, a flexible comparison function is used.
+If `w` is the wanted value (specified in the YAML file) and `g` is the got value (produced by user code),
+all of the following will register as a match:
+
+-   `w == g`
+-   `w` is same/sub type of exception as `g`
+-   casting `g` to `type(w)` makes `w == g` work
+-   `abs(w-g) < 1e-6`
+-   if `search` is a member of `w`, `w.search(g)` -- intended for compiled `re` objects
+-   if `re.match("/.+/", w)`, strip the `/`s and from `w`, compile the rest as a regex, and run `w.search(g)`
+-   if `w` is callable, `w(g)`
+-   `w is None and type(g) is str`
+-   `all(compare_result(w,g) for w,g in zip(w,g))`
+
