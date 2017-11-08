@@ -258,7 +258,6 @@ shared string[string] session_key;
 shared User[string] users;
 shared Task[string] tasks;
 shared bool[string][string] topics; // topics['loops'] = ['task':true, 'task2':true, ...]
-shared long lastread;
 
 /**
  * The log is an append-only replay log of all actions taken.
