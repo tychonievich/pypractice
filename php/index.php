@@ -56,7 +56,7 @@ function connect()
                     }
                 }
             }
-            content.innerHTML = '<p>You are viewing '+data['.name']+' ('+data['.student']+').  In addition to the options below, you may <input type="button" value="return to the students list" onclick="setText(\'requesting student list from server...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', action:\'status\'}))"> or <input type="button" value="log in as this student" onclick="setText(\'asking server to treat you as a student...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', asuser:\''+data['.student']+'\', action:\'status\'}))"> </p>';
+            content.innerHTML = '<img src="pics.php?filename='+data['.student']+'.jpg"/><p>You are viewing '+data['.name']+' ('+data['.student']+').  In addition to the options below, you may <input type="button" value="return to the students list" onclick="setText(\'requesting student list from server...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', action:\'status\'}))"> or <input type="button" value="log in as this student" onclick="setText(\'asking server to treat you as a student...\'); socket.send(JSON.stringify({user:\''+user+'\', session:\''+token+'\', asuser:\''+data['.student']+'\', action:\'status\'}))"> </p>';
             content.appendChild(table);
             setText('ready');
         } else if (kind == "status") {
