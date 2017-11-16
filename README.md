@@ -40,4 +40,7 @@ Checklist:
 | pending | implicit testing of functions ignores output |
 | pending | admin views |
 | pending | dynamic addition of users |
-| pending | checkoff interface |
+| done | checkoff interface |
+| done | test case writing interface |
+| done | test case preview interface |
+| pending | test case review by super-users |
