@@ -4,17 +4,17 @@
         <style type="text/css">
             .element { vertical-align:middle; border:thin solid rgba(0,0,0,0.125); border-radius:1ex; }
             .null { opacity:0.25; }
-            code { border:thin solid rgba(255,127,0,0.125); background: rgba(255,127,0,0.0625); }
+            code, a.button { border:thin solid rgba(255,127,0,0.125); background: rgba(255,127,0,0.0625); }
             .deletion { padding:0em; background: rgba(255,0,0,0.25); border:none; }
             .addition { padding:0em; }
             .element, .extender { display:inline-table; }
             .radio-wrapper + .radio-wrapper { margin-left: 1em; }
             input[type="submit"], textarea { vertical-align: middle; }
-            .filelist a { text-decoration: none; color:inherit; }
+            a.plain, a.button { text-decoration: none; color:inherit; }
         </style>
         <script type="text/javascript" src="sform2.js"></script>
-        <script type="text/javascript" src="js-yaml.js"></script>
-        <script type="text/javascript" src="tv4.js"></script>
+        <script type="text/javascript" src="js-yaml.js"></script> <!-- https://github.com/nodeca/js-yaml -->
+        <script type="text/javascript" src="tv4.js"></script> <!-- https://github.com/geraintluff/tv4 -->
         <script type="text/javascript">
 
 var message = '';
@@ -67,7 +67,7 @@ var schema = {
             },
             summary:'Random parameters (which must be integers) can be referred to elsewhere by surrounding them with <code>$</code>; if <code>x</code> is a parameter and you type <code>repeated $x$ times</code> the student will see (e.g.) <code>repeated 3 times</code>',
         },
-        description: { type:'string', summary:'Problem text to show student (may include markdown, like **<b>bold</b>**, *<i>italic</i>*, and `<code>code</code>`)' },
+        description: { type:'string', summary:'Problem text to show student (may include markdown, like **<b>bold</b>**, *<i>italic</i>*, and `<code>code</code>`). Should specify program vs. function and if function, what function name.' },
         topics: { type:'array', items: {type:'string', enum:['list', 'for-while conversion', 'nested loops']}, minItems:1 },
         solution: { type:'string', summary:'Reference solution (in Python 3)' },
         func: { type:'string', summary:'The function to test; if blank, will run code as a program instead' },
@@ -169,21 +169,7 @@ var schema = {
         </script>
     </head>
     <body onload="loader()">
-        <p>
-            To be accepted, a problem must meet the following criteria:
-        </p>
-        <ul>
-            <li>Have a description suitable to show a student trying to solve the problem</li>
-            <li>Have a (working) reference solution</li>
-            <li>Have enough test cases (any mix of <code>args</code>, <code>inputs</code>, and <code>cases</code>) to detect the vast majority of incorrect implementations</li>
-            <li>Be non-trivially distinct from any previously-accepted problem</li>
-            <li>Take 3&ndash;10 minutes to solve by a competent CS 111x alum</li>
-            <li>Meet one (or more) of the topics provided</li>
-            <li>Have no errors (neither an error message on this page, nor not-checked-here errors like invalid python code)</li>
-        </ul>
-        <p>Both programs and functions are welcome.  We also welcome randomized problem families; problems with multiple acceptable results as checked by predicates and/or constraints; etc.</p>
-        <p>You can either edit the problem description directly as <a href="http://yaml.org/" target="_blank">YAML</a>, or use the form provided below the YAML box.  The two should update one another, but that is based on several hundred lines of raw JavaScript that I wrote in two days without much testing.  In the very likely event that there is a bug in that code, the YAML is what gets submitted, not the form.</p>
-
+        <p>New to the site? See <a href="#guidelines">the guidelines at the end of this page</a>.</p>
 <h2>Previous submissions</h2>
 <ul class="filelist">
 <?php
@@ -191,13 +177,13 @@ $cnt = 0;
 foreach(glob("/opt/pypractice/upload/task-submission/$user-*.yaml") as $path) {
     $name = basename($path);
     $when = date(DATE_COOKIE, filemtime($path));
-    echo "<li><a href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code> (modified $when)</a></li>\n";
+    echo "<li><a class='plain' href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code></a> (modified $when) <a href='preview.php?task=$name' class='button'>preview student view</a></li>\n";
     $cnt += 1;
 }
 foreach(glob("/opt/pypractice/upload/tasks/$user-*.yaml") as $path) {
     $name = basename($path);
     $when = date(DATE_COOKIE, filemtime($path));
-    echo "<li><a href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code> (accepted)</a></li>\n";
+    echo "<li><a class='plain' href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code></a> (accepted) <a href='preview.php?task=$name' class='button'>preview student view</a></li>\n";
     $cnt += 1;
 }
 if ($cnt == 0) { echo '<li>You have not yet submitted a problem</li>'; }
@@ -216,5 +202,23 @@ if ($cnt == 0) { echo '<li>You have not yet submitted a problem</li>'; }
             </table>
         </form>
         <div id="warnings"></div>
+<h2 id="guidelines">Guidelines</h2>
+<p>
+    To be accepted, a problem must meet the following criteria:
+</p>
+<ul>
+    <li>Have a description suitable to show a student trying to solve the problem</li>
+    <li>Have a (working) reference solution</li>
+    <li>Have enough test cases (any mix of <code>args</code>, <code>inputs</code>, and <code>cases</code>) to detect the vast majority of incorrect implementations</li>
+    <li>Be non-trivially distinct from any previously-accepted problem</li>
+    <li>Take 5&ndash;10 minutes to solve by a competent but not amazing CS 111x alum</li>
+    <li>Be on one (or more) of the topics provided</li>
+    <li>Have no errors (neither an error message on this page, nor not-checked-here errors like invalid python code)</li>
+</ul>
+<p>There is an intent to pay $10 per accepted problem, up to 200 problems (in total, not per submitter), and funds to enable these payments have been received.  However, a process by which the payments may be made without scaring accounting has not yet been identified.  It may happen via gift cards or mailed checks or… TBD.</p>
+<p>Both programs and functions are welcome.  We also welcome randomized problem families; problems with multiple acceptable results as checked by predicates and/or constraints; etc.</p>
+<p>You can either edit the problem description directly as <a href="http://yaml.org/" target="_blank">YAML</a>, or use the form provided below the YAML box.  The two should update one another, but that is based on several hundred lines of raw JavaScript that I wrote in two days without much testing.  In the very likely event that there is a bug in that code, the YAML is what gets submitted, not the form.</p>
+
+
     </body>
 </html>

@@ -114,9 +114,11 @@ function arrayElement(items, value, minlen, maxlen) {
 	ans._maxlen = maxlen;
 	
 	ans.addItem = function(schema, value, focus) {
+		// console.log('addItem '+JSON.stringify(value));
 		if (this._maxlen && this.children.length-1 >= this._maxlen) return;
 		var li = document.createElement('li');
 		li.appendChild(anyElement(schema, value)); // in-module function call
+		// console.log("added "+li.innerHTML);
 		var del = document.createElement('input');
 		del.type = 'button'; del.value = '⌫';
 		del.classList.add('deletion');
@@ -183,6 +185,7 @@ function objectElement(schema, value, noExtensions) {
 	var ans = document.createElement('dl');
 	ans.schema = schema;
 	ans.addKey = function(key, value) {
+		// console.log("addKey "+key+": "+JSON.stringify(value));
 		// find schema, if any
 		var s = undefined;
 		if (this.schema.properties && key in this.schema.properties) s = this.schema.properties[key];
@@ -310,10 +313,10 @@ function objectElement(schema, value, noExtensions) {
 		for(var k in ans.schema.properties)
 			if (value && k in value) ans.addKey(k, value[k]);
 			else ans.addKey(k);
-	if (value)
-		for(var k in value)
-			if (!ans.schema.properties || !(k in ans.schema.properties))
-				ans.addKey(k, value[k]);
+	//if (value)
+		//for(var k in value)
+			//if (!ans.schema.properties || !(k in ans.schema.properties))
+				//ans.addKey(k, value[k]);
 	
 	ans.getValue = function() {
 		var ans = {};
@@ -352,6 +355,7 @@ function objectElement(schema, value, noExtensions) {
 	}
 	ans.classList.add('element');
 	ans.classList.add('object');
+	ans.setValue(value);
 	return ans;
 }
 
