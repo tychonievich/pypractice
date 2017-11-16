@@ -1,4 +1,4 @@
-import modwrap, yaml
+import modwrap, yaml, copy
 
 '''
 The main goal of this over testmaker.py is
@@ -210,7 +210,7 @@ class Tester:
             if type(ans.get('outputs')) is str:
                 ans['outputs'] = self.compile(asfunc(ans['outputs'], 'def printed()'), params=self.params)
             if type(ans.get('predicate')) is str:
-                ans['predicate'] = self.compile(asfunc(ans['predicate'], 'def predicate(retval, outputs)'), params=self.params)
+                ans['predicate'] = self.compile(asfunc(ans['predicate'], 'def predicate(retval, outputs, args, kwargs)'), params=self.params)
             if 'name' not in ans: ans['name'] = case_str(ans)
             self.cases.append(ans)
         for args in obj.get('args', ()):
@@ -230,6 +230,9 @@ class Tester:
                 ans['rule'] = self.compile(asfunc(constraint['rule'], 'def rule(retval, outputs)'), params=self.params)
                 if 'message' in constraint: ans['message'] = constraint['message']
             self.constraints.append(ans)
+        self.mustchange = obj.get('mustchange', False)
+        self.maychange = self.mustchange or obj.get('maychange', False)
+        
 
     def compile(self, src, filename='solution', mode='exec', params=()):
         for k in params:
@@ -260,13 +263,15 @@ class Tester:
             results = []
             for case in self.cases:
                 try:
+                    _uca, _uck = copy.deepcopy(case.get('args',())), copy.deepcopy(case.get('kwargs',{}))
+                    _gca, _gck = copy.deepcopy(case.get('args',())), copy.deepcopy(case.get('kwargs',{}))
                     uo, go = [], []
                     try:
-                        ur, uo = run(user, self.func, case.get('inputs'), case.get('args',()), case.get('kwargs',{}))
+                        ur, uo = run(user, self.func, case.get('inputs'), _uca, _uck)
                     except BaseException as ex:
                         ur = ex
                     try:
-                        gr, go = run(self.solution, self.func, case.get('inputs'), case.get('args',()), case.get('kwargs',{}), params)
+                        gr, go = run(self.solution, self.func, case.get('inputs'), _gca, _gck, params)
                     except BaseException as ex:
                         gr = ex
                     
@@ -284,13 +289,20 @@ class Tester:
                         if r is False:
                             results.append((False, case['name'], con.get('message', 'wrong result'), case, ur, uo))
                             failed = True
+                            break
                     if failed: continue
+                    if not self.maychange and (_uca != case.get('args',()) or _uck != case.get('kwargs',{})):
+                        results.append((False, case['name'], 'modified argument(s)', case, ur, uo))
+                        continue
+                    if self.mustchange and (_uca != _gca or _uck != _gck):
+                        results.append((False, case['name'], case.get('message', 'argument(s) not changed correctly'), case, ur, uo))
+                        continue
                     
                     # if there is a predicate, use that
                     # if not but there is retval and/or outputs, use them, running them if needed
                     # else if exact, compare ur and gr, uo and go
                     if 'predicate' in case:
-                        r,o = run(case['predicate'], 'predicate', None, (ur, uo), {}, params)
+                        r,o = run(case['predicate'], 'predicate', None, (ur, uo, _uca, _uck), {}, params)
                         if r == False:
                             results.append((False, case['name'], case.get('message', 'wrong result'), case, ur, uo))
                             continue

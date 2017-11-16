@@ -76,6 +76,8 @@ var schema = {
         recursive: { type:'boolean', summary:'Require a recursive solution? (default: false)', default:false },
         loops: { type:'boolean', summary:'Permit loops? (default: true)', default:true },
         exact: { type:'boolean', summary:'Use reference solution to generate <code>retval</code> and <code>output</code> for test cases that do not specify them? (default: true)', default:true },
+        maychange: { type:'boolean', summary:'Allow modifying the arguments? (default: false)', default:false },
+        mustchange: { type:'boolean', summary:'Require user code to modify arguments the same way that the reference solution does? (default: false)', default:false },
         constraints: { type:'array', items:{ oneOf:[
                 {type:'string', summary:'rule with default message'}, // code
                 {
