@@ -3,9 +3,9 @@
 Tests are written in [YAML](http://yaml.org), a human-readable data specification language.
 JSON is a valid subset of YAML, so feel free to use JSON if you are confused by YAML syntax.
 And yes, I know we don't teach JSON or YAML in our core curriculum. I was never taught them either.
-Some things you just learn on your own.
+They are worth learning, even if not necessarily worth spending time teaching.
 
-A task is defined as an object (the YAML equivalent of a map or dict) with both required and optional fields.
+A task is defined as an object (the YAML/JSON equivalent of a map or dict) with both required and optional fields.
 A minimal example looks like
 
 ````yaml
@@ -28,7 +28,7 @@ args:
 
 ## Required Fields
 
--   A `description` string.  This may include embedded [Markdown](...) for styling.
+-   A `description` string.  This may include embedded [Markdown](http://daringfireball.net/projects/markdown/syntax) for styling.
 -   A list of `topics`.  For this pilot study, that should be `[lists]`.
 -   A `solution`.  This must be valid Python code that solves the problem correctly.  It needn't be pretty.
 -   A `func`tion name, unless the task is to write a program instead of a function.  This pilot study should only have functions, not programs, so always include a `func`tion name.
@@ -36,7 +36,11 @@ args:
 
 ## Optional Fields
 
--   `exact: False`{.yaml} to indicate that output and return comparisons should not be performed by default
+-   `exact: False`{.yaml} to indicate that output and return comparisons should not be performed by default.
+
+-   `maychange: True`{.yaml} to give students permission to modify the contents of arguments if they so desire; without this modifying arguments is an automatic fail.
+
+-   `mustchange: True`{.yaml} to have an implict constraint added that requires student code post-invocation arguments to be `==` to reference-code post-invocation arguments.
 
 -   `random` to make a parameterized problem family.
     The value of `random` is an object describing one or more random variables;
@@ -125,7 +129,7 @@ Each test case specifies some subset of
 -   `inputs`, a list of things to simulate the user typing in response to each `input(...)` command
 -   `retval`, the value returned by the `func`tion
 -   `outputs`, a list of things printed with `print` and `input` separated by inputs.
--   `predicate`, a function body with parameters `retval` and `outputs`
+-   `predicate`, a function body with parameters `retval`, `outputs`, `args`, and `kwargs`. The `args` and `kwargs` passed to a `predicate` are the post-invocation values, to permit checking functions that are supposed to modify their arguments.
 
 Each case may also specify
 
@@ -164,7 +168,7 @@ If one of `retval` and `outputs` is specified but not the other, the other is no
 If neither `retval` nor `outputs` is specified and `exact: False`{.yaml} is not specified either,
 then both `retval` and `outputs` must be identical to those produced by the `solution`.
 If neither `retval` nor `outputs` is specified and `exact: False`{.yaml} is specified,
-neither `retval nor `outputs` are checked except as required by `constraints`.
+neither `retval` nor `outputs` are checked except as required by `constraints`.
 
 
 ### Specification formats
