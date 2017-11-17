@@ -73,9 +73,11 @@ var schema = {
         func: { type:'string', summary:'The function to test; if blank, will run code as a program instead' },
         imports: { type:'array', items:{type:'string'}, summary:'Permitted imports; if empty, all imports are banned' },
         ban: { type:'array', items:{type:'string'}, summary:'Symbols that may not be used in solutions (single tokens: <code>if</code> and <code>(</code> can each be banned, but <code>if(</code> cannot)' },
-        recursive: { type:'boolean', summary:'Require a recursive solution? (default: false)', default:false },
-        loops: { type:'boolean', summary:'Permit loops? (default: true)', default:true },
-        exact: { type:'boolean', summary:'Use reference solution to generate <code>retval</code> and <code>output</code> for test cases that do not specify them? (default: true)', default:true },
+        recursive: { type:'boolean', summary:'Require a recursive solution?', default:false },
+        loops: { type:'boolean', summary:'Permit loops?', default:true },
+        exact: { type:'boolean', summary:'Use reference solution to generate <code>retval</code> and <code>output</code> for test cases that do not specify them?', default:true },
+        maychange: { type:'boolean', summary:'Allow modifying the contents of the arguments?', default:false },
+        mustchange: { type:'boolean', summary:'Require student code to modify arguments the same way that the reference solution does?', default:false },
         constraints: { type:'array', items:{ oneOf:[
                 {type:'string', summary:'rule with default message'}, // code
                 {

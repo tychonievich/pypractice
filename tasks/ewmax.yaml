@@ -1,0 +1,15 @@
+description: |
+  Write a function named `ewmax`
+  which, given two lists of the same length,
+  returns a new list of the same length
+  such that `ewmax(a,b)[i] == max(a[i], b[i]`
+topics:
+  - list
+solution: |
+  def ewmax(a,b):
+      return [max(i,j) for i,j in zip(a,b)]
+func: ewmax
+cases:
+  - args:
+      - [1, 5]
+      - [4, -2]

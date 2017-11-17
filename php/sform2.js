@@ -237,6 +237,8 @@ function objectElement(schema, value, noExtensions) {
 			dd.innerHTML = (s.summary || s.description) + '<br/>';
 		if (s && (this.schema.required && this.schema.required.includes(key) && s.type))
 			dd.appendChild(anyElement(s, value));
+		else if (s && s.type == 'boolean' && s.default !== 'undefined')
+			dd.appendChild(anyElement(s, s.default));
 		else {
 			var holder = document.createElement('span');
 			var addSet = [{type:'null'}, {type:'boolean'}, {type:'number'}, {type:'string'}, {type:'array'}, {type:'object'}];
@@ -327,7 +329,8 @@ function objectElement(schema, value, noExtensions) {
 			if (value) value = value.querySelector('.element');
 			if (value && value.getValue) {
 				value = value.getValue();
-				ans[k] = value;
+        if (!this.schema.properties || ! this.schema.properties[k] || this.schema.properties[k].default !== value)
+					ans[k] = value;
 			}
 		}
 		return ans;
