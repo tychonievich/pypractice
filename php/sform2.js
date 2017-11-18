@@ -211,7 +211,8 @@ function objectElement(schema, value, noExtensions) {
 				this.dispatchEvent(new Event('change', {bubbles:true}));
 				return true;
 			}
-		if ((s === undefined) && noExtensions) return false;
+		// if ((s === undefined) && noExtensions) return false; // causes data loss on key typo
+		if ((s === undefined) && noExtensions && key == '') return false;
 		// add a new key-value pair
 		
 		
@@ -238,12 +239,21 @@ function objectElement(schema, value, noExtensions) {
 		if (s && (this.schema.required && this.schema.required.includes(key) && s.type))
 			dd.appendChild(anyElement(s, value));
 		else if (s && s.type == 'boolean' && s.default !== 'undefined')
-			dd.appendChild(anyElement(s, s.default));
+			dd.appendChild(anyElement(s, value !== undefined ? value : s.default));
+		else if (!s && value !== undefined)
+			dd.appendChild(anyElement({}, value));
 		else {
 			var holder = document.createElement('span');
 			var addSet = [{type:'null'}, {type:'boolean'}, {type:'number'}, {type:'string'}, {type:'array'}, {type:'object'}];
+			var valueType = (
+				value === undefined ? false 
+				: value === null ? 'null'
+				: Array.isArray(value) ? 'array'
+				: typeof value
+				);
 			if (s && s.type) addSet = [s];
 			if (s && s.oneOf) addSet = s.oneOf;
+			var toClick = undefined;
 			addSet.forEach(function(option){
 				var adder = document.createElement('input');
 				adder.type = 'button'; adder.value = '+ ' + (option.enum ? 'enum' : option.type || 'item');
@@ -270,13 +280,19 @@ function objectElement(schema, value, noExtensions) {
 					}
 					if (is.nextSibling)
 						is.parentNode.insertBefore(del, is.nextSibling)
-					else
+					else if (is.parentNode)
 						is.parentNode.appendChild(del);
 					is.dispatchEvent(new Event('change', {bubbles:true}));
 				}
+				if (option.type == valueType) toClick = adder;
 			});
 			dd.appendChild(holder);
-			if (addSet.length == 1 && (!this.schema.properties || !(key in this.schema.properties))) {
+			if (toClick) {
+				toClick.click();
+				dd.querySelector('.element').setValue(value);
+			} else if (value !== undefined) {
+				console.error('addKey with value that does not match schema on custom key is not yet implemented');
+			} else if (addSet.length == 1 && (!this.schema.properties || !(key in this.schema.properties))) {
 				// can remove entire key, and only one type possible, so just make it
 				dd.lastElementChild.lastElementChild.click(); // by clicking the make button
 				dd.lastElementChild.remove(); // and removing the value removal button
@@ -284,8 +300,13 @@ function objectElement(schema, value, noExtensions) {
 		}
 
 		var tail = this.querySelectorAll('dt.extender'); if (tail) tail = tail[tail.length-1];
-		this.insertBefore(dt, tail);
-		this.insertBefore(dd, tail);
+		if (tail) {
+			this.insertBefore(dt, tail);
+			this.insertBefore(dd, tail);
+		} else {
+			this.appendChild(dt);
+			this.appendChild(dd);
+		}
 		this.dispatchEvent(new Event('change', {bubbles:true}));
 		return true;
 	}
@@ -329,7 +350,7 @@ function objectElement(schema, value, noExtensions) {
 			if (value) value = value.querySelector('.element');
 			if (value && value.getValue) {
 				value = value.getValue();
-        if (!this.schema.properties || ! this.schema.properties[k] || this.schema.properties[k].default !== value)
+				if (!this.schema.properties || ! this.schema.properties[k] || this.schema.properties[k].default !== value)
 					ans[k] = value;
 			}
 		}

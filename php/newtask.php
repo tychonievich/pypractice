@@ -121,7 +121,7 @@ var schema = {
                 document.body.insertBefore(thing, document.getElementById('warnings').nextSibling);
                 <?php if ($_POST['problem']) { ?>
                 document.getElementById('yaml').value = <?=json_encode($_POST['problem'])?>;
-                reverse();
+                reverse(true);
                 <?php } else { ?>
                 checker();
                 <?php } ?>
@@ -140,7 +140,7 @@ var schema = {
                 document.getElementById('yaml').value = jsyaml.safeDump(data);
                 yaml_validate();
             }
-            function yaml_validate() {
+            function yaml_validate(force) {
                 var lines = document.getElementById('yaml').value.split(/\n|\r\n?/g);
                 if (document.getElementById('yaml').rows < lines.length)
                     document.getElementById('yaml').rows = lines.length;
@@ -157,13 +157,15 @@ var schema = {
                 if (!data) { warn("invalid yaml entered"); return; }
                 if (!tv4.validate(data, schema, true, true)) {
                     warn(tv4.error.dataPath+" "+tv4.error.message);
+                    if (force) return data;
+                    else return;
                 } else {
                     warn();
                     return data;
                 }
             }
-            function reverse() {
-                var data = yaml_validate();
+            function reverse(force) {
+                var data = yaml_validate(force);
                 if (data)
                     document.getElementById('form').setValue(data);
             }
@@ -193,7 +195,7 @@ if ($cnt == 0) { echo '<li>You have not yet submitted a problem</li>'; }
 </ul>
 <h2>Current proposal</h2>
         <form action="<?=$_SERVER['SCRIPT_NAME']?>" method="POST">
-            <textarea id="yaml" onkeyup="yaml_validate()" onchange="reverse()" name="problem"></textarea>
+            <textarea id="yaml" onkeyup="yaml_validate()" onchange="reverse(true)" name="problem"></textarea>
             <table style="display:inline-table; vertical-align:middle;">
                 <tr><td>Filename: <?=$user?>-<input type="text" name="filename" value="<?php
                 
