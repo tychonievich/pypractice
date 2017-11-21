@@ -100,7 +100,8 @@ var schema = {
                 inputs:{type:'array', items:{type:'string'}},
                 outputs:{oneOf:[{type:'string', summary:'python expression generating list of outputs'}, {type:'array', summary:'list of outputs'}]}, // if string, is code Python will eval(...)
                 retval:{},
-                message:{type:'string', summary:'how this case will be descrbied to the student'},
+                message:{type:'string', summary:'what to show on test failure'},
+                name:{type:'string', summary:'how to identify this case'},
                 predicate:{type:'string', summary:'the body of a Python function to be called with (outputs, retval) arguments'}, // code
             },
         }, summary:'full test cases' },
