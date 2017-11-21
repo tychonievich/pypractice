@@ -143,7 +143,7 @@ if __name__ == "__main__":
             if watch:
                 wm.add_watch(path, mask, rec=True)
             # the following may result in double-processed files but prevents a different race condition
-            for d,sds,fns in os.walk(event.pathname):
+            for d,sds,fns in os.walk(path):
                 for fn in fns:
                     self.newfile(os.path.join(d,fn))
         def process_default(self, event):
