@@ -8,13 +8,13 @@ if ($_POST['code']) {
             if (file_exists("/opt/pypractice/upload/task-submission/$_GET[task]")) {
                 $result = shell_exec(
                     'timeout -k 12s 10s '.
-                    'python3 /opt/pypractice/testtask.py '.
+                    '/opt/python-latest/bin/python3 /opt/pypractice/testtask.py '.
                     "/opt/pypractice/upload/task-submission/$_GET[task] ".
                     "/tmp/pyractice_preview_$user.py 2>&1");
             } else if (file_exists("/opt/pypractice/upload/tasks/$_GET[task]")) {
                 $result = shell_exec(
                     'timeout -k 12s 10s '.
-                    'python3 /opt/pypractice/testtask.py '.
+                    '/opt/python-latest/bin/python3 /opt/pypractice/testtask.py '.
                     "/opt/pypractice/upload/tasks/$_GET[task] ".
                     "/tmp/pyractice_preview_$user.py 2>&1");
             }
@@ -30,6 +30,7 @@ if ($_POST['code']) {
         <title>Python Practice Preview</title>
         <script type="text/javascript" src="ace.js"></script>
         <script type="text/javascript" src="js-yaml.js"></script>
+        <script type="text/javascript" src="marked.js"></script>
         <style type="text/css">
         #wrapper { padding:1em; border-radius:1em; background:white; }
         body { background: #dddad0; }
@@ -55,17 +56,6 @@ if ($_GET['task']) {
         }
     }
 }
-/*
-if ($problem && $_POST['code']) {
-    file_put_contents("/tmp/pyractice_preview_$user.py", $_POST['code']);
-    try {
-        $feedback = shell_exec('timeout -k 12s 10s  python3 /opt/pypractice/testtasky.py '."/tmp/pyractice_preview_$user.py 2>&1");
-        echo "console.log($feedback)";
-    } finally {
-        unlink("/tmp/pyractice_preview_$user.py");
-    }
-}
-*/
 ?>
 
 function setText(text) {
@@ -113,7 +103,7 @@ function connect() {
     var problem = jsyaml.safeLoad(<?=json_encode($problem)?>);
 
 
-    document.getElementById("content").innerHTML = "<h1>"+task+".py</h1><p>"+problem.description+"</p><div id='editor'></div><input id=\"send\" type=\"button\" onclick=\"sendcode()\" value=\"Submit Code\"></input><table id=\"result\"></table>";
+    document.getElementById("content").innerHTML = "<h1>"+task+".py</h1><p>"+marked(problem.description)+"</p><div id='editor'></div><input id=\"send\" type=\"button\" onclick=\"sendcode()\" value=\"Submit Code\"></input><table id=\"result\"></table>";
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/pycharm");
     editor.getSession().setMode("ace/mode/python");
@@ -129,6 +119,7 @@ function connect() {
         </script>
     </head>
 <body onLoad="connect()">
+    <p>Note: the preview does not correctly handle parameterized problems, but the final version does.</p>
     <div id="wrapper">
         <div id="content"></div>
         <pre id="timer"></pre>

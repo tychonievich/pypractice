@@ -11,6 +11,10 @@
             .radio-wrapper + .radio-wrapper { margin-left: 1em; }
             input[type="submit"], textarea { vertical-align: middle; }
             a.plain, a.button { text-decoration: none; color:inherit; }
+            table { margin: auto; }
+            td { text-align: center; }
+            td:first-child, th:first-child { text-align: left; }
+            th,td { padding: 0ex 1ex; }
         </style>
         <script type="text/javascript" src="sform2.js"></script>
         <script type="text/javascript" src="js-yaml.js"></script> <!-- https://github.com/nodeca/js-yaml -->
@@ -68,7 +72,7 @@ var schema = {
             summary:'Random parameters (which must be integers) can be referred to elsewhere by surrounding them with <code>$</code>; if <code>x</code> is a parameter and you type <code>repeated $x$ times</code> the student will see (e.g.) <code>repeated 3 times</code>',
         },
         description: { type:'string', summary:'Problem text to show student (may include markdown, like **<b>bold</b>**, *<i>italic</i>*, and `<code>code</code>`). Should specify program vs. function and if function, what function name.' },
-        topics: { type:'array', items: {type:'string', enum:['list', 'for-while conversion', 'nested loops']}, minItems:1 },
+        topics: { type:'array', items: {type:'string', enum:['basics', 'functions', 'conditionals', 'loops', 'lists', 'strings', 'dict', 'files', 'regex', 'exceptions']}, minItems:1 },
         solution: { type:'string', summary:'Reference solution (in Python 3)' },
         func: { type:'string', summary:'The function to test; if blank, will run code as a program instead' },
         imports: { type:'array', items:{type:'string'}, summary:'Permitted imports; if empty, all imports are banned' },
@@ -174,7 +178,7 @@ var schema = {
         </script>
     </head>
     <body onload="loader()">
-        <p>New to the site? See <a href="#guidelines">the guidelines at the end of this page</a>.</p>
+        <p>New to the site? See <a href="#guidelines">the guidelines</a> and <a href="#examples">examples</a> below.</p>
 <h2>Previous submissions</h2>
 <ul class="filelist">
 <?php
@@ -182,16 +186,43 @@ $cnt = 0;
 foreach(glob("/opt/pypractice/upload/task-submission/$user-*.yaml") as $path) {
     $name = basename($path);
     $when = date(DATE_COOKIE, filemtime($path));
-    echo "<li><a class='plain' href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code></a> (modified $when) <a href='preview.php?task=$name' class='button'>preview student view</a></li>\n";
+    $txt = file_get_contents($path);
+    echo "<li><a class='plain' href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code></a> (modified $when) <a href='preview.php?task=$name' class='button'>preview student view</a>";
+    if (strpos($txt, "not accepted:") > 0) echo " <span style='background-color:pink'>(rejected)</span>";
+    else if (strpos($txt, "accepted:") > 0) echo " <span style='background-color:lightgreen'>(accepted)</span>";
+    echo "</li>\n";
     $cnt += 1;
 }
+
+$lists_draft = 0;
+$lists_accepted = 0;
+$lists_rejected = 0;
+$conditionals_draft = 0;
+$conditionals_accepted = 0;
+$conditionals_rejected = 0;
+$num_submitted = 0;
+foreach(glob("/opt/pypractice/upload/task-submission/*.yaml") as $path) {
+    $txt = file_get_contents($path);
+    if (strpos($txt,'lists')) {
+        if (strpos($txt,'not accepted:')) $lists_rejected += 1;
+        else if (strpos($txt,'accepted:')) $lists_accepted += 1;
+        else $lists_draft += 1;
+    } else if (strpos($txt,'conditionals')) {
+        if (strpos($txt,'not accepted:')) $conditionals_rejected += 1;
+        else if (strpos($txt,'accepted:')) $conditionals_accepted += 1;
+        else $conditionals_draft += 1;
+    }
+    $num_submitted += 1;
+}
+
+/*
 foreach(glob("/opt/pypractice/upload/tasks/$user-*.yaml") as $path) {
     $name = basename($path);
     $when = date(DATE_COOKIE, filemtime($path));
     echo "<li><a class='plain' href='$_SERVER[SCRIPT_NAME]?revisit=$name'><code>$name</code></a> (accepted) <a href='preview.php?task=$name' class='button'>preview student view</a></li>\n";
     $cnt += 1;
 }
-if ($cnt == 0) { echo '<li>You have not yet submitted a problem</li>'; }
+*/if ($cnt == 0) { echo '<li>You have not yet submitted a problem</li>'; }
 ?>
 </ul>
 <h2>Current proposal</h2>
@@ -217,13 +248,63 @@ if ($cnt == 0) { echo '<li>You have not yet submitted a problem</li>'; }
     <li>Have enough test cases (any mix of <code>args</code>, <code>inputs</code>, and <code>cases</code>) to detect the vast majority of incorrect implementations</li>
     <li>Be non-trivially distinct from any previously-accepted problem</li>
     <li>Take 5&ndash;10 minutes to solve by a competent but not amazing CS 111x alum</li>
-    <li>Be on one (or more) of the topics provided</li>
+    <li>Be on <strong>one</strong> of the pilot topics (do not flag multiple topics):
+        <ul>
+            <li><strong>conditionals</strong>: using functions or input/print; if-statements and operators; but not loops or recursion</li>
+            <li><strong>lists</strong>: using functions, loops, and lists</li>
+        </ul>
+    </li>
     <li>Have no errors (neither an error message on this page, nor not-checked-here errors like invalid python code)</li>
 </ul>
-<p>There is an intent to pay $10 per accepted problem, up to 200 problems (in total, not per submitter), and funds to enable these payments have been received.  However, a process by which the payments may be made without scaring accounting has not yet been identified.  It may happen via gift cards or mailed checks or… TBD.</p>
+<p>Suggested approach:</p>
+<ol><li>Write a solution first, in your editor of choice;</li><li>copy it here and add test cases and a description.</li><li>Submit, click preview, and make sure it works, editing if not</li></ol>
+<p>SEAS has provided me with 200 $10 Walmart gift cards (usable online and in the store, up to 30 cards per purchase). One will be awarded to each of the first 100 accepted problems in each pilot topic.</p>
+<p>I was given only ⅓ of my asked-for fee for creating this problem-submission and testing site. As such I basically skipped testing; if it works, that was a happy accident. I don't have resources to fix anything major, either, so I might add <q>known bugs</q> to this part of the page if they are reported.</p>
 <p>Both programs and functions are welcome.  We also welcome randomized problem families; problems with multiple acceptable results as checked by predicates and/or constraints; etc.</p>
 <p>You can either edit the problem description directly as <a href="http://yaml.org/" target="_blank">YAML</a>, or use the form provided below the YAML box.  The two should update one another, but that is based on several hundred lines of raw JavaScript that I wrote in two days without much testing.  In the very likely event that there is a bug in that code, the YAML is what gets submitted, not the form.</p>
-
-
-    </body>
+<center>— Luther Tychonievich</center>
+<h2 id="guidelines">Examples</h2>
+<h3>Reference-solution-based simple list example</h3>
+<p>The following uses just a reference implementation and a set of test cases to define a task:</p>
+<pre style="display:table; margin:auto; border: thin solid rgba(255,127,0,0.125); background: rgba(255,127,0,0.0625);">description: >-
+  Write a function named `smaller` that, given an integer, returns the odd 
+  integers smaller than it as a list
+topics:
+  - lists
+solution: |-
+  def smaller(n):
+     return list(range(1,n,2))
+func:
+  smaller
+args:
+  - [3]
+  - [8]
+  - [0]
+  - [4, 'hi']</pre>
+<p>Note that the solution only needs to work, it doesn't need to look like code a student would write;
+and that test cases should include boundary cases, such as the <code>0</code> and too-long list above.
+The last case <code>[4, 'hi']</code> means the function is called as <code>smaller(4, 'hi')</code></p>
+<h3>Using predicates</h3>
+<p>The following uses a custom predicate instead of a reference solution:</p>
+<pre style="display:table; margin:auto; border: thin solid rgba(255,127,0,0.125); background: rgba(255,127,0,0.0625);">description: 'print `done!`, any case you want'
+topics:
+  - basics
+solution: print('Done!')
+exact: false
+cases:
+  - inputs: []
+    predicate: 'len(outputs) == 1 and outputs[0].strip().lower()[:4] == "done"'</pre>
+<p>Because the given test case contains a predicate, the reference solution will not be checked, allowing the use of a more-forgiving boolean expression instead.</p>
+<h3>Logistics</h3>
+<p>If you see a submitted problem, we see it too.</p>
+<p>We have to review the submissions to ensure they are on-topic, not duplicates, etc. After that we'll email you to pick up your cards (or that we couldn't accept a submission and why). Expect about 2 weeks for this process to happen.</p>
+<p>We have received a total of <?=$num_submitted?> submissions; <?=$cnt?> of them came from you. That probably contains some duplicates from multiple submitters and some incomplete submissions; we haven't reviewed them all yet.</p>
+<table><thead><tr><th>Task</th><th>Accepted</th><th>Rejected</th><th>Not yet reviewed</th></tr></thead>
+<tbody>
+    <tr><td><code>lists</code></td><td><?=$lists_accepted?></td><td><?=$lists_rejected?></td><td><?=$lists_draft?></td></tr>
+    <tr><td><code>conditionals</code></td><td><?=$conditionals_accepted?></td><td><?=$conditionals_rejected?></td><td><?=$conditionals_draft?></td></tr>
+    <tr><td>other topics</td><td></td><td><?=$num_submitted-$lists_rejected-$lists_accepted-$lists_draft-$conditionals_rejected-$conditionals_accepted-$conditionals_draft?></td><td></td></tr>
+</tbody>
+</table>
+</body>
 </html>

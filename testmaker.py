@@ -75,14 +75,14 @@ def no_loops(node):
             raise ValueError('use of loops prohibited')
 def ban(*names):
     '''An ast predicate maker to prohibit particular variable, module, and function names (slightly more forgiving that banning lexemes)'''
-    def ans(node):
+    def ans(f):
         '''An ast predicate to prohibit particular variable, module, and function names (slightly more forgiving that banning lexemes)'''
         import ast, _ast
-        for f in ast.walk(node):
+        for node in ast.walk(f):
             if isinstance(node, _ast.Name) and node.id in names:
                 raise ValueError('use of name "'+node.id+'" prohibited')
             elif isinstance(node, _ast.Attribute) and node.attr in names:
-                raise ValueError('use of name "'+node.id+'" prohibited')
+                raise ValueError('use of name "'+node.attr+'" prohibited')
                 
     return ans
     

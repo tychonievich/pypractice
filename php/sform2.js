@@ -301,8 +301,8 @@ function objectElement(schema, value, noExtensions) {
 
 		var tail = this.querySelectorAll('dt.extender'); if (tail) tail = tail[tail.length-1];
 		if (tail) {
-			this.insertBefore(dt, tail);
-			this.insertBefore(dd, tail);
+			tail.parentNode.insertBefore(dt, tail);
+			tail.parentNode.insertBefore(dd, tail);
 		} else {
 			this.appendChild(dt);
 			this.appendChild(dd);

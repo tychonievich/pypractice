@@ -11,8 +11,8 @@ function wss_start {
 
 function tester_start {
     cd /opt/pypractice
-    if [ "$(ps -A u | grep 'python3 autotester.py' -c)" -ge 2 ]; then return; fi
-    nohup python3 autotester.py >> upload/run.log 2>> upload/run.log </dev/null &
+    if [ "$(ps -A u | grep '/opt/python-latest/bin/python3 autotester.py' -c)" -ge 2 ]; then return; fi
+    nohup /opt/python-latest/bin/python3 autotester.py >> upload/run.log 2>> upload/run.log </dev/null &
 }
 
 tester_start
