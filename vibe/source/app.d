@@ -80,7 +80,7 @@ struct User {
                 if (v[0] > now-day && v[1] > 0) weight += v[1];
                 // if (v[1] < 0 && status > 1) status = 1;
             }
-            if (ready && status > 2) ans[topic] = "check off with TA";
+            if (ready && status > 2) ans[topic] = "it looks like you've mastered this topic!";//"check off with TA";
             else if (status > 1 && weight > 2) ans[topic] = "wait and revisit to build long-term memory";
             else ans[topic] = "practice";
         }
@@ -414,7 +414,7 @@ void trackSessions() {
     while(sessions.readChanges(changes))
         foreach(change; changes) {
             if (change.type == DirectoryChangeType.modified)
-                session_key[change.path.head.toString] = readFileUTF8(change.path);
+                session_key[change.path.head.name] = readFileUTF8(change.path);
         }
 }
 void trackTasks() {
@@ -422,7 +422,7 @@ void trackTasks() {
     DirectoryChange[] changes;
     while(sessions.readChanges(changes))
         foreach(change; changes) {
-            auto name = change.path.head.toString;
+            auto name = change.path.head.name;
             if (name[0] == '.' || name[$-4..$] != "yaml") continue;
             name = name[0..$-5];
             if (change.type == DirectoryChangeType.removed)
@@ -475,7 +475,8 @@ void handleWebSocketConnection(scope WebSocket socket) {
                 ]));
             } else {
                 string staff = null;
-                if (users[user].role != Role.student) {
+                // if (users[user].role != Role.student) {
+                if (false) {
                     staff = user;
                     if ("asuser" in data) {
                         user = data["asuser"].get!string;
@@ -491,7 +492,7 @@ void handleWebSocketConnection(scope WebSocket socket) {
                 }
                 switch(action) {
                     case "status": {
-                        if (users[user].role == Role.student) {
+                        if (!staff) { // users[user].role == Role.student) {
                             auto ans = users[user].status;
                             ans["."] = "status";
                             socket.send(serializeToJsonString(ans));
@@ -593,7 +594,7 @@ void handleWebSocketConnection(scope WebSocket socket) {
                             break;
                         }
                         user = data["student"].get!string;
-                        if (user !in users || users[user].role != Role.student) {
+                        if (user !in users || staff) {
                             socket.send(serializeToJsonString(
                             [".":"error"
                             ,"public":"user "~user~" not registered with system"
@@ -618,7 +619,7 @@ void handleWebSocketConnection(scope WebSocket socket) {
                             break;
                         }
                         user = data["student"].get!string;
-                        if (user !in users || users[user].role != Role.student) {
+                        if (user !in users || staff) {
                             socket.send(serializeToJsonString(
                             [".":"error"
                             ,"public":"user "~user~" not registered with system"

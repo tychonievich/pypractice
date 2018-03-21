@@ -200,7 +200,7 @@ class Tester:
             # to do: add re, ban_re, recursive: False, loops: True
         )
         if 'solution' in obj:
-            self.solution = self.compile(obj['solution'], params=self.params)
+            self.solution = self.compile(obj['solution'], params=self.params, loose_rules=True)
         self.func = obj.get('func')
         self.exact = obj.get('exact', True)
         self.cases = []
@@ -234,10 +234,13 @@ class Tester:
         self.maychange = self.mustchange or obj.get('maychange', False)
         
 
-    def compile(self, src, filename='solution', mode='exec', params=()):
+    def compile(self, src, filename='solution', mode='exec', params=(), loose_rules=False):
         for k in params:
             src = src.replace('$'+k+'$', '___'+k)
-        return modwrap.safe_execable(filename, code=src, imports=self.allow, ban_tokens=self.banned, allow=tuple('___'+_ for _ in params))
+        if loose_rules:
+            return modwrap.safe_execable(filename, code=src, imports=self.allow, allow=tuple('___'+_ for _ in params))
+        else:
+            return modwrap.safe_execable(filename, code=src, imports=self.allow, ban_tokens=self.banned, allow=tuple('___'+_ for _ in params))
 
 
     

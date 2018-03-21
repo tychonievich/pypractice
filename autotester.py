@@ -7,6 +7,7 @@ testers = {}
 def newtask(path):
     global testers
     import testmaker, yaml
+    print('try',path)
     with open(path) as f: p = yaml.safe_load(f)
     t = testmaker.Tester(p)
     name = path.rsplit('/', 1)[-1].rsplit('.', 1)[0]

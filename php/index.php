@@ -86,7 +86,7 @@ function connect()
         } else if (kind == "task") {
             done = false;
             task = data.task;
-            document.getElementById("content").innerHTML = "<h1>"+data.task+".py</h1><p>"+data.desc+"</p><div id='editor'></div><input id=\"send\" type=\"button\" onclick=\"sendcode()\" value=\"Submit Code\"></input><table id=\"result\"></table>";
+            document.getElementById("content").innerHTML = "<h1>"+task.replace(/[^\-]*-/, '')+".py</h1><p>"+data.desc+"</p><div id='editor'></div><input id=\"send\" type=\"button\" onclick=\"sendcode()\" value=\"Submit Code\"></input><table id=\"result\"></table>";
             editor = ace.edit("editor");
             editor.setTheme("ace/theme/pycharm");
             editor.getSession().setMode("ace/mode/python");
