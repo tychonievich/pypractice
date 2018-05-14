@@ -1,0 +1,16 @@
+description: >-
+  Write a function called `areEqual` that takes two real-valued inputs to check
+  if they are equal. Do not use the `=` sign.
+topics: [conditionals]
+solution: |-
+  #changed ban to refer to all standard operators using the equality sign.
+  def areEqual(x,y):
+     return (not (x>y or x<y))
+func: areEqual
+ban: ['=', '==', '<=', '>=', '!=']
+args:
+  - [3, 4]
+  - [0, -1]
+  - [0, 0]
+  - [-2, -2, 3]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `divisorUnder10` which, given a number, returns its
+  first proper divisor between 1 and 10, noninclusive. If there is none, return
+  None. A proper divisor a of n is an integer such that there exists another
+  integer b such that ab=n.
+topics: [conditionals]
+solution: |-
+  def divisorUnder10(a):
+     if a%2==0:
+       return 2
+     if a%3==0:
+       return 3
+     if a%5==0:
+       return 5
+     if a%7==0:
+       return 7
+     return None
+func: divisorUnder10
+args:
+  - [2]
+  - [3]
+  - [5]
+  - [7]
+  - [11]
+  - [21]
+  - [720]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

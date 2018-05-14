@@ -1,0 +1,29 @@
+description: >-
+  Write a function named `batchSum` that, given a positive integer n and a list
+  of numbers as input, returns a list containing the sum of the first n of the
+  list, the next n of the list, and so on. For instance,
+  batchSum(3,[1,3,4,5,6,7,8]) should return [1+3+4,5+6+7,8]=[8,18,8]. Note that
+  the last group, while incomplete, was still summed. `batchSum(n,[])` should
+  return `[]` for any n.
+topics: [lists]
+solution: |-
+  def batchSum(n,l):
+    while len(l)%n:
+      l+=[0]
+    b=[]
+    while len(l):
+      b+=[sum(l[0:n if n<len(l) else len(l)])]
+      l=l[n if n<len(l) else len(l):]
+    return b
+func: batchSum
+args:
+  - - 3
+    - [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  - - 8
+    - []
+  - - 7
+    - [1, 2, 3]
+  - - 7
+    - [1, 2, 3, 4, 5, 7, 2, 3, 4]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

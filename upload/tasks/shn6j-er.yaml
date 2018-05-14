@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `er` which takes three arguments a,b,c. If a>0, it
+  should return whichever of b or c is bigger (either if they are the same). If
+  a<0, it should return whichever of b or c is smaller (either if they are the
+  same). If a=0, return None. For instance, `er(-2,3,4)` should return 3.
+topics: [conditionals]
+solution: |-
+  def er(a,b,c):
+     if a==0:
+       return None
+     return (b if (a*b>a*c) else c)
+func: er
+args:
+  - [-0.3, 1, 3]
+  - [9, 0, 2]
+  - [0, 1, 3]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

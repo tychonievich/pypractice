@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `union` that, given two lists of numbers, returns a
+  list of every number that exists in at least one of the lists. Return elements
+  in numeric order. Do not use `set`. For instance, union([1,2,3,3],[3,3,2,8])
+  should return [1,2,3,8].
+topics: [lists]
+solution: |-
+  def union(m,n):
+     comb=[]
+     for i in (m+n):
+       if not (i in comb):
+         comb += [i]
+     return sorted(comb)
+func: union
+ban: [set]
+args:
+  - - [5, 4, 3, 3]
+    - [2, 1, 8, 3]
+  - - []
+    - []
+  - - [43214.5432]
+    - [432, 324, 5432]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

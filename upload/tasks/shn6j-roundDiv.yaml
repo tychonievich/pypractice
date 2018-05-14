@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `roundDiv` which, given two arguments a and b, returns
+  a/b rounded to the nearest integer. Remember that only numbers with fractional
+  part less than .5 round down. Do not use `//` or round.
+topics: [conditionals]
+solution: |-
+  #Round banned
+  def roundDiv(n,r):
+     a=n/r
+     if a%1>=.5:
+       a+=1
+     a-=a%1
+     return a
+func: roundDiv
+ban: [//, round]
+args:
+  - [3, 7]
+  - [3, 6]
+  - [17, 13]
+  - [-7, 2.111111111]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `absoluteSum` that takes the sum of the absolute values
+  of all numbers in a list of numbers. For instance, `absoluteSum([-8,13])`
+  should return 21. Do not use `sum`.
+topics: [lists]
+solution: |-
+  def absoluteSum(a):
+    s=0
+    for i in a:
+      s+=abs(i)
+    return s
+func: absoluteSum
+ban: [sum]
+args:
+  - - []
+  - - [1, 2, 3, 4, -1, -2, -4, -8, 16, -32, 64, 129534]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

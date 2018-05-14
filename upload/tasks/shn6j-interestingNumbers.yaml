@@ -1,0 +1,20 @@
+description: >-
+  Write a function called "interestingNumber" that, given a number, returns True
+  iff the number given is either a square, a cube, or -1 times either of those.
+  Return False otherwise. Do not use abs.
+topics: [conditionals]
+solution: |-
+  #Fixed definition to conform to reasonable problem, code
+  def interestingNumber(n):
+     return (((n**2)**.25)%1==0 or ((n**2)**(1/6))%1==0)
+func: interestingNumber
+ban: [abs]
+args:
+  - [0]
+  - [1]
+  - [4]
+  - [-73]
+  - [-4]
+  - [8]
+  - [3, 5]
+accepted: expect an email from Prof T about picking up your gift card

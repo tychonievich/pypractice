@@ -297,8 +297,9 @@ cases:
 <p>Because the given test case contains a predicate, the reference solution will not be checked, allowing the use of a more-forgiving boolean expression instead.</p>
 <h3>Logistics</h3>
 <p>If you see a submitted problem, we see it too.</p>
-<p>We have to review the submissions to ensure they are on-topic, not duplicates, etc. After that we'll email you to pick up your cards (or that we couldn't accept a submission and why). Expect about 2 weeks for this process to happen.</p>
-<p>We have received a total of <?=$num_submitted?> submissions; <?=$cnt?> of them came from you. That probably contains some duplicates from multiple submitters and some incomplete submissions; we haven't reviewed them all yet.</p>
+<p>We have to review the submissions to ensure they are on-topic, not duplicates, etc. After that they will show up as <span style="background-color:lightgreen">(accepted)</span> in your view of this page and you can come to Prof Tychonievich's office (Rice 208) to pick up your cards. Expect about 2 weeks for this process to happen.</p>
+<p>If a questions is <span style="background-color:pink">(rejected)</span>, read the reason why and, if it can be fixed, feel free to fix it and remove the rejection notice. We'll re-review it thereafter.</p>
+<p>We have received a total of <?=$num_submitted?> submissions; <?=$cnt?> of them came from you. That does include some duplicates from multiple submitters, some incomplete submissions, and some off-topic submissions.</p>
 <table><thead><tr><th>Task</th><th>Accepted</th><th>Rejected</th><th>Not yet reviewed</th></tr></thead>
 <tbody>
     <tr><td><code>lists</code></td><td><?=$lists_accepted?></td><td><?=$lists_rejected?></td><td><?=$lists_draft?></td></tr>

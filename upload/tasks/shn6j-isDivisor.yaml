@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `isDivisor` which, given two positive integers as
+  inputs, returns `0` if neither divides the other, `1` if the first divides the
+  second, `2` if the second divides the first, and `3` if they divide each
+  other. a is said to divide b if the remainder of the division b/a is 0.
+topics: [conditionals]
+solution: |-
+  #Reworded to avoid the use of the term modulo
+  def isDivisor(a,b):
+     if a*b==0:
+       if a==0 and b!=0:
+         return 2
+       if b==0 and a!=0:
+         return 1
+       return 0
+     return (((b/a)%1==0) + (2*((a/b)%1==0)))
+func: isDivisor
+args:
+  - [3, 4]
+  - [8, 2]
+  - [2, 2]
+  - [2, 0]
+  - [0, 0]
+  - [1, 2, 3]
+accepted: expect an email from Prof T about picking up your gift card

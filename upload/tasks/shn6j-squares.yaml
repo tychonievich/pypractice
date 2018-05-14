@@ -1,0 +1,16 @@
+description: >-
+  Write a function named `squares` which, given a list of numbers, returns the
+  elementwise square of the list. For instance, `[1,5,7]` should return
+  `[1,25,49]`.
+topics: [lists]
+solution: |-
+  def squares(n):
+     return ([x**2 for x in n])
+func: squares
+args:
+  - - [3, 4, 5]
+  - - [8, -1]
+  - - []
+  - - [4, 0, 2]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

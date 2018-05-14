@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `averageRound` that, given two numbers, returns their
+  average. However, if their average is neither an integer nor equal to the
+  first number, round it towards the first number. For instance,
+  `averageRound(6,9)` should return 7, while`averageRound(9,6)` should return 8.
+topics: [conditionals]
+solution: |-
+  def averageRound(a,b):
+    avg=(a+b)/2
+    if avg%1:
+      if a>avg:
+        avg-=avg%1
+        avg+=1
+      if a<avg:
+        avg-=avg%1
+    return avg
+func: averageRound
+args:
+  - [3.5, 3.5]
+  - [4, 8]
+  - [4, 7]
+  - [7, 4]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

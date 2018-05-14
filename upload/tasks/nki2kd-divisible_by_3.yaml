@@ -1,0 +1,21 @@
+description: >-
+  Write a function `divisible_by_3` that, given a list of integers `nums`,
+  returns a list of the integers in `nums` that are divisible by 3 in the order
+  they appear in `nums`. If no numbers within `nums` are divisible by 3, then
+  return an empty list.
+topics: [lists]
+solution: |-
+  def divisible_by_3(nums):
+      subset = []
+      for val in nums:
+          if val % 3 == 0:
+              subset.append(val)
+
+      return subset
+args:
+  - - [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  - - [2]
+  - - [5, 5, 3, 2, 9, 2, 0, 9]
+  - - [555, 993, 234, 3423950, 235839, 324802934]
+    - extra
+accepted: expect an email from Prof T about picking up your gift card

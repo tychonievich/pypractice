@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `formSquare` that takes two numbers as input, and
+  checks to see whether their product is a square number. It should return True
+  if their product is a square number, but they are not the same number and
+  False if either condition is not met. A square number is a number n such that
+  there exists integer a where a*a=n.
+topics: [conditionals]
+solution: |-
+  def formSquare(n,m):
+     if (n*m>=0):
+       if ((n*m)**.5)%1==0 and n!=m:
+         return True
+     return False
+func: formSquare
+args:
+  - [3, 3]
+  - [8, 2]
+  - [0, 0]
+  - [-4, -16]
+  - [-4, -8]
+  - [-4, 7]
+  - [-1, -2, 3]
+accepted: expect an email from Prof T about picking up your gift card

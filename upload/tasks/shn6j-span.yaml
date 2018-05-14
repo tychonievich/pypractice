@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `span` that, given a list, returns the positive
+  difference between the largest and smallest elements. The span of the empty
+  list is 0. Do not use sort, sorted, set, min, or max.
+topics: [lists]
+solution: |-
+  #added and correct bans
+  def span(n):
+    l,s=float('-inf'),float('inf')
+    if n==[]:
+      return 0
+    for i in n:
+      if i<s:
+        s=i
+      if i>l:
+        l=i
+    return (l-s)
+func: span
+ban: [sort, sorted, set, min, max]
+args:
+  - - [3, 4, 5]
+  - - [137, 64, -2]
+  - - []
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,29 @@
+description: >-
+  Write a function named `unnest` that, given a list of (nested) lists, returns
+  a single list that contains all the elements within the nested lists. For
+  example, `[[1, 2], [3, 4]]` becomes `[1, 2, 3, 4]`. You will not need to
+  unnest past the first level.
+topics: [lists]
+solution: |-
+  def unnest(lst):
+      # flatten list
+      return [i for l in lst for i in l]
+func: unnest
+ban: [itertools, chain]
+args:
+  - - [1, 2, 3]
+    - [2, 3, 4]
+    - [3, 4, 5]
+  - - [1]
+    - [2, 3]
+    - [4, 5, 6]
+  - - []
+    - []
+    - []
+  - - [9, 6]
+    - []
+    - [6, 7]
+    - []
+    - [3, 2, 1]
+  - - []
+accepted: expect an email from Prof T about picking up your gift card

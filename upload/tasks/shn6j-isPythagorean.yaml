@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `isPythagorean` that takes three numbers as arguments
+  and checks if the sum of the squares of any two of the numbers is equal to the
+  square of the third.
+  
+  Returns True if so, False if not
+topics: [lists]
+solution: |-
+  def isPythagorean(a,b,c):
+     nums=sorted([a**2,b**2,c**2])
+     return(nums[0]+nums[1]==nums[2])
+func: isPythagorean
+args:
+  - [3, 4, 5]
+  - [4, 5, 9]
+  - [0, -2, 2]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

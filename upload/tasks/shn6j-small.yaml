@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `small` that, given an number and a list, checks
+  whether that number is smaller than more than half of the elements in the
+  list. Return True if so, False if not.
+topics: [lists]
+solution: |-
+  def small(n,l):
+     smaller=0
+     for i in l:
+       if n<i:
+         smaller+=1
+     if smaller>len(l)/2:
+       return True
+     return False
+func: small
+args:
+  - - 3
+    - [1, 2, 3]
+  - - 8
+    - [5, 6, 9, 10]
+  - - 8
+    - [5, 6, 9, 10, 11]
+  - - 0
+    - [-3, -2, 1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

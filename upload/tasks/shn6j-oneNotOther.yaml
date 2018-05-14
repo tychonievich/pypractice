@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `oneNotOther` that, given two lists a and b, returns
+  all elements that appear at least once in one of the lists but not in the
+  second. The returned list should not contain duplicates. Return them in their
+  order of first appearance in a+b. For instance, `oneNotOther([1,2,3],[3,4,5])`
+  should return [1,2,4,5].
+topics: [lists]
+solution: |-
+  def oneNotOther(a,b):
+    l=[]
+    for i in (a+b):
+     if ((i in a)^(i in b)) and not (i in l):
+       l+=[i]
+    return l
+func: oneNotOther
+args:
+  - - [1, 2, 3]
+    - [2, 3, 4]
+  - - []
+    - []
+  - - [1, 2, 3]
+    - [4, 5, 6, 7, 8]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

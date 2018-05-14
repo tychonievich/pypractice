@@ -1,0 +1,21 @@
+description: >-
+  Write a function called right_sum that takes in a list of integers and returns
+  True if all elements in the list excluding the first sum to the first element.
+  For example, right_sum([5, 2, 3]) should return True.
+topics: [lists]
+solution: |
+  def right_sum(li):
+    target = li[0]
+    total = 0
+    for i in li:
+      total += i
+    total -= target
+    return total == target
+func: right_sum
+args:
+  - [3, 1, 2]
+  - [0, 1, 0]
+  - [-1, 1, 2]
+  - [-1, 1, 1, 2, -5]
+  - [A, B, 0]
+accepted: expect an email from Prof T about picking up your gift card

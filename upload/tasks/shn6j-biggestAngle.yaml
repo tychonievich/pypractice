@@ -1,0 +1,27 @@
+description: >-
+  Write a function named `biggestAngle` that, given two interior angles of a
+  triangle in degrees, returns 1 if the first is the biggest angle of the
+  triangle, 2 if the second is the biggest angle of the triangle, and 3 if the
+  third (which is not given) is the biggest angle of the triangle. However, if
+  any two angles are the same, return None. Recall that all angles of a triangle
+  sum to 180 degrees! 
+topics: [conditionals]
+solution: |-
+  #Clarified description
+  def biggestAngle(a,b):
+     c=180-a-b
+     if c==a or a==b or b==c:
+       return None
+     if c>a and c>b:
+       return 3
+     if a>b:
+       return 1
+     return 2
+func: biggestAngle
+args:
+  - [60, 60]
+  - [8, 86]
+  - [17, 72]
+  - [89, 9]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

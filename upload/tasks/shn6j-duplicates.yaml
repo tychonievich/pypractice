@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `duplicates` that, given a list, returns a list of all
+  duplicate items in the list. However, each element should appear at most once
+  in the list of duplicates. Elements should appear in the order in which their
+  first duplicate appeared in the list. For instance, `duplicates([1,2,2,2,1])`
+  should return [2,1].
+topics: [lists]
+solution: |-
+  def duplicates(a):
+    b=[]
+    c=[]
+    for i in a:
+      if i in b:
+        if not (i in c):
+          c+=[i]
+      else:
+        b+=[i]
+    return c
+func: duplicates
+args:
+  - - [1, 2, 3, 3, 2, 1]
+  - - [5, 5, 5, 5, 5]
+  - - [0, 1, 2, 3, 4]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

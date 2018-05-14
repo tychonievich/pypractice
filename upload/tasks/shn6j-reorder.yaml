@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `reorder` that accepts two lists. The first will have n
+  elements, and the second will contain the numbers 1, 2, ..., n. The function
+  should return the first list, reordered under the ordering of the second list.
+  For instance, if the first element in the second list is 3, then the third
+  element in the first list should be the first in the output list. For
+  instance, reorder([10,3,5], [1,3,2]) shoul return the list [10,5,3] (elements
+  1, 3, and 2 of the first list, in that order.
+topics: [lists]
+solution: |-
+  #Added example
+  def reorder(a,b):
+    ans=[]
+    for i in b:
+      ans += [a[i-1]]
+    return ans
+func: reorder
+args:
+  - - [4, 5, 6]
+    - [3, 2, 1]
+  - - [sheep, dog, cat]
+    - [3, 1, 2]
+  - - [4, 5, 6]
+    - [1, 2, 3]
+  - - []
+    - []
+  - [1, 2, 3]
+accepted: expect an email from Prof T about picking up your gift card

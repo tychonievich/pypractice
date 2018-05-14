@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `addToAll` that, given a list of numbers l and a number
+  a, returns l with every number increased by a. For instance,
+  `addToAll([1,2,3],5)` should return `[6,7,8]`.
+topics: [lists]
+solution: |-
+  def addToAll(l,a):
+    for i in range (len(l)):
+      l[i]=l[i]+a
+    return l
+func: addToAll
+args:
+  - - [1, 2, 3]
+    - 5
+  - - []
+    - 6
+  - - [2, 3, 5, 21]
+    - -8
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

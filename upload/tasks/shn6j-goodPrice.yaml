@@ -1,0 +1,32 @@
+description: >-
+  Write a function named `goodPrice` that takes two arguments. The first is a
+  product number. The function should return True if the second argument, a
+  number, is a good price for that item. A good price for item 0 is 800 or less,
+  a good price for item 1 is 3.03 or less, a good price for item 2 is 1537 or
+  less, and a good price for item 3 is 13.26 or less. if the item number is none
+  of these, return None.
+topics: [conditionals]
+solution: |-
+  #Added more test cases
+  def goodPrice(a,b):
+     if a==0:
+       return b<=800
+     if a==1:
+       return b<=3.03
+     if a==2:
+       return b<=1537
+     if a==3:
+       return b<=13.26
+     return None
+func: goodPrice
+args:
+  - [3, 13.26]
+  - [0, 1600]
+  - [1, 13.26]
+  - [2, 1600]
+  - [3, 13.27]
+  - [0, 400]
+  - [1, 0.98]
+  - [2, 15.37]
+  - [4, 30]
+accepted: expect an email from Prof T about picking up your gift card

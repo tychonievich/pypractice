@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `blackSpaces` which, given a positive integer n,
+  returns the number of black squares on a n*n checkerboard. Assume that there
+  is always a black square in a corner. 
+topics: [conditionals]
+solution: |-
+  def blackSpaces(n):
+     k=n**2/2
+     if n%2:
+       k+=.5
+     return k
+func: blackSpaces
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

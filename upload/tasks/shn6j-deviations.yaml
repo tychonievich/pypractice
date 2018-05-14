@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `deviations` which, given a list of numbers, returns a
+  list of the difference between each number and the average. For instance, the
+  list [1,4,1] should return [-1,2,-1], as the average is 3.
+topics: [lists]
+solution: |-
+  def deviations(n):
+     if n==[]:
+       return []
+     avg=sum(n)/len(n)
+     for i in range (len(n)):
+       n[i]-=avg
+     return n
+func: deviations
+args:
+  - - [1, 2, 3, 4, 5]
+  - - [8, 6, 4, 2, 9]
+  - - []
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

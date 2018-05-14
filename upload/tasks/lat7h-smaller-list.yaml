@@ -1,0 +1,16 @@
+description: >-
+  write a function named `smaller` that, given an integer, returns the odd
+  integers smaller than it as a list
+topics:
+  - lists
+solution: |-
+  def smaller(n):
+     return list(range(1,n,2))
+func: smaller
+args:
+  - - 3
+  - - 8
+  - - 0
+  - - 4
+    - '"hi"'
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `drop` which, given a list and another object, returns
+  the list missing any elements which are equal to the object. For instance,
+  `drop([1,2,3,4,5,4,3],3)` should return [1,2,4,5,4]. Do not use `remove`.
+topics: [lists]
+solution: |-
+  #banned remove
+  def drop(a,b):
+     i=0
+     while i<len(a):
+       if a[i]==b:
+         a.pop(i)
+       else:
+         i+=1
+     return a
+func: drop
+ban: [remove]
+args:
+  - - [1, 2, 3, 4, 5, 4, 3, 2]
+    - 3
+  - - [8, 432, 321]
+    - 5
+  - - []
+    - 0
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

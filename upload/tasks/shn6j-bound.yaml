@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `bound` which takes a list of numbers and two values a
+  and b such that a<=b. Change every number in that list by the minimum amount
+  possible such that for any number in the list, n>=a and n<=b. Return the
+  resulting list. For instance, `bound([1,2,3,4,5,6,7],3,5)` should return
+  `[3,3,3,4,5,5,5]`
+topics: [lists]
+solution: |-
+  def bound(n,a,b):
+     for i in range (0,len(n)):
+       if n[i]<a:
+         n[i]=a
+       if n[i]>b:
+         n[i]=b
+     return n
+func: bound
+args:
+  - - [1, 2, 3, 4, 5]
+    - 8
+    - 6
+  - - [3, 1, 4, 1, 5, 7]
+    - 2
+    - 2
+  - - []
+    - 5
+    - 7
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

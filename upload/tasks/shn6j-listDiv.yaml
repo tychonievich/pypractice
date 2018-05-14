@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `listDiv` which takes a list as input. It should output
+  a list of lists which are the sublists of the input, split by the element
+  `'break'`. For instance, the list `[1,2,'break',3,4,'break',5,6,'break']`
+  should output `[[1,2],[3,4],[5,6],[]]`. The empty list should output `[[]]`.
+topics: [lists]
+solution: |-
+  def listDiv(x):
+    lists=[[]]
+    for i in x:
+      if i=='break':
+        lists+=[[]]
+      else:
+        lists[-1]+=[i]
+    return lists
+func: listDiv
+args:
+  - - [break, 1, 2, break, 3, 4, break, 5, 6, break]
+  - - [break, break]
+  - - [4, hi, break, '0']
+  - - [null]
+  - [1]
+accepted: expect an email from Prof T about picking up your gift card

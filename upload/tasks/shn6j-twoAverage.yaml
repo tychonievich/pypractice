@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `twoAverage` which, given three input numbers, returns
+  the average of the two that are closest to each other.
+topics: [conditionals]
+solution: |-
+  def twoAverage(a,b,c):
+    #this can be done with a bunch of conditionals - just figure out order, then figure out which two are closer, then take avg.
+    sl=sorted([a,b,c])
+    if sl[1]-sl[0]>sl[2]-sl[1]:
+      sl[0]=sl[2]
+    return ((sl[0]+sl[1])/2)
+func: twoAverage
+args:
+  - [3, 4, 6]
+  - [8, 2, -100]
+  - [0, 100, -100]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

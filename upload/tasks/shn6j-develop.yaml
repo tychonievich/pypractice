@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `develop` that, given a nonnegative integer, adds its
+  last digit to itself if its last digit is less than 6 and subtracts its last
+  digit from itself if its last digit is greater than or equal to 6, and returns
+  the result. However, treat a 0 as 10. For instance, `develop(19)` should
+  return 10, `develop(20)` should return 10, and `develop(24)` should return 28.
+topics: [conditionals]
+solution: |-
+  #Made conditionals more consistent
+  def develop(n):
+     if n%10==0:
+       n-=10
+     elif n%10>5:
+       n-=n%10
+     else:
+       n+=n%10
+     return n
+func: develop
+args:
+  - [39]
+  - [84]
+  - [70]
+  - [75]
+  - [76]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `largestSmallest`. Given a list of real numbers, it
+  should return a list containing the largest and the smallest of them, in that
+  order. The list may be presumed to only contain real numbers. If the largest
+  and the smallest are the same or there are no elements, return None
+topics: [lists]
+solution: |-
+  def largestSmallest(n):
+    m=sorted(n)
+    if m[-1]==m[0] or len(n)<1:
+      return None
+    return ([m[-1],m[0]])
+func: largestSmallest
+args:
+  - - []
+  - - [1, 2, 3, 4, 5]
+  - - [1]
+  - - [1, 5, 2, -8, 4]
+  - - [4, 4, 4, 4, 4]
+  - - 1
+    - [2, 3]
+accepted: expect an email from Prof T about picking up your gift card

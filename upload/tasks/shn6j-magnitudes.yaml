@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `magnitudes` that, given a list of lists, each of which
+  contains several numbers, returns the magnitude of each contained list. The
+  magnitude of a list [a,b,...,z] may be calculated as the square root of
+  (a**2+b**2+...+z**2). For instance, the magnitude of [3,2,3,1,1,1] is 5, as
+  sqrt(3**2+2**2+3**2+1**2+1**2+1**2) = 5. Therefore, if the
+  call `magnitudes([[1,2,3],[4,5]])` is made, we take return the list containing
+  the magnitude of [1,2,3] and the magnitude of [4,5], in that order. The return
+  would therefore be `[3.7416573867739413, 6.4031242374328485]`.
+topics: [lists]
+solution: |-
+  #reworded for clarity, gave a full example.
+  def magnitudes(n):
+     return [sum([j**2 for j in i])**.5 for i in n]
+func: magnitudes
+args:
+  - - - []
+  - - - [1, 2, 3]
+      - [4, 5, 6]
+  - - - [3, 1, 4, 1, 5, 9, 2, 6]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

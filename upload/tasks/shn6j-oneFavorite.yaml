@@ -1,0 +1,42 @@
+description: >-
+  Write a function named `onePrime` that checks if a given number has exactly
+  one of the prime numbers below 20 as a divisor. A divisor a of b is an integer
+  such that b/a has no remainder. For reference, the prime numbers below 20 are
+  2, 3, 5, 7, 11, 13, 17, and 19.
+topics: [conditionals]
+solution: >-
+  #Stephen is no longer immortalized. The problem has been further changed to
+  have practical value, as opposed to checking numeric merit.
+
+  def onePrime(a):
+    count=0
+    if a%2==0:
+      count+=1
+    if a%3==0:
+      count+=1
+    if a%5==0:
+      count+=1
+    if a%7==0:
+      count+=1
+    if a%11==0:
+      count+=1
+    if a%13==0:
+      count+=1
+    if a%17==0:
+      count+=1
+    if a%19==0:
+      count+=1
+    return (count==1)
+func: onePrime
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [273]
+  - [39]
+  - [7]
+  - [962]
+  - [13]
+  - [37]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

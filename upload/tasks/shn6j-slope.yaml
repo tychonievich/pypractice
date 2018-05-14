@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `slope` which, given x1, y1, x2, y2, returns the slope
+  in the xy plane between points 1 and 2. If the points are the same, the slope
+  should be `0`. If the line is vertical, the slope should be `None`. 
+topics: [conditionals]
+solution: |-
+  #fixed to make slope None in infinite case.
+  def slope(x1,y1,x2,y2):
+     if (x1-x2):
+       return ((y1-y2)/(x1-x2))
+     else:
+       if (y1-y2==0):
+         return float('0')
+       return None
+func: slope
+args:
+  - [3, 4, 4, 3]
+  - [8, 3, 8, 3]
+  - [0, 2, 1, 2]
+  - [0, 2, 0, 3]
+  - [0, 2, 0, 3, 2]
+accepted: expect an email from Prof T about picking up your gift card

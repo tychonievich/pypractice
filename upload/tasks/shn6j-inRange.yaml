@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `doubleRange` which, given three arguments, returns
+  True if their absolute differences are n, 2n, and 3n for some n. It should
+  return False otherwise. For instance, [1,7,3] should return True, as the
+  differences are 2, 6, and 4 which are 1*2, 2*2, and 3*2 (not respectively;
+  order does not matter).
+topics: [conditionals]
+solution: |-
+  #added example to clarify that order does not matter
+  def doubleRange(a,b,c):
+    l=sorted([a,b,c])
+    return (l[1]-l[0]==2*(l[2]-l[1]) or l[1]-l[0]==.5*(l[2]-l[1]))
+func: doubleRange
+args:
+  - [3, 4, 5]
+  - [8, 6, 9]
+  - [0, 1, -1]
+  - [6, 4, -8]
+  - [1, 2, 4]
+  - [3, 6, 4]
+  - [0, 0, 0]
+  - [6, 4, 6]
+  - [1, 2, 3, 4]
+accepted: expect an email from Prof T about picking up your gift card

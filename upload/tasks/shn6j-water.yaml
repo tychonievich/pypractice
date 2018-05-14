@@ -1,0 +1,27 @@
+description: >-
+  Write a function named `water` that, given an Fahrenheit temperature as an
+  integer, returns 0.0 if water is solid there, .5 if water is between solid and
+  liquid there, 1.0 if water is liquid there, 1.5 if water is between liquid and
+  gas there, and 2.0 if water is gas there. For reference, water moves between
+  solid and liquid at 32 deg F, and moves between liquid and gas at 212 deg F.
+topics: [conditionals]
+solution: |-
+  def water(n):
+     if n==32:
+       return .5
+     if n==212:
+       return 1.5
+     if n>212:
+       return 2.0
+     if n<32:
+       return 0.0
+     return 1.0
+func: water
+args:
+  - [216]
+  - [32]
+  - [210]
+  - [212]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

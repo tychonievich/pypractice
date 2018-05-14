@@ -1,0 +1,27 @@
+description: >-
+  Write a function named `dropTowardsZero` which takes a real-valued argument a
+  and a nonnegative number b. It should return a, moved towards 0 by b units.
+  However, if this would push it past zero, simply return 0. For instance,
+  dropTowardsZero(-1,3) should return 0, as -1 moved towards 0 by 3 passes 0.
+  However, dropTowardsZero(4,3) should return 1, as 4 moved towards 0 by three
+  is 1.
+topics: [conditionals]
+solution: |-
+  def dropTowardsZero(a,b):
+     c=a
+     if c<0:
+       c+=b
+     else:
+       c-=b
+     if c*a<0:
+       return 0
+     else:
+       return c
+func: dropTowardsZero
+args:
+  - [3, 4]
+  - [8, 2]
+  - [-6, 4]
+  - [-6, 6]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

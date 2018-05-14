@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `intToList` that takes a nonnegative int as input and
+  outputs a list of its digits. For instance, `473` should output [4,7,3]. `0`
+  should output `[]`.
+topics: [lists]
+solution: |-
+  def intToList(n):
+    m=n
+    l=[]
+    while m:
+      l=[m%10]+l
+      m-=m%10
+      m/=10
+    return l
+      
+func: intToList
+args:
+  - [3]
+  - [8]
+  - [0]
+  - [14327]
+  - - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `between` that, given 3 numbers a,b,c, and one boolean
+  d (in that order), returns True if c is in the range between a and b, and
+  False if not. If d is True, the range should include a and b themselves; if d
+  is False, it should not.
+topics: [conditionals]
+solution: |-
+  def between(a,b,c,d):
+    if c==a or c==b:
+      return d
+    if (b-c)*(a-c)<0:
+      return True
+    return False
+func: between
+args:
+  - [7, 5, 5, true]
+  - [7, 5, 5, false]
+  - [6, 8, 4, true]
+  - [7, 5, 6, false]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

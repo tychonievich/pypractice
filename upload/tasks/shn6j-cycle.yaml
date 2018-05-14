@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `cycle` that, given a list and an integer n as its
+  first and second argument, returns the list cyclically left-shifted by n
+  increments. A cyclical left-shift of 1 moves every element to the position of
+  the element before it, except the first element, which becomes last. A
+  cyclical left-shift of n is a cyclical left-shift repeated n times. For
+  instance, `[1,2,3]` and 1 should return `[2,3,1]`
+topics: [lists]
+solution: |-
+  def cycle(l,n):
+    if l==[]:
+      return l
+    m=n%len(l)
+    return (l[m:]+l[:m])
+func: cycle
+args:
+  - - []
+    - 5
+  - - [1, 2, 3, 4, 5, 6, 7, 8]
+    - 3
+  - - [3, 2, 1]
+    - 5
+  - - [1]
+    - 6
+  - - [1]
+    - 6
+    - 1
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `toNum` which, given a list of digits as its argument,
+  returns the number that they represent. For instance, `[1,4,0]` should return
+  140. Do not use str
+topics: [lists]
+solution: |-
+  def toNum(n):
+     num=0
+     for i in n:
+       num*=10
+       num+=i
+     return num 
+func: toNum
+ban: [str]
+args:
+  - - [1]
+  - - [0, 3, 6, 4]
+  - - []
+  - - [1, 1, 1, 1, 3, 0, 1, 1]
+  - - [1, 1, 1, 2, 1, 6, 1, 0, 1]
+    - [1]
+accepted: expect an email from Prof T about picking up your gift card

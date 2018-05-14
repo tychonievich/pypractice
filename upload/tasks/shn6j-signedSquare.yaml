@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `signedSquare` that, given an integer, returns its
+  square with the same sign as it. For instance, `signedSquare(-5) should return
+  `-25`.
+topics: [conditionals]
+solution: |-
+  def signedSquare(n):
+     k=n**2
+     if n<0:
+       k*=-1
+     return k
+func: signedSquare
+args:
+  - [3]
+  - [8]
+  - [-26]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

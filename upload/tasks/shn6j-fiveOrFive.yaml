@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `fiveOrFive` that accepts two numbers. It should return
+  True if they are either within five of each other or an integer multiple of
+  five away from each other. It should return False if not.
+topics: [conditionals]
+solution: |-
+  def fiveOrFive(m,n):
+     if abs(m-n)<=5:
+       return True
+     if (m-n)%5:
+       return False
+     return True
+func: fiveOrFive
+args:
+  - [3, 8]
+  - [8, 7]
+  - [8, -1]
+  - [8, -7]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

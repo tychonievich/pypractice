@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `sequentialAdd` that, given a list of numbers, adds
+  each element to the one to its right. The last element should be added to the
+  first. Return the resulting list. For instance, the list [1,2,3,4] should
+  return [1+4,2+1,3+2,4+3]=[5,3,5,7].
+topics: [lists]
+solution: |-
+  def sequentialAdd(n):
+     if len(n)==0:
+       return []
+     l=n[-1]
+     for i in range (len(n)-2,-1,-1):
+       n[i+1]+=n[i]
+     n[0]+=l
+     return n
+       
+func: sequentialAdd
+args:
+  - - []
+  - - [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 53215, 321, 4539]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

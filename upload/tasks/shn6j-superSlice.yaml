@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `superSlice`. It should take two arrays: one of
+  arbitrary elements, and another of the same length containing only booleans.
+  The function should return the array of all of the elements in the first array
+  that correspond to a True-value in the second array. For instance,
+  `superSlice([1,2,3,4],[True,True,False,True])` should return `[1,2,4]`.
+topics: [lists]
+solution: |-
+  def superSlice(a,b):
+    c=[]
+    for i in zip(a,b):
+      if i[1]:
+        c+=[i[0]]
+    return c
+func: superSlice
+args:
+  - - []
+    - []
+  - - [1, 2, 3]
+    - [false, false, true]
+  - - [1, 2, 3, 4, 5, 6, 7]
+    - [true, true, true, false, false, true, true]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

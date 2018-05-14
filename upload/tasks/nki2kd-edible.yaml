@@ -1,0 +1,113 @@
+description: >-
+  Write a function `edible` that, given parameters `size`, `color`, and `shape`,
+  returns **True** if the leaf is edible and **False** if the leaf is not.
+  `size` will be an integer between 1 and 10 (representing centimeters). `color`
+  will be a string of either "red", "green", "yellow", or "mixed". `shape` will
+  be a string of either "oval" or "circle". The following rules apply: Leaves
+  smaller than 5 cm are not edible, unless they are green ovals. Leaves between
+  5 and 8 cm are edible only if they are green or mixed in color. For leaves
+  larger than 8 cm, only red and yellow circles are edible. 
+topics: [conditionals]
+solution: |-
+  def edible(size, color, shape):
+
+      if size < 5:
+          if color == 'green' and shape == 'oval':
+              return True
+          else:
+              return False
+
+      if size >= 5 and size <= 8:
+          if color == 'green' or color == 'mixed':
+              return True
+          else:
+              return False
+
+      else:
+          if (color == 'red' or color == 'yellow') and shape == 'circle':
+              return True
+          else:
+              return False
+func: edible
+args:
+  - [1, green, circle]
+  - [1, green, oval]
+  - [1, yellow, circle]
+  - [1, yellow, oval]
+  - [1, red, circle]
+  - [1, red, oval]
+  - [1, mixed, circle]
+  - [1, mixed, oval]
+  - [2, green, circle]
+  - [2, green, oval]
+  - [2, yellow, circle]
+  - [2, yellow, oval]
+  - [2, red, circle]
+  - [2, red, oval]
+  - [2, mixed, circle]
+  - [2, mixed, oval]
+  - [3, green, circle]
+  - [3, green, oval]
+  - [3, yellow, circle]
+  - [3, yellow, oval]
+  - [3, red, circle]
+  - [3, red, oval]
+  - [3, mixed, circle]
+  - [3, mixed, oval]
+  - [4, green, circle]
+  - [4, green, oval]
+  - [4, yellow, circle]
+  - [4, yellow, oval]
+  - [4, red, circle]
+  - [4, red, oval]
+  - [4, mixed, circle]
+  - [4, mixed, oval]
+  - [5, green, circle]
+  - [5, green, oval]
+  - [5, yellow, circle]
+  - [5, yellow, oval]
+  - [5, red, circle]
+  - [5, red, oval]
+  - [5, mixed, circle]
+  - [5, mixed, oval]
+  - [6, green, circle]
+  - [6, green, oval]
+  - [6, yellow, circle]
+  - [6, yellow, oval]
+  - [6, red, circle]
+  - [6, red, oval]
+  - [6, mixed, circle]
+  - [6, mixed, oval]
+  - [7, green, circle]
+  - [7, green, oval]
+  - [7, yellow, circle]
+  - [7, yellow, oval]
+  - [7, red, circle]
+  - [7, red, oval]
+  - [7, mixed, circle]
+  - [7, mixed, oval]
+  - [8, green, circle]
+  - [8, green, oval]
+  - [8, yellow, circle]
+  - [8, yellow, oval]
+  - [8, red, circle]
+  - [8, red, oval]
+  - [8, mixed, circle]
+  - [8, mixed, oval]
+  - [9, green, circle]
+  - [9, green, oval]
+  - [9, yellow, circle]
+  - [9, yellow, oval]
+  - [9, red, circle]
+  - [9, red, oval]
+  - [9, mixed, circle]
+  - [9, mixed, oval]
+  - [10, green, circle]
+  - [10, green, oval]
+  - [10, yellow, circle]
+  - [10, yellow, oval]
+  - [10, red, circle]
+  - [10, red, oval]
+  - [10, mixed, circle]
+  - [10, mixed, oval]
+accepted: expect an email from Prof T about picking up your gift card

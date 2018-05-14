@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `rightHeavy` which takes a list of real numbers as its
+  only argument. it returns True if elements to the right of the center of the
+  list have a greater sum than elements to the left of the center of the list.
+  For instance, `[1,3,2]` would return true, but `[1,4,3,2]` would not. The
+  center may be considered to be the element in the center of a list of odd
+  length (3 in the first example) and the place between the two center elements
+  (index 1.5, between 4 and 3, in the second example). Therefore, the center
+  element of any odd-length list is not counted in the sum of either side,
+  whereas all elements are counted for one side or the other in an even-length
+  list.
+topics: [lists]
+solution: |-
+  #Clarified center
+  def rightHeavy(n):
+     return (sum(n[int(len(n)/2+(len(n)/2)%1):])-sum(n[:int(len(n)/2-(len(n)/2)%1)])>0)
+func: rightHeavy
+args:
+  - - [3]
+  - - [8, 2]
+  - - [2, 8, 3]
+  - - [1, 3, 3, 1]
+  - - []
+  - - [1, 3, 3, 2]
+  - [1, 2, 3]
+accepted: expect an email from Prof T about picking up your gift card

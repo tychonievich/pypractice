@@ -1,0 +1,20 @@
+description: >-
+  Given a temperature c in degrees Celsius, and a temperature f in degrees
+  Fahrenheit (in that order), write a function 'hottestTemp' which will return
+  the hotter temperature. If the temperatures are equivalent, return 0. Recall
+  that Fahrenheit and Celsius can be compared using the equation F = C*1.8+32,
+  where F is the temperature in Fahrenheit and C is the temperature in Celsius.
+  Example: hotterTemp(1,32) will return 1 because 32 degrees Fahrenheit converts
+  to 0 degrees Celsius, and 1 degrees Celsius is greater than 32 degrees
+  Fahrenheit.
+topics: [conditionals]
+solution: "def hottestTemp(c, f):\n\tif c*1.8+32 > f:\n\t\treturn c\n\telse:\n\t\treturn f"
+func: hottestTemp
+args:
+  - [1, 32]
+  - [100, 212]
+  - [-40, -40]
+  - [110, 400]
+  - [193, 32]
+  - [0, 0]
+accepted: expect an email from Prof T about picking up your gift card

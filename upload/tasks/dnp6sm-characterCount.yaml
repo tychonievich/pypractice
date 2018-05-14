@@ -1,0 +1,24 @@
+description: >-
+  Write a function "letterCount" that, given a list of words, and a letter,
+  returns a count of how many times that letter appears in the list of words.
+  Your solution should be case insensitive, meaning that the characters 'r' and
+  'R' should be treated as the same letter. For example, given
+  letterCount(["boxes", "Stake", "princess"], 's'), your function should return
+  4 because "boxes" and "Stake" each have one letter 's', and princess has two
+  of the letter 's'.
+topics: [lists]
+solution: "def letterCount(names, letter):\n\tletter = letter.lower()\n\tcount = 0\n\tfor name in names:\n\t\tlowercased = name.lower()\n\t\tfor c in lowercased:\n\t\t\tif c == letter:\n\t\t\t\tcount += 1\n\treturn count"
+func: letterCount
+ban: [.count]
+args:
+  - - [arbitrarily, boondocks, police, houses]
+    - m
+  - - [Transportation, Land, lanyard]
+    - l
+  - - []
+    - r
+  - - [caw, boom, SMASH]
+    - o
+  - - [boxes, Stake, princess]
+    - s
+accepted: expect an email from Prof T about picking up your gift card

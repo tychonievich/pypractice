@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `multTable` that, given an integer, returns the
+  multiplication table (in 2d list form) for both multiplicands up to and
+  including that number. For instance, the input `5` should return `[[1, 2, 3,
+  4, 5], [2, 4, 6, 8, 10], [3, 6, 9, 12, 15], [4, 8, 12, 16, 20], [5, 10, 15,
+  20, 25]]`. The input `0` should return the empty list. This exercise may take
+  a few seconds to check - be patient!
+topics: [lists]
+solution: |-
+  def multTable(n):
+     a=[[0 for i in range(n)] for j in range (n)]
+     for i in range (0,n):
+       for j in range (0,n):
+         a[i][j]=(i+1)*(j+1)
+         print (a)
+     return (a)
+func: multTable
+args:
+  - [0]
+  - [3]
+  - [9]
+  - [45]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

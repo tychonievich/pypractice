@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `compute` that accepts a number `N` and returns the
+  square if `N` is even, or the square root if `N` is odd. Zero is considered
+  even.
+topics: [conditionals]
+solution: |-
+  def compute(N):
+      return N ** (2 ** (N % 2 * -2 + 1))
+func: compute
+ban: [math]
+loops: false
+args:
+  - [9]
+  - [2]
+  - [1]
+  - [0]
+  - [625]
+  - [12]
+accepted: expect an email from Prof T about picking up your gift card

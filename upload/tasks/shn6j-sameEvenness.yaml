@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `sameEvenness` that, given two integers, returns True
+  if either they are both even or they are both not even. Do not use and, or,
+  xor, not, &, ^, !, or |.
+topics: [conditionals]
+solution: |-
+  def sameEvenness(a,b):
+     if a%2:
+       if b%2:
+         return True
+       return False
+     else:
+       if b%2:
+         return False
+       return True
+func: sameEvenness
+ban: [and, or, not, xor, '&', ^, '|', '!']
+args:
+  - [3, 4]
+  - [4, 3]
+  - [0, 8]
+  - [-13, 5]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

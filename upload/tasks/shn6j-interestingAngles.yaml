@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `compSup` that, given two angles in degrees, returns 1
+  if they are compliments, 2 if they are supplements, and 0 if they are neither.
+  Recall that two complimentary angles sum to 90 degrees, and two supplementary
+  angles sum to 180 degrees.
+topics: [conditionals]
+solution: |-
+  def compSup(a,b):
+    if a+b==90:
+      return 1
+    if a+b==180:
+      return 2
+    return 0
+func: compSup
+args:
+  - [3, 177]
+  - [8, 92]
+  - [208, 2]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

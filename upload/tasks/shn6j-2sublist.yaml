@@ -1,0 +1,36 @@
+description: >-
+  Write a function named `sublist` that returns `True` iff the first input is a
+  continuous sublist of the second list (also a list). If not, returns `False`.
+  For instance, the inputs [1,2] and [1,0,2] should return False, as there is no
+  [1,2] in the second list. However, [1,2] and [0,1,2] should return True, as
+  the first list occurs as part of the second.
+topics: [lists]
+solution: |-
+  #Description expanded, examples added
+  def sublist(l1,l2):
+    if l1==l2:
+      return True
+    for i in range (0,len(l2)-len(l1)):
+      if l2[i:i+len(l1)]==l1:
+        return True
+    return False
+func: sublist
+args:
+  - - [2, 3]
+    - [2, 3, 4]
+  - - [4, 3]
+    - [2, 3, 4]
+  - - [2, 4]
+    - [2, 3, 4]
+  - - [3]
+    - [2, 3, 4]
+  - - [1, 0]
+    - [2, 3, 4]
+  - - []
+    - []
+  - - [1, 0]
+    - []
+  - - [1, 0]
+    - []
+    - []
+accepted: expect an email from Prof T about picking up your gift card

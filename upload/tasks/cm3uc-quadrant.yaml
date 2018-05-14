@@ -1,0 +1,48 @@
+description: >-
+  In the Cartesian coordinate system, points lie on the xy-plane and are
+  written  as the ordered pair (x, y). The x axis and the y axis divide the
+  xy-plane into four areas called "quadrants", which are numbered as below
+
+           +y
+            |
+         2  |  1
+      ------------ +x
+         3  |  4
+            |
+       
+  For example, if x is negative and y is positive, the point falls into
+   quadrant 2. If either coordinate is zero, then the point falls on an
+   axis and lies on the boundary between quadrants.
+
+  Write a function `quadrant(x, y)` which returns what quadrant the point (x, y)
+  is in, as an integer. If on a boundary between quadrants, return -1. 
+
+  Ex: quadrant(1, 1) == 1, quadrant(-1, 1) == 2, quadrant(-1, -1) == 3,
+  quadrant(1, -1) == 4, quadrant(0, 0) == -1.
+topics: [conditionals]
+solution: |-
+  def quadrant(x, y):
+      if x > 0:
+          if y > 0:
+              return 1
+          elif y < 0:
+              return 4
+      elif x < 0:
+          if y > 0:
+              return 2
+          elif y < 0:
+              return 3
+      else:
+          return -1
+func: in_circ
+args:
+  - [1, 1]
+  - [-20.6, 2.3]
+  - [0, 0]
+  - [100, -100]
+  - [-0.01, -0.5]
+  - [0, -1.1]
+  - [0, 282]
+  - [9, 0]
+  - [-0.3, 0]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `absDiff` that, given two real numeric arguments,
+  should return their absolute difference. However, if they are the same, return
+  the number instead. Do not use `abs`
+topics: [conditionals]
+solution: |-
+  def absDiff(a,b):
+    if (a-b)>0:
+      return (a-b)
+    elif (a-b)<0:
+      return (b-a)
+    else:
+      return (b)
+func: absDiff
+ban: [abs]
+args:
+  - [1, 2]
+  - [2, 1]
+  - [1, 0, 1]
+  - [2, 2]
+  - [0, 0]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `lineEquality` that, given three numbers, returns True
+  if any two of them sum to the third, and False if not.
+topics: [conditionals]
+solution: |-
+  def lineEquality(a,b,c):
+     if a+b==c:
+       return True
+     if b+c==a:
+       return True
+     if c+a==b:
+       return True
+     return False
+func: lineEquality
+args:
+  - [3, 4, 7]
+  - [6, 8, 2]
+  - [8, 6, 2]
+  - [6, 8, 6]
+  - [0, 0, 0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

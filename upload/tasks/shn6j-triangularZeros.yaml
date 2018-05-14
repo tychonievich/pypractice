@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `triangularZeros` which, given a positive integer i,
+  returns the list containing the list containing 1 zero, the list containing
+  two zeros, ..., and the list containing i zeros. For instance,
+  `triangularZeros(3)` should return `[[0],[0,0],[0,0,0]]`
+topics: [lists]
+solution: |-
+  #can be for-looped without recursion
+  def triangularZeros(n):
+     if n==0:
+       return []
+     return (triangularZeros(n-1)+[[0]*n])
+func: triangularZeros
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

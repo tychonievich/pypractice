@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `squareXORcube` that, given an integer, returns True if
+  it is a perfect square or a perfect cube, but not both, and False otherwise. A
+  perfect square is a number n such that there exists integer k such that k**2=n,
+  and a perfect cube is a number such that there exists integer k such that
+  k**3=n.
+topics: [conditionals]
+solution: |-
+  def squareXORcube(n):
+     if n<0:
+       return (round(abs(n)**(1/3))**3==n)
+     else:
+       return ((round(n**(1/3))**3==n)^((n**(1/2))%1==0))
+func: squareXORcube
+args:
+  - [3]
+  - [8]
+  - [4]
+  - [64]
+  - [-64]
+  - [-4]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,27 @@
+description: >-
+  Write a function named `numMoves` which, given integers a, b between 1 and 8
+  inclusive, returns the number of possible moves for a king on square a, b of
+  an otherwise empty chessboard. A king may move to any square adjacent to his,
+  including those diagonally so. A chessboard is an 8x8 grid of squares, with
+  rows and columns each numbered 1-8 sequentially. Draw it if it helps!
+topics: [conditionals]
+solution: |-
+  def numMoves(a,b):
+     edges=0
+     if a==8 or a==1:
+       edges+=1
+     if b==8 or b==1:
+       edges+=1
+     if edges==0:
+       return 8
+     if edges==1:
+       return 5
+     if edges==2:
+       return 3
+func: numMoves
+args:
+  - [3, 4]
+  - [1, 1]
+  - [8, 7]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,22 @@
+description: >-
+  Let us number some of the notes on the saxophone 1-30. There are three groups
+  of notes: 1-12, 13-24, and 25-30. Any two notes within the same group are easy
+  to play consecutively, and any other pair is not. Write a function named
+  `easy` that, given two integers in the range 1-30, returns True if they are
+  easy to play consecutively, and False if not.
+topics: [conditionals]
+solution: |-
+  def easy(n,m):
+     if n<13:
+       return (m<13)
+     if n<25:
+       return (m<25)
+     return (m>24)
+func: easy
+args:
+  - [3, 14]
+  - [12, 13]
+  - [24, 25]
+  - [27, 25]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

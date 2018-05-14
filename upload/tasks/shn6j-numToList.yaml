@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `numToList` which turns an non-negative number into a
+  list of its digits. For instance, 130 should go to [1,3,0]. 0 has no digits.
+topics: [lists]
+solution: |-
+  def numToList(n):
+     l=[]
+     while n:
+       l=[n%10]+l
+       n//=10
+     return l
+       
+func: numToList
+args:
+  - [3]
+  - [845321]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

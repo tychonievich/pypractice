@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `place` that, given a list, a smaller list, and an
+  index, returns the first list where the sublist starting at the index and of
+  the same length as the smaller list has been replaced by the smaller list. The
+  smaller list may be presumed to not extend past the end of the original list.
+  For instance, `place([1,2,3,4,5],["cat","dog","sheep"],1)` should return
+  [1,"cat","dog","sheep",5]
+topics: [lists]
+solution: |-
+  def place(l1,l2,n):
+     return (l1[:n]+l2+l1[n+len(l2):])
+func: place
+args:
+  - - [1, 2, 3, 4, 5]
+    - [cat, dog, sheep]
+    - 2
+  - - [a, b, c, d, e, f, g]
+    - [2, 1, 0]
+    - 0
+  - - []
+    - []
+    - 0
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

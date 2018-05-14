@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `nonrepetitiveList` that, given a list, returns True if
+  no element appears more than once, and False if one does. Do not use `set`.
+  Note that things like `None` and `0` are not the same.
+topics: [lists]
+solution: |-
+  def nonrepetitiveList(n):
+     for i in range (0,len(n)):
+       for j in range (0,i):
+         if n[i]==n[j] and type(n[i])==type(n[j]):
+           return False
+     return True
+func: nonrepetitiveList
+ban: [set]
+args:
+  - - []
+  - - [0, None]
+  - - [1, 2, 3]
+  - - [1, 2, 3, 3]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

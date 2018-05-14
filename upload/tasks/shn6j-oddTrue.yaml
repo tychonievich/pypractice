@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `oddTrue` which, given a list of values, returns True
+  if an odd number are boolean True, and False if not. For instance, `[8,7]`
+  should return `False`, as both are implicitly True. It is easy to check
+  whether some value `val` is implicitly true by calling bool(val). Numbers>0
+  and strings and lists with stuff in them are all implicitly true, for
+  instance.
+topics: [lists]
+solution: |-
+  #fixed description
+  def oddTrue(n):
+     return (sum([not not i for i in n])%2)
+func: oddTrue
+args:
+  - - [true]
+  - - []
+  - - [false, true, false, true, false]
+  - - [4, hi, '0']
+  - - [null]
+  - [1]
+accepted: expect an email from Prof T about picking up your gift card

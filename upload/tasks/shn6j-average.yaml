@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `average` that, given a list of numbers, returns their
+  integer-truncated average. If an empty list is input, the average is 0. For
+  instance, [3.7,5.5] should return 4, as their average is 4.6, which truncates
+  to the integer 4.
+topics: [lists]
+solution: |-
+  def average(n):
+    sum=0
+    for i in n:
+      sum += i/len(n)
+    return (int(sum))
+func: average
+args:
+  - - [3]
+  - - [3, 4, 5, 6]
+  - - [3, 4]
+  - - []
+  - - [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  - - [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    - []
+accepted: expect an email from Prof T about picking up your gift card

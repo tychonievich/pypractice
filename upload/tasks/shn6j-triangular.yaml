@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `triangular` that, given a number, will return True if
+  it is triangular and false if it is not. 0 is triangular. A triangular number
+  n is a number such that, for some positive integer k, 1+2+...+(k-1)+k=n. For
+  instance, 10=1+2+3+4 is triangular. One interesting feature of the triangular
+  numbers is that they can be represented as (1^2+1)/2, (2^2+2)/2, (3^2+3)/2,
+  (4^2+4)/2, and so on. For instance, the 10th triangular number is
+  (10^2+10)/2=55.
+topics: [conditionals]
+solution: |-
+  #Defined triangular, added equation for determining them easily
+  def triangular(n):
+     return ((n>0 and n%1==0 and ((8*n+1)**.5)%1==0) or n==0)
+func: triangular
+args:
+  - [3]
+  - [8]
+  - [0]
+  - [10]
+  - [5050]
+  - [0.505]
+  - [-5050]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

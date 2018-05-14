@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `linearComb` that takes four inputs a,b,c,d. Return the
+  sum of (a)(b) and (c)(d), except that if either b or d is zero, make them 1.
+  For instance, `linearComb(5,0,2,5)` should return (5)(1) + (2)(5) = 15.
+topics: [conditionals]
+solution: |-
+  def linearComb(a,b,c,d):
+     if b==0:
+       b=1
+     if d==0:
+       d=1
+     return (a*b+c*d)
+func: linearComb
+args:
+  - [5, 0, 2, 5]
+  - [8, 0, -8, 6]
+  - [8, 0, -4, 0]
+  - [8, 7, -4, 8]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

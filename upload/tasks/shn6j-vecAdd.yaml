@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `vecAdd` that, given two lists of equal length
+  containing numbers, adds them as vectors (elementwise) and returns the
+  resulting list. A vector is considered to be a list of numbers. Two vectors
+  are added by adding their elements pairwise. For instance, [1,2,3] and [4,5,6]
+  add to [5,7,9] because 1+4=5, 2+5=7, and 3+6=9.
+topics: [lists]
+solution: |-
+  def vecAdd(a,b):
+    return [i[0]+i[1] for i in list(zip(a,b))]
+func: vecAdd
+args:
+  - - [3, 4, 5]
+    - [1, 2, 3]
+  - - []
+    - []
+  - - [3, 4, 5, 3, 6, 3, 55]
+    - [1, 2, 3, 5, 20, 3, 2]
+  - [hi!!!!!!]
+accepted: expect an email from Prof T about picking up your gift card

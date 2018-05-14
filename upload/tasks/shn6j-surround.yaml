@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `surround` which, given a list of lists, pads each list
+  with its index (in the overarching list) once on either end, and returns the
+  resulting list of lists. For instance, `surround([[1,2,3],[4,5],[]])` should
+  return [[0,1,2,3,0],[1,4,5,1],[2,2]].
+topics: [lists]
+solution: |-
+  def surround(n):
+     for i in range (len(n)):
+       n[i]=[i]+n[i]+[i]
+     return n
+     
+func: surround
+args:
+  - - []
+  - - - [1, 2, 3, 4, 5]
+      - [8, 2, 3]
+  - - - [1, 2, 3, 4, 5]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

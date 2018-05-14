@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `shuffle`. It should take one list as input. If its
+  length is odd, it should not return anything. If its length is even, it should
+  return the interleave of the first and the last half of the list. For
+  instance, `[1,2,3,4,5,6]` should return `[1,4,2,5,3,6]`.
+topics: [lists]
+solution: |-
+  def shuffle(a):
+    if len(a)%2 == 0:
+      l=[]
+      for i in range (int(len(a)/2)):
+        l += [a[i],a[i+int(len(a)/2)]]
+      return (l)
+      
+      
+func: shuffle
+args:
+  - - [1, 2, 3, 4, 5, 6]
+  - - [1, 2, 3, 4, 5]
+  - - [1, 2]
+  - - [1]
+  - - []
+  - [1]
+accepted: expect an email from Prof T about picking up your gift card

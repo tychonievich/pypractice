@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `breakNumber` that, given a nonnegative number, returns
+  its integer component minus its decimal component. However, if either is 0,
+  just return the number (for instance, `breakNumber(0.6)` should return 0.6).
+  If both are 0, return None. For instance, `breakNumber(1.6)` should return
+  `.4`
+topics: [conditionals]
+solution: |-
+  #fixed to not require multiple returns
+  def breakNumber(a):
+    if a%1 and a-a%1:
+      return (a-2*(a%1))
+    if a%1:
+      return a%1
+    if a:
+      return a
+    return None
+func: breakNumber
+args:
+  - [3]
+  - [8.6]
+  - [0.4]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

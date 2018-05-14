@@ -1,0 +1,27 @@
+description: >-
+  Write a function called oddMultiple. This function should take an integer as
+  its input. It should return true when the integer is odd, a multiple of three,
+  and a multiple of five. In all other cases it should return false.
+topics: [conditionals]
+solution: |-
+  def oddMultiple(x):
+    if (x%2!=0 and x%3==0 and x%5==0):
+      return True
+    return False
+func: oddMultiple
+args:
+  - [0]
+  - [135]
+  - [77]
+  - [5]
+  - [3]
+  - [90]
+  - [15]
+  - [101]
+  - [1392]
+  - [225]
+  - [18273]
+  - [50625]
+  - [45]
+  - [75]
+accepted: expect an email from Prof T about picking up your gift card

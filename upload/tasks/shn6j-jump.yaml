@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `jump` which, when given a list of numbers, returns the
+  biggest signed difference between two consecutive elements. For instance,
+  `[5,6,4]` should return `1`, as the difference between 5 and 6 is 1 and the
+  difference between 6 and 4 is -2. If there are not enough numbers to have a
+  jump, return None. Do not sort the list or use `max` or `min`.
+topics: [lists]
+solution: >-
+  #Fixed "do not return" to "return None", banned max and min to force practice
+  iterating through lists.
+
+  def jump(x):
+    if len(x)>1:
+      best=-float('Inf')
+      for i in range (0,len(x)-1):
+        if best<x[i+1]-x[i]:
+          best=x[i+1]-x[i]
+      return best
+    return None
+func: jump
+ban: [max, min, sort, sorted]
+args:
+  - - [3, 4, 5, 6, 7, 9]
+  - - [8, 2, 0]
+  - - [0]
+  - - []
+  - [2]
+accepted: expect an email from Prof T about picking up your gift card

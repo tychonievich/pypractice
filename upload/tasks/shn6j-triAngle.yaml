@@ -1,0 +1,27 @@
+description: >-
+  Write a function named `triAngle` that, given two internal angles of a
+  triangle (in degrees), returns 0 if it is equilateral, 1 if it is isosceles,
+  and 2 if it is scalene. An equilateral triangle is one with three equal-length
+  sides, an isosceles triangle is one with two equal-length sides, and a scalene
+  triangle is one that is neither isosceles nor equilateral. Note that iff two
+  angles of a triangle are equal, the lengths of the legs opposite them are
+  equal.
+topics: [lists]
+solution: >-
+  #definitions added, note regarding the relationship between angles and
+  opposing sides added
+
+  def triAngle(a,b):
+     if a==60 and b==60:
+       return 0
+     if a==b or 180-a-b==b or 180-a-b==a:
+       return 1
+     return 2
+func: triAngle
+args:
+  - [60, 60]
+  - [90, 45]
+  - [45, 90]
+  - [117, 34]
+  - [117, 34, 68]
+accepted: expect an email from Prof T about picking up your gift card

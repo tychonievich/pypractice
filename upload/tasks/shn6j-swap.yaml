@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `swap` which, given a list and two distinct indices in
+  that list (in that order), returns a copy of the list with the elements at
+  those two indices swapped.
+topics: [lists]
+solution: |-
+  #fixed description
+  def swap(n,a,b):
+     n2=n[:]
+     n2[a]=n[b]
+     n2[b]=n[a]
+     return n2
+func: swap
+args:
+  - - [1, 2, 3]
+    - 0
+    - 1
+  - - [1, 3, 5, 67]
+    - 3
+    - 2
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

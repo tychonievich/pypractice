@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `weave` that, given two lists l1 and l2 of equal
+  length, returns the list [l1[0],l2[0],l1[1],l2[1],...,l1[-1],l2[-1]]. For
+  instance, weave([1,2,3],[4,5,6]) should return [1,4,2,5,3,6].
+topics: [lists]
+solution: |-
+  #fixed so that a and b are not changed
+  def weave(a,b):
+    c=a[:]
+    d=b[:]
+    l=[]
+    while c:
+      l+=[c.pop(0),d.pop(0)]
+    return l
+func: weave
+args:
+  - - [1, 2, 3, 4, 5, 6, 7, 8]
+    - [4, 5, 6, 7, 8, 9, 10, 11]
+  - - []
+    - []
+  - - [1]
+    - [2]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

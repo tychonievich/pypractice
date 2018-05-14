@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `lowerStep` that, given positive numbers a and b,
+  returns the largest value of n*b for integer n such that n*b<a.
+topics: [conditionals]
+solution: |-
+  def lowerStep(a,b):
+     if a%b==0:
+       return a-b
+     else:
+       return a-a%b
+func: lowerStep
+args:
+  - [3, 0.7]
+  - [3, 0.75]
+  - [1.8, 1.8]
+  - [4328, 435]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

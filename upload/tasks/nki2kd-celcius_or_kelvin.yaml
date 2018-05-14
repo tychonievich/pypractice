@@ -1,0 +1,19 @@
+description: >-
+  Write a function named 'celcius_kelvin' that, when given a float 'temp' and a
+  string 'degrees' (which can be either "C" or "K"), returns the value of that
+  temperature as a float converted into the other unit. Note that 0 degrees
+  Kelvin is equivalent to -273.15 degrees Celsius.
+topics: [conditionals]
+solution: |-
+  def celcius_kelvin(temp, degrees):
+      if degrees == "C":
+          return temp + 273.15
+      else:
+          return temp - 273.15
+func: celcius_kelvin
+args:
+  - [0, C]
+  - [45, K]
+  - [273.15, K]
+  - [35.35, C]
+accepted: expect an email from Prof T about picking up your gift card

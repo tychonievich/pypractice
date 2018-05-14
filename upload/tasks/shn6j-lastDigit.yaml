@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `lastDigit` that, given a number, returns its last
+  digit if it is an integer, and `None` if not. For instance, `lastDigit(-37)`
+  should return 7, and `lastDigit(6.2)` should return None.
+topics: [conditionals]
+solution: |-
+  def lastDigit(n):
+     if n%1:
+       return None
+     if n>0:
+       return n%10
+     else:
+       if n%10:
+         return (10-(n%10))
+       else:
+         return 0
+func: lastDigit
+args:
+  - [43]
+  - [-278]
+  - [0]
+  - [16.2]
+  - [-3.8]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

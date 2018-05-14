@@ -1,0 +1,20 @@
+description: >-
+  Write a function named "twoXORThree" that, given an integer input, returns
+  True if the integer is divisible by three and not two, or two and not three. Do not use `%`.
+topics: [conditionals]
+solution: |-
+  def twoXORThree(n):
+     return ((n//2==n/2)!=(n//3==n/3))
+func: twoXORThree
+ban: ['%']
+args:
+  - [3]
+  - [2]
+  - [7]
+  - [4]
+  - [6]
+  - [-6]
+  - [-2]
+  - [1]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

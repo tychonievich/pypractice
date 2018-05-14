@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `fibonacci` that, given a non-negative integer n,
+  returns a list of the first n Fibonacci numbers. The Fibonacci sequence of
+  numbers is the sequence of numbers where the first two elements are both 1 and
+  every other element is the sum of the two previous elements. It starts
+  1,1,2,3,5,8,13,...
+topics: [lists]
+solution: |-
+  def fibonacci(n):
+     l=[]
+     for i in range (1,n+1):
+       if i<3:
+         l+=[1]
+       else:
+         l+=[l[-1]+l[-2]]
+     return l
+func: fibonacci
+args:
+  - [3]
+  - [8]
+  - [0]
+  - [4]
+  - [1]
+  - [2]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

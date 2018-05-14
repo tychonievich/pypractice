@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `pluralize` that takes two arguments, a number `N` and
+  a string `word`. Return a string containing the number followed by the word,
+  separated by a space. However, if the number is not `1`, pluralize the word by
+  adding the letter 's' after it. For example, (2, 'word') becomes '2 words'.
+  Don't worry about other English rules regarding pluralization.
+topics: [conditionals]
+solution: "def pluralize(N, word):\n\treturn '{} {}'.format(str(N), word + ('s' if N != 1 else ''))"
+func: pluralize
+loops: false
+args:
+  - [1, word]
+  - [2, word]
+  - [3, test]
+  - [0, argument]
+  - [-1, apple]
+  - [100, orange]
+accepted: expect an email from Prof T about picking up your gift card

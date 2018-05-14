@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `furthestNumber` which, given three numbers, returns
+  whichever has the furthest absolute distance to the nearest number to it. If
+  there are multiple such, return the smallest. For instance, the input triplet
+  (2,8,6) should return 2.
+topics: [conditionals]
+solution: |-
+  #doable without sorted - just takes a few conditionals
+  def furthestNumber(a,b,c):
+    nums=sorted([a,b,c])
+    if nums[1]-nums[0]>=nums[2]-nums[1]:
+      return nums[0]
+    else:
+      return nums[2]
+func: furthestNumber
+args:
+  - [3, 4, 7]
+  - [8]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

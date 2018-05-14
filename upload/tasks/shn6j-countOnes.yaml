@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `ctOnes` which, given a non-negative integer as input,
+  counts the number of ones in the number and returns the result. Do not use
+  `count`.
+topics: [lists]
+solution: |-
+  def ctOnes(n):
+     #this can be done without strings by parsing it using a for loop and modulus operations
+     #banned count
+     ones=list(str(n))
+     cter=0
+     for i in ones:
+       if int(i)==1:
+         cter+=1
+     return cter
+func: ctOnes
+ban: [count]
+args:
+  - [3]
+  - [81]
+  - [0]
+  - [417]
+  - [65511315]
+  - [6515316]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

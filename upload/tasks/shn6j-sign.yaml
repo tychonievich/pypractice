@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `sign` that takes a real-number input and returns `1`
+  if it is greater than 0, `0` if it is 0, and `-1` if it is less than 0.
+topics: [conditionals]
+solution: |-
+  def sign(n):
+     if n==0:
+       return 0
+     elif n>0:
+       return 1
+     return (-1)
+func: sign
+args:
+  - [3]
+  - [8]
+  - [0]
+  - [-4]
+  - - [2]
+accepted: expect an email from Prof T about picking up your gift card

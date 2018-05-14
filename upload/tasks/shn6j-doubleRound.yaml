@@ -1,0 +1,27 @@
+description: >-
+  Write a function named `doubleRound` that takes a non-negative integer as
+  input and calculates two times its last digit as k. It should then return the
+  original input rounded to the nearest k. If the last digit of the original
+  integer is zero, return zero. Recall that numbers halfway between two round
+  points round up. For instance, if rounding to the nearest 14, 21 rounds to 28.
+  Some examples: `doubleRound(28)=28 rounded to the nearest (8*2) = 32`,
+  `doubleRound(72)=72 rounded to the nearest (2*2) = 72`
+topics: [conditionals]
+solution: |-
+  def doubleRound(a):
+    if a%10:
+      k=2*(a%10)
+      if a/k%1>=.5:
+        return (a//k+1)*k
+      else:
+        return (a//k)*k
+    return 0
+func: doubleRound
+args:
+  - [13]
+  - [6]
+  - [0]
+  - [20]
+  - [11]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

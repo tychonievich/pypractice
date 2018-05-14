@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `balancedTriad` which, given a positive integer n,
+  returns three integers a, b, and c such that a=c, a+b+c=n, and |a-b| is
+  minimized. For instance, `7` should return `2,3,2`.
+  
+  Recall that you can return three numbers by putting them all after the
+  `return`, like `return 1, 2, 3`.
+topics: [conditionals]
+solution: |-
+  def balancedTriad(n):
+    if n%3==0:
+      return (n/3,n/3,n/3)
+    if n%3==1:
+      return (n//3,n//3+1,n//3)
+    return (n//3+1,n//3,n//3+1)
+func: balancedTriad
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [7]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

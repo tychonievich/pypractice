@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `progressive` that accepts a positive number
+  representing income. Write a function that returns the tax on that income,
+  where the tax on income x 5%, plus 10% of the amount of x above 10000 if x is
+  above 10000, plus 10% of the amount of x above 100000 if x is above 100000.
+  For instance, `progressive(200000)` should return 200000*5% + 190000*10% + 
+  100000*10% = 39000.
+topics: [conditionals]
+solution: |-
+  def progressive(x):
+    s=x*.05
+    if x>10000:
+      s+=(x-10000)*.1
+    if x>100000:
+      s+=(x-100000)*.1    
+    return s
+func: progressive
+args:
+  - [200000]
+  - [500]
+  - [16500]
+  - [165000]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

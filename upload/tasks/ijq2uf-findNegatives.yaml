@@ -1,0 +1,18 @@
+description: >-
+  Given two numbers as parameters, *num1*, *num2*, determine how many of the two
+  are negative.
+
+
+  Return an integer representing the number of negative numbers. For example, if
+  both numbers are negative, then return the integer 2. If there are no negative
+  numbers, return the string "None"
+topics: [conditionals]
+solution: "def findNegatives(num1, num2):\n\n\tnum1_neg = 0 < num1\n\tnum2_neg = 0 < num2\n\n\tif (num1_neg and num2_neg):\n\t\treturn 2\n\telif (num1_neg or num2_neg):\n\t\treturn 1\n\telse:\n\t\treturn \"None\""
+func: findNegatives
+args:
+  - [0, 0]
+  - [1, 1]
+  - [-1, 1]
+  - [1, -1]
+  - [-1, -1]
+accepted: expect an email from Prof T about picking up your gift card

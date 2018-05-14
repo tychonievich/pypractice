@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `devolve` that, given a nonegative integer, removes the
+  last digit and returns the result if the integer is >= 10. For instance,
+  `devolve(138)` should return 13. If the integer is <10 and >0, return itself,
+  and if the integer is 0, return None.
+topics: [conditionals]
+solution: |-
+  #fixed to not require multiple returns, fixed example for consistency
+  def devolve(n):
+     if n==0:
+       return (None)
+     if n<10:
+       return n
+     return (n//10)
+func: devolve
+args:
+  - [3]
+  - [138]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

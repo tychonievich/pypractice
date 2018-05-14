@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `sumDifferences` that, given an a list of lists, each
+  of which has two numbers, return the sum of the absolute differences of the
+  numbers in each pair. For instance, `[[1,2],[8,6],[4,4]]` should return
+  1+2+0=`3`.
+topics: [lists]
+solution: |-
+  def sumDifferences(a):
+    return sum([abs(i[0]-i[1]) for i in a])
+func: sumDifferences
+args:
+  - - []
+  - - - [1, 2]
+      - [3, 4]
+      - [5, 6]
+  - - - [4321, -432]
+      - [-4321, 1953]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

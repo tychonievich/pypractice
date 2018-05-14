@@ -1,0 +1,25 @@
+description: >-
+  Write a function called 'grade' that takes in an integer representing a grade
+  percentage and prints out the corresponding letter grade. You can assume the
+  input is between 0 and 100, inclusive. Use a standard 10-point grading scale
+  with no pluses or minuses (only A, B, C, D, and F). Additionally, if a grade
+  is failing (below a 60), print out how many points away the grade is from
+  passing. E.g. grade(90)="A", grade(85)="B", grade(55)="F 5", grade(0)="F 60".
+topics: [conditionals]
+solution: |-
+  def grade(num):
+    if(num>= 90):
+      print("A")
+    elif(num>= 80):
+      print("B")
+    elif(num>=70):
+      print("C")
+    elif(num>=60):
+      print("D")
+    else:
+      print("F " + str(60-num))
+      
+func: grade
+args:
+  - [90, 80, 77, 60, 55, 25, 0]
+accepted: expect an email from Prof T about picking up your gift card

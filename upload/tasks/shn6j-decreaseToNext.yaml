@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `decreaseToNext` which, given number a and integer b,
+  returns the largest integer multiple of b below a, and returns the result. For
+  instance, given (9,3), it should return 6.
+topics: [conditionals]
+solution: >-
+  #your proposed return int((a-1)/b)*b does not work for the second test case.
+  It was an oversight (test case now modified).
+
+  def decreaseToNext(a,b):
+     if a%b==0:
+       a-=b
+     a-=a%b
+     return a
+func: decreaseToNext
+args:
+  - [9, 3]
+  - [24, 4]
+  - [27, 2]
+  - [-8, 6]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

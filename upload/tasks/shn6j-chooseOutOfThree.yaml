@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `chooseOutOfThree` which takes three arguments a,b,c
+  and a number d. It should return a if d is 1, b if d is 2, and c if d is 3.
+  Return None if d is none of the above.
+topics: [conditionals]
+solution: |-
+  def chooseOutOfThree(a,b,c,n):
+     if n==1:
+       return a
+     if n==2:
+       return b
+     if n==3:
+       return c
+     return None
+func: chooseOutOfThree
+args:
+  - [3, 4, 5, 3]
+  - [3, 4, 5, 2]
+  - [3, 4, 5, 1]
+  - [3, 4, 5, 0]
+  - [6, 8, 2, 2.5]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

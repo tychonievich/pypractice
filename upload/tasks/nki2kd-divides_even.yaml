@@ -1,0 +1,19 @@
+description: >-
+  Write a function named 'divide_even' that, given an integer **n**, returns
+  **n** divided by 2 if **n** is even, and otherwise returns 0.
+topics: [conditionals]
+solution: |-
+  def divides_even(n):
+      if n % 2 == 0:
+          return n/2
+      else:
+          return 0
+func: divides_even
+args:
+  - [0]
+  - [-1]
+  - [2]
+  - [14]
+  - [17]
+  - [40, hi]
+accepted: expect an email from Prof T about picking up your gift card

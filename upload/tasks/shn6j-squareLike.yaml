@@ -1,0 +1,29 @@
+description: >-
+  Write a function named `squareLike` which, given a number n, checks if n, 1/n,
+  -n, or -1/n is the square of an integer. Return True if so and False if not.
+topics: [conditionals]
+solution: |-
+  def squareLike(n):
+     if n>0:
+       if (n**.5)%1==0:
+         return True
+       if (n**(-.5))%1==0:
+         return True
+     if n<0:
+       if ((-n)**.5)%1==0:
+         return True
+       if ((-n)**(-.5))%1==0:
+         return True
+     if n==0:
+       return True
+     return False
+func: squareLike
+args:
+  - [3]
+  - [4]
+  - [0.25]
+  - [0]
+  - [-0.25]
+  - [-4]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

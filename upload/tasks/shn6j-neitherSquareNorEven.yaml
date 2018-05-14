@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `neitherSquareNorEven` that, given a number n, returns
+  the smallest integer i>=n such that i is neither a perfect square (i=j*j for
+  some integer j) nor even. For instance, neitherSquareNorEven(4) should return
+  5.
+topics: [conditionals]
+solution: |-
+  #corrected typo in description
+  def neitherSquareNorEven(a):
+    if a%1:
+      a+=1-(a%1)
+    if a%2==0:
+      a+=1
+    if (a**.5)%1==0:
+      a+=1
+    if a%2==0:
+      a+=1
+    return a
+func: neitherSquareNorEven
+args:
+  - [0.5]
+  - [8]
+  - [7]
+  - [5]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

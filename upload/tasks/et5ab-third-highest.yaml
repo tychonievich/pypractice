@@ -1,0 +1,29 @@
+description: >-
+  Write a function named `third_highest` that, given a list, returns the third
+  highest element within the list. Assume that all elements are comparable with
+  each other, i.e. `>` and `<` are supported between all elements. Do not modify
+  the provided list. Return `None` if no such element exists. If some elements
+  are equal, assume the first occurrence is the largest.
+topics: [lists]
+solution: |-
+  def third_highest(lst):
+      if len(lst) < 3:
+          return None
+      copy = lst[:]
+      for i in range(2):
+          copy.remove(max(copy))
+      return max(copy)
+func: third_highest
+ban: [sorted, sort]
+args:
+  - - [1, 2, 3]
+  - - [1, 2]
+  - - []
+  - - [-1, -3, 4, 5]
+  - - [h, e, l, p]
+  - - - [2, 3]
+      - [1, 2]
+      - [14, 3]
+  - - [5, 23, 12, 43, 42, 1, 12, 12, 312, 2]
+  - - [1, 1, 1, 1, 1]
+accepted: expect an email from Prof T about picking up your gift card

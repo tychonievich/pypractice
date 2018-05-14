@@ -1,0 +1,17 @@
+description: >-
+  Write a function named `areSolutions` that takes five arguments: a, b, c, d,
+  and e (in that order). It should check if both d and e are solutions to the
+  equation axx+bx+c=0. For instance, if a=1, b=4, c=4, d=-2, and e=-2, the
+  function would find that a*d*d+b*d+c=0, and a*e*e+b*e+c=0, so it would return
+  True.
+topics: [conditionals]
+solution: |-
+  def areSolutions(a,b,c,d,e):
+     return (a*d*d+b*d+c==0 and (a*e*e+b*e+c==0))
+func: areSolutions
+args:
+  - [3, 3, 0, -1, 0]
+  - [3, 3, 0, -1, 1]
+  - [1, 4, 4, -2, -2]
+  - [1, 4, 4, 1, 1, 6]
+accepted: expect an email from Prof T about picking up your gift card

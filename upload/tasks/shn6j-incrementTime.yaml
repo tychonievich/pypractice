@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `incrementTime` that, given two integers which
+  represent the current hour and minute, calculates the next minute, and returns
+  the hour of it times 100 plus the minute. Use a 24 hour clock. For instance,
+  the input incrementTime(18,58) should return 18*100+59=1859. The first hour of
+  the day is 0, and the first minute is 0.
+topics: [conditionals]
+solution: >-
+  #changed to only require one output, and subsequently to not be doable by
+  simple modular addition #fixed example
+
+  def incrementTime(a,b):
+     b+=1
+     if b==60:
+       b=0
+       a+=1
+     if a==24:
+       a=0
+     return (a*100+b)
+func: incrementTime
+args:
+  - [23, 59]
+  - [18, 30]
+  - [6, 59]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

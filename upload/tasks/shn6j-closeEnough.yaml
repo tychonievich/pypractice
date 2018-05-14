@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `closeEnough` that, given two separate input numbers,
+  returns True iff their absolute difference is less than 5. Otherwise, it
+  returns False. If only one number is input, the distance should be assumed to
+  be from `0`. Do not use abs.
+topics: [conditionals]
+solution: |-
+  def closeEnough(a,b=0):
+    if (a-b>=5):
+        return False
+    if (b-a>=5):
+        return False
+    return True
+func: closeEnough
+ban: [abs]
+args:
+  - [5, 6]
+  - [-5, 1]
+  - [-6, -1]
+  - [-5, 0]
+  - [1000000000, -11111111110]
+  - [1, 6]
+  - [-1, -5, 2]
+  - [6]
+  - [-2]
+accepted: expect an email from Prof T about picking up your gift card

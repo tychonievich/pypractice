@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `bigger` which, given two input numbers, returns
+  whichever is bigger. If they are equal, return None. Do not use max or min.
+topics: [conditionals]
+solution: |-
+  def bigger(n,m):
+     if n==m:
+       return None
+     return (n if n>m else m)
+func: bigger
+ban: [max, min]
+args:
+  - [3, 4]
+  - [8, 8]
+  - [0, -1]
+  - [4, -100000]
+  - [4, -100000, 1]
+accepted: expect an email from Prof T about picking up your gift card

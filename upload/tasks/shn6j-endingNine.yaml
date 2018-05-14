@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `endingNine` that, given an integer, appends a 9 to its
+  end if 9 is not already its last digit, and returns the result.
+  `endingNine(0)` should return 9. Do not use `str`.
+topics: [conditionals]
+solution: |-
+  def endingNine(n):
+     if n>=0 and n%10!=9:
+       n*=10
+       n+=9
+     if n<0 and n%10!=1:
+       n*=10
+       n-=9
+     return n
+func: endingNine
+ban: [str]
+args:
+  - [3]
+  - [18]
+  - [909]
+  - [0]
+  - [-36]
+  - [-69]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

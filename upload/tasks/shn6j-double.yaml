@@ -1,0 +1,18 @@
+description: >-
+  Write a function named `double` that, given a list, returns that list with two
+  of every element (in the same order). Duplicates should be doubled twice. For
+  instance, `double([1,2,3,3,2,1])` should return `[1,1,2,2,3,3,3,3,2,2,1,1]`.
+topics: [lists]
+solution: |-
+  def double(n):
+     l=[]
+     for i in n:
+       l+=[i,i]
+     return l
+func: double
+args:
+  - - [1, 2, 3, 4, 5, 1, 432]
+  - - [cat, dog, pig, sheep]
+  - - []
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

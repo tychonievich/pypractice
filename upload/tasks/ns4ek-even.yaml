@@ -1,0 +1,21 @@
+description: >-
+  Write a function called even that takes in an integer. The program should
+  print 'even' if a number is even, and print 'The number *x* is not even.' if
+  the number is odd. For example, 2 would print 'even', but 3 would print 'The
+  number 3 is not even.'.
+topics: [conditionals]
+solution: |-
+  def even(n):
+    if(n%2==0):
+      print("even")
+    else:
+      print("The number " + n + " is not even.")
+func: even
+args:
+  - [0]
+  - [2]
+  - [10]
+  - [9]
+  - [-9]
+  - [7]
+accepted: expect an email from Prof T about picking up your gift card

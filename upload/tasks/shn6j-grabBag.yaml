@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `grabBag`. It is given a list of numbers as an input.
+  Each number represents a number of colored balls (a differnt color for each
+  number). Give the ordered probabilities that, if all the balls were thrown
+  into a bag, that color would be picked. For example, `[4,2,2]` should return
+  `[.5,.25,.25]`.
+topics: [lists]
+solution: |-
+  def grabBag(n):
+      s = 0
+      for i in n:
+        s += i
+      return [i/s for i in n]
+func: grabBag
+args:
+  - - [3, 5, 7, 5]
+  - - []
+  - - [2, 4, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  - - [1]
+  - [1]
+accepted: expect an email from Prof T about picking up your gift card

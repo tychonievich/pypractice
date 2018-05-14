@@ -1,0 +1,15 @@
+description: >-
+  Write a function named `altInts` that, given a positive integer n as input,
+  returns a list of alternating positive-negative integers from 1 to n. For
+  instance, `5` should return `[1,-2,3,-4,5]`.
+topics: [lists]
+solution: |-
+  def altInts(n):
+     return ([x*(-1)**((x+1)%2) for x in list(range(1,n+1))])
+func: altInts
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

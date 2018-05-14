@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `rotated_list` that, given a `length` integer and a
+  positive integer `n`, returns the an ordered list of number from 0 to `length`
+  (exclusive), rotated by `n`. The rotate operation creates a new list that has
+  values of the normal list shifted to the left by `n` numbers. For example, if
+  `length` is 5 and `n` is 3, then the original list of [0,1,2,3,4] then the new
+  rotated list should be [3,4,0,1,2]. Assume that `n` will always be less than
+  `length`.
+topics: [lists]
+solution: |-
+  def rotated_list(length, n):
+      return list(range(n, length)) + list(range(0, n))
+func: rotated_list
+args:
+  - [20, 5]
+  - [20, 0]
+  - [10, 7]
+  - [0, 0]
+  - [4, 1]
+  - [10, 3]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,17 @@
+description: >-
+  Write a function called all_num that takes in a list and returns True if all
+  items in the list are integers and False otherwise. 
+topics: [lists]
+solution: |-
+  def all_num(li):
+    for i in li:
+      if(False == isinstance(i,int)):
+        return False
+    return True
+func: all_num
+args:
+  - [1, 2, 3, 4]
+  - [cat, '1', dog]
+  - [-1, 0, '12']
+  - [1, 12, 24, four eight]
+accepted: expect an email from Prof T about picking up your gift card

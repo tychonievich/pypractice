@@ -1,0 +1,17 @@
+description: >-
+  Write a function named `nested` that, given a positive integer n, returns n
+  lists nested within each other. For instance, nested(3) should return [[[]]].
+topics: [lists]
+solution: |-
+  def nested(n):
+    l=[]
+    for i in range(1,n):
+      l=[l]
+    return l
+func: nested
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

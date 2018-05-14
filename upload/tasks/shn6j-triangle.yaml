@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `triangle` that, given a list, returns the list
+  containing the list containing the first element, the list containing the
+  first two elements, the list containing the first three elements, and so on.
+  For instance, `triangle([1,3,5,7])` should return
+  [[1],[1,3],[1,3,5],[1,3,5,7]].
+topics: [lists]
+solution: |-
+  def triangle(n):
+     l=[]
+     for i in range (1,len(n)+1):
+       l+=[n[0:i]]
+     return l
+func: triangle
+args:
+  - - [1, 3, 5, 7]
+  - - [1]
+  - - [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

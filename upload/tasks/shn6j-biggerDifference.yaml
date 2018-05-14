@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `biggerDifference` that, given two numbers, returns the
+  biggest difference between any two numbers with the same absolute values as
+  those two. For instance, `biggerDifference(-5,-7)` should return 12, as the
+  maximal distance between a number with an absolute value of abs(-5) and an
+  absolute value of abs(-7) is 12 (for instance, the difference between 5 and
+  -7). Do not use abs.
+topics: [conditionals]
+solution: |-
+  def biggerDifference(a,b):
+    if a>0:
+      a*=-1
+    if b<0:
+      b*=-1
+    return (b-a)
+func: biggerDifference
+ban: [abs]
+args:
+  - [3, 9]
+  - [-8, 14]
+  - [-7, -16]
+  - [0, 0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

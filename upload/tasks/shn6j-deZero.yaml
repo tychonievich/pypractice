@@ -1,0 +1,22 @@
+description: >-
+  Write a function named `deZero` that, given a nonnegative integer of up to
+  three digits, replaces any non-leading 0s with 1s and returns the result. For
+  instance, `deZero(60)` should become 61. Do not use `str`. `deZero(0)` should
+  return 0, as it contains only leading zeros.
+topics: [conditionals]
+solution: |-
+  def deZero(n):
+     if n>99 and (n//10)%10==0:
+       n+=10
+     if n>9 and (n%10==0):
+       n+=1
+     return n
+func: deZero
+ban: [str]
+args:
+  - [3]
+  - [80]
+  - [602]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

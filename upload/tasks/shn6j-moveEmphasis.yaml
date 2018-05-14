@@ -1,0 +1,35 @@
+description: >-
+  Write a function named `moveEmphasis` that accepts a list containing numbers
+  for all but one element and a list containing a number for that last element.
+  For instance, [1,2,3,[4],5] would be acceptable. It should then replace that
+  list with the corresponding number and make the next number in the list into a
+  list containing that number, and return the resulting list. For instance, the
+  above example would change to [1,2,3,4,[5]]. If the last element is the list
+  containing the number when the list is passed, then it should cycle to the
+  start. For instance, if the function is passed [1,2,3,4,[5]], it should return
+  [[1],2,3,4,5]
+topics: [lists]
+solution: |-
+  def moveEmphasis(n):
+     for i in range (len(n)):
+       if type(n[i])==type([1]):
+         n[i]=n[i][0]
+         if i+1==len(n):
+           n[0]=[n[0]]
+         else:
+           n[i+1]=[n[i+1]]
+         break
+     return n
+func: moveEmphasis
+args:
+  - - - [1]
+      - 2
+      - 3
+      - 4
+  - - - 3
+      - 4
+      - [8]
+      - 6
+  - - - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

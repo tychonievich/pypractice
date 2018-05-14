@@ -1,0 +1,17 @@
+description: >-
+  Write a function named `nCubes` which, given a positive integer n, returns a
+  list of the first n positive cubic numbers. For instance, `3` should return
+  `[1,8,27]`. A cubic number is a number n so that n=i^3 for some positive
+  integer i.
+topics: [lists]
+solution: |-
+  #fixed description.
+  def nCubes(n):
+     return ([x**3 for x in list(range(1,n+1))])
+func: nCubes
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

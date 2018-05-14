@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `consecProd` which, given a list, returns the largest
+  product of two consecutive elements. The list may be assumed to contain only
+  real numbers, and to be of at least length 2.
+topics: [lists]
+solution: |-
+  def consecProd(n):
+     mProd=float('-inf')
+     for i in range (0,len(n)-1):
+       if n[i]*n[i+1]>mProd:
+         mProd=n[i]*n[i+1]
+     return mProd
+     
+func: consecProd
+args:
+  - - [-100000000, 1000000000]
+  - - [1, 2, 3, 6, 2302, 302, 582]
+  - - [0, 0]
+  - - [4, 4, 20, 5, 19, 2, 18, 17]
+accepted: expect an email from Prof T about picking up your gift card

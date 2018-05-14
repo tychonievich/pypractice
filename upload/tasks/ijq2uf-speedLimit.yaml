@@ -1,0 +1,31 @@
+description: >-
+  Given a driver's speed *speed* and a speed limit *speed_limit*, return a
+  string that represents the probability a driver will be pulled over. A driver
+  driving 0-4 mph over the speed limit will have a "Extremely low" probability
+  of being pulled over. At 5-8 mph over, the driver will a "Low" probability of
+  being pulled over; at 9-13 mph, a "Medium" probability; at 14-18 mph, a "High"
+  probability; at 18+ mph, an "Extremely High" probability. If the driver is not
+  speeding, return the string "Not Speeding"
+topics: [conditionals]
+solution: "def speedLimit(speed, speed_limit):\n\tif (speed - 18 > speed_limit):\n\t\treturn \"Extremely High\"\n\telif (speed - 14 >= speed_limit):\n\t\treturn \"High\"\n\telif (speed - 9 >= speed_limit):\n\t\treturn \"Medium\" \n\telif (speed - 5 >= speed_limit):\n\t\treturn \"Low\"\n\telif (speed >= speed_limit):\n\t\treturn \"Extremely Low\"\n\telse:\n\t\treturn \"Not Speeding\""
+func: speedLimit
+loops: false
+args:
+  - [0, 2]
+  - [-2, 0]
+  - [5, 0]
+  - [7, 0]
+  - [9, 0]
+  - [10, 0]
+  - [14, 0]
+  - [13, 0]
+  - [18, 0]
+  - [19, 0]
+  - [25, 0]
+  - [1, 0]
+  - [4, 0]
+  - [17, 0]
+  - [15, 0]
+  - [8]
+  - [3, 0]
+accepted: expect an email from Prof T about picking up your gift card

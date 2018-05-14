@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `cut` which takes a list with an even number of
+  elements, cuts it in half at the middle, switches the positions of the two
+  halves. For instance, the list `[1,2,3,4,5,6]` would go to `[4,5,6,1,2,3]`. If
+  the list is of odd length, return None
+topics: [lists]
+solution: |-
+  def cut(a):
+    if (len(a)%2)==0:
+      return (a[int(len(a)/2):]+a[:int(len(a)/2)])
+    return None
+      
+func: cut
+args:
+  - - [1, 2, 3, 4, 5, 6]
+  - - [1, 2, 3, 4, 5]
+  - - [1, 2]
+  - - []
+  - - []
+    - []
+accepted: expect an email from Prof T about picking up your gift card

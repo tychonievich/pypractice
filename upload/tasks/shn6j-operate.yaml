@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `operate` that, given a number, a string containing
+  either `*`, `/`, `+`, or `-`, and another number as arguments, will return
+  that operation on those numbers. For example, `operate(5,'*',2)` should return
+  `10`. Division by zero should return None.
+topics: [conditionals]
+solution: |-
+  #fixed description
+  def operate(a,b,c):
+    if b=='*':
+      return (a*c)
+    if b=='/' and c!=0:
+      return (a/c)
+    if b=='+':
+      return (a+c)
+    if b=='-':
+      return (a-c)
+func: operate
+args:
+  - [3, +, 4]
+  - [3, '-', 6]
+  - [3, /, 4]
+  - [3, /, 0]
+  - [3, '*', 0]
+  - [2, 2, '*']
+accepted: expect an email from Prof T about picking up your gift card

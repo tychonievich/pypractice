@@ -1,0 +1,22 @@
+description: >-
+  Given a list of temperatures (in degrees Celsius) recorded at the top of Mount
+  Everest, find the highest recorded temperature that is below the freezing
+  point of water (Assume that the freezing point of water is 0 degrees Celsius,
+  and all recorded temperatures are greater than -273 degrees Celsius). If there
+  is no temperature below 0 degrees Celsius, return 0. For example, given list
+  [2, 5, -20, -2, 0], you should return -2
+topics: [lists]
+solution: "def everest(temps):\n\thighest = -273\n\tfor temp in temps:\n\t\tif temp < 0 and temp > highest:\n\t\t\thighest = temp\n\tif temp > -273:\n\t\treturn temp\n\telse:\n\t\treturn 0"
+func: everest
+cases:
+  - args:
+      - [-40, -20, -12, 9, 0, -28, -5]
+  - args:
+      - [10, 20, 13, 9, 0, 28, 3]
+  - args:
+      - [0, 0, 0, 0]
+  - args:
+      - [1, 2, -1]
+  - args:
+      - []
+accepted: expect an email from Prof T about picking up your gift card

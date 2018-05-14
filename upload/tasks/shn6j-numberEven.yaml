@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `numberEven` which accepts three integer arguments and
+  returns the number of them that are even. For instance, `numberEven(1,3,4)`
+  should return 1.
+topics: [conditionals]
+solution: |-
+  def numberEven(a,b,c):
+     count=3
+     if a%2:
+       count-=1
+     if b%2:
+       count-=1
+     if c%2:
+       count-=1
+     return count
+func: numberEven
+args:
+  - [3, 9, 5]
+  - [8, 3, 1]
+  - [3, 6, 8]
+  - [-2, 6, 8]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

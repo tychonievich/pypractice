@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `edgeDistance` that, given two numbers symbolizing a
+  coordinate pair, returns the distance from that point to the closest axis on
+  the graph. For instance, (5,-3) has a distance of 3 to the negative side of
+  the y-axis
+topics: [conditionals]
+solution: |-
+  def edgeDistance(a,b):
+     c=a*(1 if a>0 else -1)
+     d=b*(1 if b>0 else -1)
+     return (d if c>d else c)
+func: edgeDistance
+args:
+  - [4, 3]
+  - [0, -3]
+  - [8, -2]
+  - [0, 0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

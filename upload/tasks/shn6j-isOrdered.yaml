@@ -1,0 +1,34 @@
+description: >-
+  Write a function named `isOrdered` which, given a list of numbers as its
+  input, returns True if it is in either pure ascending or descending order and
+  False if not. If two consecutive numbers are the same, they are both ascending
+  and descending and may therefore count towards either criterion. Do not use
+  sort or sorted.
+topics: [lists]
+solution: |-
+  def isOrdered(n):
+     o=n
+     m=n[::-1]
+     if m[0]>n[0]:
+       o=m
+       m=n
+     ism=True
+     iso=True
+     for i in range (0,len(n)-1):
+       if m[i]>m[i+1]:
+         ism=False
+       if o[i]<o[i+1]:
+         iso=False
+     return (ism or iso)
+func: isOrdered
+ban: [sort,sorted]
+args:
+  - - [3]
+  - - [8, 6]
+  - - []
+  - - [4, 6, 8]
+  - - [8, 5, 7, 3]
+  - - [-1]
+  - - [4, 6, 8, -1]
+  - [1, 2]
+accepted: expect an email from Prof T about picking up your gift card

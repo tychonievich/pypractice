@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `twoflip` that, given an even-length list as input,
+  outputs the result when each element in that list is flipped with its neighbor
+  - to its right if it is even-indexed and to its left if it is odd-indexed. For
+  instance, [1,2,3,4] should go to [2,1,4,3].
+topics: [lists]
+solution: |-
+  def twoflip(n):
+     result = []
+     for i in range (0,int(len(n)/2)):
+       result += [n[2*i+1],n[2*i]]
+     return result
+func: twoflip
+args:
+  - - [3, 4]
+  - - [3, 1, 4, 1]
+  - - []
+  - [1]
+accepted: expect an email from Prof T about picking up your gift card

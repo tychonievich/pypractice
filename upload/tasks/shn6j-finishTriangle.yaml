@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `finishTriangle` that, given two interior angles of a
+  triangle, returns the third one, or returns None if the two given angles are
+  not valid or do not make a valid triangle. For instance,
+  `finishTriangle(376,92)` should return None. Recall that the interior angles
+  of a triangle are the angles created by the insides of corners of the
+  triangle, and that for any triangle, the three interior angles sum to 180
+  degrees.
+topics: [conditionals]
+solution: |-
+  #Added description of interior angles and their relevant property
+  def finishTriangle(a,b):
+     if a<0 or b<0 :
+       return None
+     if a+b>=180:
+       return None
+     return 180-a-b
+func: finishTriangle
+args:
+  - [3, 4]
+  - [-2, 60]
+  - [181, -2]
+  - [181, 8]
+  - [93, 102]
+  - [93, 86]
+  - [93, 87]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

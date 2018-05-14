@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `isSquare` that, given a 2d list as an argument,
+  returns True if it is square and False if it is not. A 2d list is a list of
+  lists, and a 2d ist is square if the length of every list within it is equal
+  to its length.
+topics: [lists]
+solution: |-
+  def isSquare(n):
+     l=len(n)
+     for i in n:
+       if len(i)!=l:
+         return False
+     return True
+func: isSquare
+args:
+  - - - [1, 2]
+      - [3, 4]
+  - - - [1, 2, 3]
+      - [3, 4, 5]
+  - - - [1, 2]
+      - [3]
+  - - - []
+  - - - [1]
+  - [1]
+accepted: expect an email from Prof T about picking up your gift card

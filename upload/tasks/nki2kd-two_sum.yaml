@@ -1,0 +1,25 @@
+description: >-
+  Write a function `two_sum` that, given an input list `nums` and an integer
+  `target`, returns **True** if there are two **different** numbers within
+  `nums` that add up to `target` and otherwise returns **False**.
+topics: [lists]
+solution: |-
+  def two_sum(nums, target):
+      for i in range(nums):
+          for j in range(nums):
+              if nums[i] != nums[j]:
+                  if nums[i] + nums[j] == target:
+                      return True
+
+      return False
+func: two_sum
+args:
+  - - [1, 2, 3, 4, 5]
+    - 5
+  - - [0, 0, 0]
+    - 0
+  - - [5, 3, 9, 200, -50]
+    - 14
+  - - [-100, 3, 4, 5, 100]
+    - 0
+accepted: expect an email from Prof T about picking up your gift card

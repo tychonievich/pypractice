@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `interestingLines` that, given the four arguments
+  `s1,yint1,s2,yint2` (the slopes and y intercepts of two lines) returns 1 if
+  they are parallel, -1 if they are perpendicular, and 0 if neither is true. Two
+  lines are perpendicular if their slopes multiply to -1.
+topics: [conditionals]
+solution: |-
+  def interestingLines(s1,y1,s2,y2):
+     if s1==s2:
+       return 1
+     if s1*s2==-1:
+       return -1
+     return 0
+func: interestingLines
+args:
+  - [1, 2, 3, 4]
+  - [2, 1, 2, 3]
+  - [1, 2, -1, 1]
+  - [2, 2, -0.5, 2]
+  - [1, 2, 3, 4, 5]
+accepted: expect an email from Prof T about picking up your gift card

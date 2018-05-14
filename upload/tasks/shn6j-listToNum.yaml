@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `listToNum` which turns a list of digits into a number.
+  For instance, the input [0,3,4,6,2,0] should return 34620. The empty list
+  should return 0.
+topics: [lists]
+solution: |-
+  def listToNum(l):
+     n=0
+     while l:
+       n*=10
+       n+=l.pop(0)
+     return n
+       
+func: listToNum
+args:
+  - - [3]
+  - - [0, 1, 2, 5, 2, 4]
+  - - []
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `compassDir` that, given an angle in the range [0,360)
+  degrees, returns the compass bearing closest to it (0, 90, 180, or 270). Round
+  counterclockwise (down) if exactly halfway between two.
+topics: [lists]
+solution: |-
+  def compassDir(n):
+     if n%90>45:
+       n+=90
+     n-=n%90
+     if n>=360:
+       n-=360
+     return n
+func: compassDir
+args:
+  - [340]
+  - [45]
+  - [168]
+  - [243]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

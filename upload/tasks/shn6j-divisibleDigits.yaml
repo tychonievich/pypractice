@@ -1,0 +1,39 @@
+description: >-
+  Write a function named `divisibleDigits` that, given a number, returns the
+  number of digits (numbers in the range 1-9 inclusive) that it is divisible by.
+  Iff a is divisible by b, a=nb for some integer n. For instance,
+  `divisibleDigits(45)` should return 3, as 45 is divisible by 9, 3, and 5.
+topics: [conditionals]
+solution: |-
+  def divisibleDigits(n):
+     ct=9
+     if n%1:
+       ct-=1
+     if n%2:
+       ct-=1
+     if n%3:
+       ct-=1
+     if n%4:
+       ct-=1
+     if n%5:
+       ct-=1
+     if n%6:
+       ct-=1
+     if n%7:
+       ct-=1
+     if n%8:
+       ct-=1
+     if n%9:
+       ct-=1
+     return ct
+func: divisibleDigits
+args:
+  - [69]
+  - [3]
+  - [8]
+  - [18]
+  - [37]
+  - [45]
+  - [0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,24 @@
+description: >-
+  Write a function `triangle_classifier` which takes as input three side lengths
+  of a triangle (real numbers). If all three sides of the triangle are equal,
+  return the string "equilateral". If two sides are equal, and the third is
+  different, return "isosceles". If all three sides are different, return
+  "scalene". You do not need to check if the sides can form a valid triangle.
+topics: [conditionals]
+solution: |-
+  def triangle_classifier(a, b, c):
+      if a == b == c:
+          return "equilateral"
+      elif a == b or b == c or a == c:
+          return "isosceles"
+      else:
+          return "scalene"
+func: triangle_classifier
+args:
+  - [1, 2, 3]
+  - [2.3, 9.1, 2.3]
+  - [5.5, 5.5, 5.5]
+  - [9, 99, 100]
+  - [75, 75, 76]
+  - [20, 30, 30]
+accepted: expect an email from Prof T about picking up your gift card

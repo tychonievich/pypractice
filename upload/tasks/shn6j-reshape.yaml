@@ -1,0 +1,33 @@
+description: >-
+  Write a function named `reshape` which, given a list n of length a*b and two
+  numbers a and b, returns the elements of l in the same order, in a list of a
+  lists, each of length b. For instance, `reshape([1,2,3,4,5,6],2,3)` should
+  return [[1,2,3],[4,5,6]].
+topics: [lists]
+solution: |-
+  #clarified definition with a and b
+  def reshape(n,a,b):
+    l=[]
+    for i in range (a):
+      l+=[n[0:b]]
+      n=n[b:]
+    return l
+func: reshape
+args:
+  - - [1, 2, 3, 4, 5, 6, 7, 8]
+    - 8
+    - 1
+  - - [1, 2, 3, 4, 5, 6, 7, 8]
+    - 4
+    - 2
+  - - [1, 2, 3, 4]
+    - 2
+    - 2
+  - - []
+    - 3
+    - 0
+  - - []
+    - 0
+    - 3
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

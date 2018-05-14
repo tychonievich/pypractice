@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `flipSum` that, given a list of even length, returns
+  the list of half that length containing the elementwise sum of all pairs of
+  elements opposite eachother in the list. For instance, given the list
+  [1,2,3,4,6,8], we can see that the pairs (1,8), (2,6), and (3,4) are opposite
+  each other. The function should therefore return [1+8,2+6,3+4]=[9,8,7].
+topics: [lists]
+solution: |-
+  def flipSum(n):
+     l=[]
+     for i in range (0,len(n)//2):
+       l+=[n[i]+n[-i-1]]
+     return l
+func: flipSum
+args:
+  - - [3, 4, 5, 6, 7, 9, 1432, 43]
+  - - [8, -8]
+  - - []
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

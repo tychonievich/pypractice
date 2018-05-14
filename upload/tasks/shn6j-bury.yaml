@@ -1,0 +1,20 @@
+description: >-
+  Write a function named `bury` that, given a list and a positive integer,
+  returns that list nested in that integer number of extra lists. For instance,
+  `bury([1,2,3],4)` should return `[[[[[1,2,3]]]]]`.
+topics: [lists]
+solution: |-
+  def bury(a,b):
+    for i in range (b):
+      a=[a]
+    return a
+func: bury
+args:
+  - - [1, 2, 3]
+    - 5
+  - - [8]
+    - 1
+  - - []
+    - 1
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

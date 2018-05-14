@@ -1,0 +1,17 @@
+description: >-
+  Write a function named `twoSame` which, given three numbers, returns True if
+  exactly two of them are the same, and False if not.
+topics: [conditionals]
+solution: |-
+  #can be checked with conditionals
+  def twoSame(a,b,c):
+     n=sorted([a,b,c])
+     return (bool(n[0]-n[1])^bool(n[1]-n[2]))
+func: twoSame
+args:
+  - [3, 4, 5]
+  - [8, 4, 8]
+  - [0, 0, 6]
+  - [0, 0, 0]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

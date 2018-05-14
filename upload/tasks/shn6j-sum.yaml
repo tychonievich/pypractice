@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `sum` which returns the sum of a list of numbers. If
+  any element is not an integer or float, do not add it to the sum.
+topics: [lists]
+solution: |-
+  def sum(a):
+    s=0
+    for i in a:
+      if type(i) in [int, float, complex]:
+        s+=i
+    return (s)
+      
+      
+func: sum
+args:
+  - - [1, 2, 3, 4, 5, 6]
+  - - [1, 2, 3, 4, 5]
+  - - [1, 2]
+  - - []
+  - - [cat, 2]
+  - - [cat]
+  - - [None]
+  - - [1e+67]
+  - [2]
+accepted: expect an email from Prof T about picking up your gift card

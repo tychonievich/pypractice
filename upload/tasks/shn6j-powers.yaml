@@ -1,0 +1,19 @@
+description: >-
+  Write a function named `powers` which, given a positive integer, returns all
+  of the integer powers of 2 less than it. An integer power of two is a number
+  2^n such that 2^n and n are both integers.
+topics: [lists]
+solution: |-
+  def powers(n):
+     l=[1]
+     while l[-1]<n:
+       l+=[l[-1]*2]
+     l=l[:-1]
+     return l
+func: powers
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [47854309754308]
+accepted: expect an email from Prof T about picking up your gift card

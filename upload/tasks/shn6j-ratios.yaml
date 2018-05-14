@@ -1,0 +1,25 @@
+description: >-
+  Write a function named `ratios` which, given a, b, c, and d, returns True if
+  the ratios a:b and c:d are equal, and False if not. Two ratios a:b and c:d are
+  equal if there exists n such that an=c and bn=d.
+topics: [conditionals]
+solution: |-
+  #removed numerical tricks
+  def ratios(a,b,c,d):
+     if b==0:
+       return d==0
+     if d==0:
+       return b==0
+     if a==0:
+       return c==0
+     if c==0:
+       return a==0
+     return (a/c==b/d)
+func: ratios
+args:
+  - [3, 4, 6, 8]
+  - [2, 0, 8, 0]
+  - [0, 3, 0, 6]
+  - [3, 5, 7, 9]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

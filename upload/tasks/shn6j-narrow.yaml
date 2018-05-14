@@ -1,0 +1,21 @@
+description: >-
+  Write a function named `narrow` that accepts two numbers a<=b (representing a
+  range) and a boolean, in that order. If the boolean is True, it should return
+  the product of the two numbers representing the higher half of the range, and
+  if False, it should return the product of the two representing the lower half
+  of the range. For instance, `narrow(5,8,False)` should return 5* 6.5=32.5
+topics: [conditionals]
+solution: |-
+  #Changed to not require multiple returns
+  def narrow(a,b,c):
+     if c:
+       return ((a+b)/2*b)
+     else:
+       return (a*(a+b)/2)
+func: narrow
+args:
+  - [3, 8, false]
+  - [8, 8, true]
+  - [0, 9, true]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

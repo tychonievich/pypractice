@@ -1,0 +1,22 @@
+random: {}
+description: >-
+  A group of friends want to organize a taco potluck this weekend. To have a
+  successful taco potluck, each member of the friend group must be able to eat
+  at least one taco. Since one person should not be burdened with all the
+  cooking, one friend can only bring up to 4 tacos to the potluck. Given a total
+  of *x* friends attending the potluck and *y* friends who bring tacos,
+  determine if the friend group will have a successful potluck. If they can,
+  return the string `They can!`, otherwise, return the minimum number of
+  additional friends who would need to bring tacos to have a successful potluck.
+topics: [conditionals]
+solution: "def potluck(x, y):\n\tif (x <= 4 * y):\n\t\treturn \"They can!\"\n\telse:\n\t\tcount_friends = x - 4*y\n\t\treturn count_friends"
+func: potluck
+loops: false
+args:
+  - [100, 1]
+  - [4, 1]
+  - [5, 1]
+  - [9, 2]
+  - [17, 4]
+  - [19, 5]
+accepted: expect an email from Prof T about picking up your gift card

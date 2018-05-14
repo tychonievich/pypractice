@@ -1,0 +1,15 @@
+description: >-
+  Write a function named `oddTwoPowers` which, given an integer n>0, returns the
+  list of all 2^(2k+1) for nonnegative integer k such that 2k+1<n, in ascending
+  order. For instance, oddTwoPowers(7) should return [2^1,2^3,2^5]=[2,8,32].
+topics: [lists]
+solution: |-
+  def oddTwoPowers(a):
+    return [2**i for i in range (1,a,2)]
+func: oddTwoPowers
+args:
+  - [3]
+  - [8]
+  - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

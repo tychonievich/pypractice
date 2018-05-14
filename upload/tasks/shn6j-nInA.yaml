@@ -1,0 +1,35 @@
+description: >-
+  Write a function named isElementOfA that, given a number and a list of numbers
+  as inputs, checks if the number is an element of the list. Returns True if so,
+  False if not. Do not use use `in` or list methods that find, count, or remove 
+  elements.
+topics: [lists]
+solution: |-
+  #Fixed name, patched 1,0 to True,False
+  def isElementOfA(n,A):
+    iter=0
+    while iter<len(A):
+      k=A[iter]
+      if k==n:
+        return True
+      iter+=1
+    return False
+func: isElementOfA
+ban: [in,index,remove,count]
+args:
+  - - 1
+    - [2, 3, 4]
+  - - 2
+    - [2, 3, 4]
+  - - 1
+    - []
+  - - 1
+    - [2]
+  - - 9
+    - [2, 3, 4]
+  - - 3
+    - [2, 3, 4]
+  - - 1
+    - [2, 3, 4]
+  - [2, 3]
+accepted: expect an email from Prof T about picking up your gift card

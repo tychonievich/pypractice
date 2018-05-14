@@ -1,0 +1,28 @@
+description: >-
+  Write a function `workout_plan` that, given a `day` string ("Monday",
+  "Tuesday", etc.) returns the correct lifts for that day as a string. The
+  workout plan is as follows : Monday, Wednesday, and Friday is "back and bi".
+  Tuesday and Thursday is for "chest and tri". Saturday is for "legs", and
+  Sunday is for "rest".
+topics: [conditionals]
+solution: |-
+  def workout_plan(day):
+      if day == 'Monday' or day == 'Wednesday' or day == 'Friday':
+          return "back and bi"
+
+      elif day == 'Tuesday' or day == 'Thursday':
+          return 'chest and tri'
+      elif day == 'Saturday':
+          return 'legs'
+      elif day == 'Sunday':
+          return 'rest'
+func: workout_plan
+args:
+  - [Monday]
+  - [Tuesday]
+  - [Wednesday]
+  - [Thursday]
+  - [Friday]
+  - [Saturday]
+  - [Sunday]
+accepted: expect an email from Prof T about picking up your gift card

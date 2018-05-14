@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `loan` that, given an amount of money, returns the
+  interest per year. Interest will be bracketed: .05 of the principal for
+  anything under 10000, .04 for anything from 10000 (inclusive) up to 100000
+  (noninclusive), and .03 for anything above that. For instance, `loan(50000)`
+  should return .04*50000=`2000`.
+topics: [conditionals]
+solution: |-
+  def loan(n):
+    if n<10000:
+      return (n*.05)
+    elif n<100000:
+      return (n*.04)
+    else:
+      return (n*.03)
+func: loan
+args:
+  - [3]
+  - [800000]
+  - [80000]
+  - [10000]
+  - [100000]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

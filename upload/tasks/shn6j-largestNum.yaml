@@ -1,0 +1,17 @@
+description: >-
+  Write a function named `largestNum`. Given an array of integers, each a digit
+  in the range 0-9, inclusive, return the largest number that may be created by
+  using each digit exactly once. If there are no digits, the answer is zero.
+topics: [lists]
+solution: |-
+  def largestNum(n):
+    return (int('0'+''.join([str(i) for i in sorted(n)[::-1]])))
+func: largestNum
+args:
+  - - []
+  - - [1, 2, 3, 4, 5]
+  - - [1]
+  - - [1, 5, 2, 8, 4]
+  - - [1, 2]
+    - 3
+accepted: expect an email from Prof T about picking up your gift card

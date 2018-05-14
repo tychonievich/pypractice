@@ -1,0 +1,26 @@
+description: >-
+  Write a function named `gsi` that is given a list of lists, each of which
+  contains numbers. It should return the index of the list with the greatest
+  sum. If multiple such exist, return the first. For example, given the list
+  `[[1,2,3],[16,-2,1],[2,5,7]], it would return `1`, as 1+2+3<16+-2+1 and
+  2+5+7<16+-2+1.
+topics: [lists]
+solution: |-
+  #added example
+  def gsi(n):
+     sn=[sum(i) for i in n]
+     snMal=sorted(sn)
+     return sn.index(snMal[-1])
+     
+     
+func: gsi
+args:
+  - - - [1, 2]
+      - [3, 4]
+      - [1000]
+  - - - [8, -8]
+      - [2, -1]
+  - - - [1]
+      - [1]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

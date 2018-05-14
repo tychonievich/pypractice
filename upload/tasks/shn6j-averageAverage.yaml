@@ -1,0 +1,35 @@
+description: >-
+  Write a function named `averageAverage` that, given three numbers, returns the
+  average of the average of the lowest two and the average of the highest two.
+  For instance, `averageAverage(5,6,8)` would be the average of 5.5 and 7, which
+  is 6.25.
+topics: [conditionals]
+solution: |-
+  def averageAverage(a,b,c):
+    if a>=b and a>=c:
+      x=a
+      if b>c:
+        y,z=b,c
+      else:
+        y,z=c,b
+    elif b>=a and b>=c:
+      x=b
+      if a>c:
+        y,z=a,c
+      else:
+        y,z=c,a
+    else:
+      x=c
+      if b>a:
+        y,z=b,a
+      else:
+        y,z=a,b
+    return (y/2+x/4+z/4)
+func: averageAverage
+args:
+  - [3, 4, 5]
+  - [8, 9, 18]
+  - [0, 0, 0]
+  - [-4, 6, 8]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

@@ -1,0 +1,23 @@
+description: >-
+  Write a function named `endingDigit` that, given integer a and digit b in that
+  order, returns a changed by the minimum amount possible to have b as its last
+  digit. If there are two equal possible changes, pick the one that decreases a.
+topics: [conditionals]
+solution: |-
+  def endingDigit(a,b):
+     c=b
+     if a<=0:
+       c*=-1
+     if (a%10-c)%10<=5:
+       a-=(a%10-c)%10
+     else:
+       a-=(a%10-c)%10 - 10
+     return a
+func: endingDigit
+args:
+  - [3, 1]
+  - [12, 7]
+  - [13, 7]
+  - [-2, 4]
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

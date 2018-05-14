@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `pad` which takes one list, an int a, and an unknown
+  object as arguments, in that order. It should zero-pad the list with copies of
+  b up to total length a. If the list is already of length a or greater, do not
+  pad. For instance, `pad([1,2,3],5,'bat')` should return `[1,2,3,'bat','bat']`
+topics: [lists]
+solution: |-
+  def pad(l,a,b):
+     while len(l)<a:
+       l=l+[b]
+     return l
+func: pad
+args:
+  - - [1, 2]
+    - 1
+    - [38]
+  - - [1, 2, 3]
+    - 3
+    - [hai]
+  - - [None, None]
+    - 432
+    - seven
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card

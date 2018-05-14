@@ -1,0 +1,28 @@
+description: >-
+  Write a function named `area` which takes four inputs: the x and y coordinates
+  of one corner of a rectangle, and the x and y coordinates of the opposite
+  corner. The rectangle lies with two sides parallel to the x-axis (horizontal)
+  and two sides parallel to the y-axis (vertical). It should return the
+  rectangle's area, which may be calculated as its width times its height. For
+  instance, given [3,4,6,8], we take the two points as (3,4) and (6,8). These
+  define a 3x2 rectangle, which has area 6. It should therefore return 6. Do not
+  use abs().
+topics: [conditionals]
+solution: >-
+  #Clarified definition of rectangle, added area calculation explanation, added
+  example.
+
+  def area(x,y,a,b):
+    c=(x-a)*(y-b)
+    if c<0:
+      c*=-1
+    return c
+func: area
+ban: [abs]
+args:
+  - [3, 4, 5, 6]
+  - [3, 4, -3, 5]
+  - [3, 4, 5, 3]
+  - [1, 2, -2, -1]
+  - [1, 2, 3, 4, 5]
+accepted: expect an email from Prof T about picking up your gift card

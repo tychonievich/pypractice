@@ -1,0 +1,17 @@
+description: >-
+  Write a function named `enList` that, given a list of arguments, returns a
+  list containing lists, each of which contains one of the elements from the
+  previous list (in the same order) such that all of the elements occur once.
+  For instance, the list `[1,2,3]` should return `[[1],[2],[3]]`.
+topics: [lists]
+solution: |-
+  #Removed dangling text
+  def enList(n):
+    return ([[k] for k in n])
+func: enList
+args:
+  - - [3]
+  - - [8, thing, other, tree]
+  - - []
+  - - [1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]
+accepted: expect an email from Prof T about picking up your gift card

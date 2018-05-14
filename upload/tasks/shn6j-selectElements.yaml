@@ -1,0 +1,24 @@
+description: >-
+  Write a function named `selectElements` which, given two lists, one of
+  elements, and the other of non negative integers less than the length of the
+  first, returns the list of elements at the indexes of the numbers in the
+  second list. The returned list should be the same length as the second. For
+  instance, given the lists `["cat","dog","sheep","pig"]` and `[2,3,2,1,2]`, it
+  should return `["sheep","pig","sheep","dog","sheep"]`.
+topics: [lists]
+solution: |-
+  def selectElements(a,b):
+     c=[]
+     for i in b:
+       c+=[a[i]]
+     return c
+func: selectElements
+args:
+  - - [1, 2, 3, 4, 5, 3, 1, 4, 3]
+    - [4, 1, 0, 4, 7, 8]
+  - - []
+    - []
+  - - [1, 2, 3, 4]
+    - []
+  - [4, hi]
+accepted: expect an email from Prof T about picking up your gift card
